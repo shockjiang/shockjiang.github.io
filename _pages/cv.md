@@ -35,16 +35,17 @@ Education
 Work experience
 ======
 * 2022 - now, [IDEA](https://www.idea.edu.cn/research/cvr.html), Senior CV Researcher
+  * 3D Detection:
+    * video link: [monocular 3D detection](https://www.bilibili.com/video/BV1cS37zAELN/)
+  * Grasping and VLA:
+    * video link: [open-set grasping](https://www.bilibili.com/video/BV1JD37zaErk/)
   * Open Set Detection, esp. prompt tuning to customize detection targets given labelled dataset and pretrained model, keypoint detection, etc.
     * keypoints detection section in Report, [DINO-X: A Unified Vision Model for Open-World Object Detection and Understanding](https://arxiv.org/abs/2411.14347)
     * supervised prompt tuning part in Blog, [Grounding DINO 1.6](https://deepdataspace.com/blog/6)
     * edge model part in Report, [Grounding DINO 1.5: Advance the "Edge" of Open-Set Object Detection](https://arxiv.org/abs/2405.10300)
   * Keypoint Detection, esp. keypoints detection in the wild
     * CVPR'25 paper: [HandOS: 3D Hand Reconstruction in One Stage](https://idea-research.github.io/HandOSweb/)
-  * 3D Detection:
-    * video link: [monocular 3D detection](https://www.bilibili.com/video/BV1cS37zAELN/)
-  * Grasping and VLA:
-    * video link: [open-set grasping](https://www.bilibili.com/video/BV1JD37zaErk/)
+
   * 3D reconstruction and Novel View Synthesis:
     * CVPR'25 paper: [LeanGaussian: Breaking Pixel or Point Cloud Correspondence in Modeling 3D Gaussians](https://kenkunliu.github.io/DIG3D/)
     * ICCV'25 paper: [UniG: Modelling Unitary 3D Gaussians for View-consistent 3D Reconstruction](https://kenkunliu.github.io/UniG/)
