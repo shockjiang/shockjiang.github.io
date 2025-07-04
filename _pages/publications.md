@@ -11,10 +11,11 @@ author_profile: true
 
 {% include base_path %}
 2025:
+- Jiamin Wu, Kenkun Liu, Yukai Shi, **Xiaoke Jiang**(corresponding), Yuan Yao, Lei Zhang, [UniG: Modelling Unitary 3D Gaussians for View-Consistent 3D Reconstruction](https://kenkunliu.github.io/UniG/)
 - Jiamin WU, Kenkun Liu, Han Gao, **Xiaoke Jiang**(corresponding), Yuan Yao, Lei Zhang, [LeanGaussian: Breaking Pixel or Point Cloud Correspondence in Modeling 3D Gaussians](https://kenkunliu.github.io/DIG3D/), CVRP 2025
 - Xingyu Chen, Zhuheng Song, **Xiaoke Jiang**, Yaoqing Hu, Junzhi Yu, Lei Zhang, [HandOS: 3D Hand Reconstruction in One Stage](https://idea-research.github.io/HandOSweb/), CVPR 2025
 - Yuhong Zhang, Guanlin Wu, Ling-Hao Chen, Zhuokai Zhao, Jing Lin, **Xiaoke Jiang**, Jiamin WU, Zhuoheng Li, Hao Frank Yang, Haoqian Wang, Lei Zhang, [HumanMM: Global Human Motion Recovery from Multi-shot Videos](../files/humanMM.pdf), CVPR 2025
-
+- Yuzhu Ji, Mingshan Sun, Jianyang Shi, Xiaoke Jiang**, Yiqun Zhang, Haijun Zhang, [SeqPose: An End-to-End Framework to Unify Single-frame and Video-based RGB Category-Level Pose Estimation](../files/paper-4424-ijcai25-CR-rev2.pdf), IJCAI 2025
 2024:
 - Jianqiu Chen, Mingshan Sun, Ye Zheng, Tianpeng Bao, Zhenyu He, Donghai Li2, Guoqiang Jin, Zhao Rui, Liwei Wu, **Xiaoke Jiang**, [Geo6D: Geometric-Constraints-Guided Direct Object 6D Pose Estimation Network](https://github.com/Jianqiuer/Geo6D), IEEE Transactions on Multimedia 2025(TMM).
 
