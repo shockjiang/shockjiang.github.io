@@ -41,9 +41,13 @@ Work experience
     * edge model part in Report, [Grounding DINO 1.5: Advance the "Edge" of Open-Set Object Detection](https://arxiv.org/abs/2405.10300)
   * Keypoint Detection, esp. keypoints detection in the wild
     * CVPR'25 paper: [HandOS: 3D Hand Reconstruction in One Stage](https://idea-research.github.io/HandOSweb/)
+  * 3D Detection:
+    * video link: [monocular 3D detection](https://www.bilibili.com/video/BV1cS37zAELN/)
+  * Grasping and VLA:
+    * video link: [open-set grasping](https://www.bilibili.com/video/BV1JD37zaErk/)
   * 3D reconstruction and Novel View Synthesis:
     * CVPR'25 paper: [LeanGaussian: Breaking Pixel or Point Cloud Correspondence in Modeling 3D Gaussians](https://kenkunliu.github.io/DIG3D/)
-    * paper: [UniG: Modelling Unitary 3D Gaussians for View-consistent 3D Reconstruction](https://kenkunliu.github.io/UniG/)
+    * ICCV'25 paper: [UniG: Modelling Unitary 3D Gaussians for View-consistent 3D Reconstruction](https://kenkunliu.github.io/UniG/)
     * ongoing work: JocSplat:  Joint Optimization for Camera parameters and 3D Gaussians, which allows 3D reconstuction without the need for camera extrinsics and intrinsics
   * Inertial Navigation and Integrated Localization (IMU + GPS + wheel odom)
 
@@ -53,9 +57,10 @@ Work experience
       * Optics and Lasers in Engineering (2023) paper, [Defect classification for specular surfaces based on deflectometry and multi-modal fusion network](https://www.sciencedirect.com/science/article/pii/S0143816623000179)
     * Defect Detection in Automobile Smart Manufacturing
   * 6D pose estimation for robotic manipulation
-    * TMM'25 paper, [Geo6D: Geometric-Constraints-Guided Direct Object 6D Pose Estimation Network](https://github.com/Jianqiuer/Geo6D)
     * CVPR'22 oral paper, [Uni6D: A Unified CNN Framework without Projection Breakdown for 6D Pose Estimation](https://arxiv.org/abs/2203.14531)
     * AISTATS'23 paper, [Uni6Dv2: Noise Elimination for 6D Pose Estimation](https://arxiv.org/abs/2208.06416)
+    * IJCAI'25 paper, [SeqPose: An End-to-End Framework to Unify Single-frame and Video-based RGB Category-Level Pose Estimation](../files/paper-4424-ijcai25-CR-rev2.pdf)
+    * TMM'25 paper, [Geo6D: Geometric-Constraints-Guided Direct Object 6D Pose Estimation Network](https://github.com/Jianqiuer/Geo6D)
   * Person Reidentification
     *  AAAI'21 paper, [SSN3D: Self-separated network to align parts for 3D convolution in video person re-identification](https://ojs.aaai.org/index.php/AAAI/article/view/16262)
   * AI automiation in Transportation System
