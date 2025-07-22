@@ -21,7 +21,7 @@ author_profile: true
 - Jianqiu Chen, Mingshan Sun, Ye Zheng, Tianpeng Bao, Zhenyu He, Donghai Li, Guoqiang Jin, Zhao Rui, Liwei Wu, **Xiaoke Jiang**, [Geo6D: Geometric-Constraints-Guided Direct Object 6D Pose Estimation Network](https://github.com/Jianqiuer/Geo6D), IEEE Transactions on Multimedia 2025(TMM).
 
 2023:
-- Mingshan Sun, Ye Zheng, Tianpeng Bao, Jianqiu Chen, Guoqiang Jin, Liwei Wu, Rui Zhao, **Xiaoke Jiang**, Uni6Dv2: Noise Elimination for 6D Pose Estimation, Proceedings of The 26th International Conference on Artificial Intelligence and Statistics, PMLR 206:1832-1844, 2023.
+- Mingshan Sun, Ye Zheng, Tianpeng Bao, Jianqiu Chen, Guoqiang Jin, Liwei Wu, Rui Zhao, **Xiaoke Jiang**, Uni6Dv2: Noise Elimination for 6D Pose Estimation, Proceedings of The 26th International Conference on Artificial Intelligence and Statistics, AISTATS 2025
 - JIngtian Guan, Jingjing Fei, Wei Li, **Xiaoke Jiang**, Liwei Wu, Yakun Liu, Juntong Xi, [Defect classification for specular surfaces based on deflectometry and multi-modal fusion network](https://www.sciencedirect.com/science/article/pii/S0143816623000179), Optics and Lasers in Engineering 163 (2023) (Opt. Lasers Eng.): 107488
 
 2022: 
