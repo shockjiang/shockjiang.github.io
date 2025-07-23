@@ -18,17 +18,17 @@ author_profile: true
 - Yuzhu Ji, Mingshan Sun, Jianyang Shi, **Xiaoke Jiang**, Yiqun Zhang, Haijun Zhang, [SeqPose: An End-to-End Framework to Unify Single-frame and Video-based RGB Category-Level Pose Estimation](../files/paper-4424-ijcai25-CR-rev2.pdf), IJCAI 2025
 
 2024:
-- Jianqiu Chen, Mingshan Sun, Ye Zheng, Tianpeng Bao, Zhenyu He, Donghai Li, Guoqiang Jin, Zhao Rui, Liwei Wu, **Xiaoke Jiang**, [Geo6D: Geometric-Constraints-Guided Direct Object 6D Pose Estimation Network](https://github.com/Jianqiuer/Geo6D), IEEE Transactions on Multimedia 2025(TMM).
+- Jianqiu Chen, Mingshan Sun, Ye Zheng, Tianpeng Bao, Zhenyu He, Donghai Li, Guoqiang Jin, Zhao Rui, Liwei Wu, **Xiaoke Jiang**, [Geo6D: Geometric-Constraints-Guided Direct Object 6D Pose Estimation Network](../files/Geo6D-TMM25.pdf), IEEE Transactions on Multimedia 2025(TMM).
 
 2023:
-- Mingshan Sun, Ye Zheng, Tianpeng Bao, Jianqiu Chen, Guoqiang Jin, Liwei Wu, Rui Zhao, **Xiaoke Jiang**, Uni6Dv2: Noise Elimination for 6D Pose Estimation, Proceedings of The 26th International Conference on Artificial Intelligence and Statistics, AISTATS 2025
-- JIngtian Guan, Jingjing Fei, Wei Li, **Xiaoke Jiang**, Liwei Wu, Yakun Liu, Juntong Xi, [Defect classification for specular surfaces based on deflectometry and multi-modal fusion network](https://www.sciencedirect.com/science/article/pii/S0143816623000179), Optics and Lasers in Engineering 163 (2023) (Opt. Lasers Eng.): 107488
+- Mingshan Sun, Ye Zheng, Tianpeng Bao, Jianqiu Chen, Guoqiang Jin, Liwei Wu, Rui Zhao, **Xiaoke Jiang**, [Uni6Dv2: Noise Elimination for 6D Pose Estimation, Proceedings of The 26th International Conference on Artificial Intelligence and Statistics](../files/Uni6Dv2-AISTATS25.pdf), AISTATS 2025
+- JIngtian Guan, Jingjing Fei, Wei Li, **Xiaoke Jiang**, Liwei Wu, Yakun Liu, Juntong Xi, [Defect classification for specular surfaces based on deflectometry and multi-modal fusion network](../files/PMD-OpticsLaser23.pdf), Optics and Lasers in Engineering 163 (2023) (Opt. Lasers Eng.): 107488
 
 2022: 
-- **Xiaoke Jiang**, Donghai Li, Hao Chen, Ye Zheng, Rui Zhao and Liwei Wu, Uni6D: A Unified CNN Framework without Projection Breakdown for 6D Pose Estimation, The Conference on Computer Vision and Pattern Recognition (CVPR) Oral, 2022. Also presented by [Sensetime CVPR paper sharing program](https://zhuanlan.zhihu.com/p/525023076).
+- **Xiaoke Jiang**, Donghai Li, Hao Chen, Ye Zheng, Rui Zhao and Liwei Wu, [Uni6D: A Unified CNN Framework without Projection Breakdown for 6D Pose Estimation](../files/Uni6D-CVPR22.pdf), The Conference on Computer Vision and Pattern Recognition (CVPR) Oral, 2022. Also presented by [Sensetime CVPR paper sharing program](https://zhuanlan.zhihu.com/p/525023076).
 
 2021:
-- **Xiaoke Jiang**, Yu Qiao, Junjie Yan, Qichen Li, Wanrong Zheng, Dapeng Chen, SSN3D: Self-Separated Network to Align Parts for 3D Convolution in Video Person Re-Identification, Proceedings of the AAAI Conference on Artificial Intelligence (AAAI2021), 35(2), 1691-1699.
+- **Xiaoke Jiang**, Yu Qiao, Junjie Yan, Qichen Li, Wanrong Zheng, Dapeng Chen, [SSN3D: Self-Separated Network to Align Parts for 3D Convolution in Video Person Re-Identification](../files/SSN3D-AAAI21.pdf), Proceedings of the AAAI Conference on Artificial Intelligence (AAAI2021), 35(2), 1691-1699.
 
 2019: 
 - Shanshan Shi, Jun Li, Haibo Wu, Yongmao Ren, **Xiaoke Jiang**, ATSRA: An Accelerated Transmission Strategy Based on Request Aggregation in NDN, INFOCOM 2019 (poster).
