@@ -35,10 +35,16 @@ Education
 Work experience
 ======
 * 2022 - now, [IDEA](https://www.idea.edu.cn/research/cvr.html), Senior CV Researcher
-  * 3D Detection:
-    * video link: [monocular 3D detection](https://www.bilibili.com/video/BV1cS37zAELN/)
-  * Grasping and VLA:
-    * video link: [open-set grasping](https://www.bilibili.com/video/BV1JD37zaErk/)
+  * open-set grasping and VLA:
+    * video: [open-set grasping for bottles ](https://www.bilibili.com/video/BV1JD37zaErk/) & open-set grasping for 17 objects(to be released)
+    * video: [voice-command grasping](https://www.bilibili.com/video/BV1NLsyzEESB/)
+    * video for grasping with VLM for long-term task, to be released.
+
+  * open-set 3D detection: Monocular 3D Detection and RGB-D based 3D Detection:
+    * video: [monocular 3D detection](https://www.bilibili.com/video/BV1cS37zAELN/)
+    * video: [RGB-D based 3D detection: chair](https://www.bilibili.com/video/BV1tgsyzDEy3/?vd_source=dbb756e32339413581a90cb4cf6401bb)
+    * video: [RGB-D based 3D detection: room](https://www.bilibili.com/video/BV1tgsyzDEcS/)
+  
   * Open Set Detection, esp. prompt tuning to customize detection targets given labelled dataset and pretrained model, keypoint detection, etc.
     * keypoints detection section in Report, [DINO-X: A Unified Vision Model for Open-World Object Detection and Understanding](https://arxiv.org/abs/2411.14347)
     * supervised prompt tuning part in Blog, [Grounding DINO 1.6](https://deepdataspace.com/blog/6)
