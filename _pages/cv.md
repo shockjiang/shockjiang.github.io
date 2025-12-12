@@ -34,13 +34,13 @@ Education
 
 Work experience
 ======
-* 2022 - now, [IDEA](https://www.idea.edu.cn/research/cvr.html), Senior CV Researcher
-  * open-set grasping and VLA, aim to grasp anything accurately with consumer-level hardware (e.g., camera, GPU and robot arm), supporting by open-set detection/segmentation, realtime tracking and 3D ReID
-    * We are glad to announce our DINO-XGrasp on [IDEA Day](https://zhuanlan.zhihu.com/p/1975898373732197681) and our [demo video](https://v-blog.csdnimg.cn/asset/dbc8830fa6c3580458fce83390eb7536/play_video/aee6eed9ff7df9b6b6027098321219bf.m3u8)
-    * video: [robot's working day](https://www.bilibili.com/video/BV1UCmEBQEeD/)    
-    * video: [voice-command grasping](https://www.bilibili.com/video/BV1NLsyzEESB/)
-    * video: [open-set grasping for bottles ](https://www.bilibili.com/video/BV1JD37zaErk/) & open-set grasping for 17 objects(to be released)
-    * video for grasping with VLM for long-term task, to be released.
+* 2022 - now, [IDEA](https://www.idea.edu.cn/research/cvr.html), Senior CV Researcher  
+  * Open-set grasping and Vision-Language Action (VLA): Developing systems to enable robots to grasp any object accurately using consumer-level hardware (camera, GPU, robot arm), powered by open-set detection/segmentation, real-time tracking, and 3D ReID.
+    * DINO-XGrasp showcased at [IDEA Day](https://zhuanlan.zhihu.com/p/1975898373732197681) ([demo video](https://v-blog.csdnimg.cn/asset/dbc8830fa6c3580458fce83390eb7536/play_video/aee6eed9ff7df9b6b6027098321219bf.m3u8))
+    * [Robot's working day](https://www.bilibili.com/video/BV1UCmEBQEeD/)
+    * [Voice-command grasping](https://www.bilibili.com/video/BV1NLsyzEESB/)
+    * [Open-set grasping for bottles](https://www.bilibili.com/video/BV1JD37zaErk/) & open-set grasping for 17 objects (to be released)
+    * Grasping with VLM for long-term tasks (video to be released)
 
   * open-set 3D detection: Monocular 3D Detection and RGB-D based 3D Detection:
     * video: [monocular 3D detection](https://www.bilibili.com/video/BV1cS37zAELN/)
