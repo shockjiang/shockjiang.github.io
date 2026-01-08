@@ -36,7 +36,7 @@ Work experience
 ======
 * 2022 - now, [IDEA](https://www.idea.edu.cn/research/cvr.html), Senior CV Researcher  
   * Open-set grasping and Vision-Language Action (VLA): Developing systems to enable robots to grasp any object accurately using consumer-level hardware (camera, GPU, robot arm), powered by open-set detection/segmentation, real-time tracking, and 3D ReID.
-    * DINO-XGrasp showcased at [IDEA Day](https://zhuanlan.zhihu.com/p/1975898373732197681) ([demo video](https://v-blog.csdnimg.cn/asset/dbc8830fa6c3580458fce83390eb7536/play_video/aee6eed9ff7df9b6b6027098321219bf.m3u8))
+    * DINO-XGrasp showcased at [IDEA Day](https://zhuanlan.zhihu.com/p/1975898373732197681) ([demo video](https://www.bilibili.com/video/BV1iXiSBoEsy/))
     * [Robot's working day](https://www.bilibili.com/video/BV1UCmEBQEeD/)
     * [Voice-command grasping](https://www.bilibili.com/video/BV1NLsyzEESB/)
     * [Open-set grasping for bottles](https://www.bilibili.com/video/BV1JD37zaErk/) & open-set grasping for 17 objects (to be released)
