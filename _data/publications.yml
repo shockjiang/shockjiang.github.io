@@ -1,0 +1,311 @@
+# 2026
+- title: "SpatialPoint: Spatial-aware Point Prediction for Embodied Localization"
+  authors: "Qiming Zhu, Zhirui Fang, Tianming Zhang, Chuanxiu Liu, <strong>Xiaoke Jiang</strong>, Lei Zhang"
+  venue: "arXiv 2026"
+  year: 2026
+  url: ""
+  arxiv: "https://arxiv.org/abs/2603.26690"
+  pdf: ""
+  tags: ["VLA", "Robot"]
+
+# 2025
+- title: "3DRot: Rediscovering the Missing Primitive for RGB-Based 3D Augmentation"
+  authors: "Shitian Yang, Deyu Li, <strong>Xiaoke Jiang</strong>, Lei Zhang"
+  venue: "arXiv 2025"
+  year: 2025
+  url: ""
+  arxiv: "https://arxiv.org/abs/2508.01423"
+  pdf: ""
+  tags: ["6D Pose", "3D Detection"]
+
+- title: "Coca-Splat: Collaborative Optimization for Camera Parameters and 3D Gaussians"
+  authors: "Jiamin Wu, Hongyang Li, <strong>Xiaoke Jiang</strong>, Yuan Yao, Lei Zhang"
+  venue: "arXiv 2025"
+  year: 2025
+  url: ""
+  arxiv: "https://arxiv.org/abs/2504.00639"
+  pdf: ""
+  tags: ["3DGS", "Object Reconstruction"]
+
+- title: "UniG: Modelling Unitary 3D Gaussians for View-Consistent 3D Reconstruction"
+  authors: "Jiamin Wu, Kenkun Liu, Yukai Shi, <strong>Xiaoke Jiang*</strong>, Yuan Yao, Lei Zhang"
+  venue: "ICCV 2025"
+  year: 2025
+  url: "https://kenkunliu.github.io/UniG/"
+  arxiv: ""
+  pdf: "files/UniGS-ICCV25.pdf"
+  tags: ["3DGS", "Object Reconstruction"]
+
+- title: "LeanGaussian: Breaking Pixel or Point Cloud Correspondence in Modeling 3D Gaussians"
+  authors: "Jiamin Wu, Kenkun Liu, Han Gao, <strong>Xiaoke Jiang*</strong>, Yuan Yao, Lei Zhang"
+  venue: "CVPR 2025"
+  year: 2025
+  url: "https://kenkunliu.github.io/DIG3D/"
+  arxiv: ""
+  pdf: "files/LeanGaussian-CVPR25.pdf"
+  tags: ["3DGS", "Object Reconstruction"]
+
+- title: "HandOS: 3D Hand Reconstruction in One Stage"
+  authors: "Xingyu Chen, Zhuheng Song, <strong>Xiaoke Jiang</strong>, Yaoqing Hu, Junzhi Yu, Lei Zhang"
+  venue: "CVPR 2025"
+  year: 2025
+  url: "https://idea-research.github.io/HandOSweb/"
+  arxiv: ""
+  pdf: "files/HandOS-CVPR25.pdf"
+  tags: ["Hand Reconstruction", "Keypoint Detection"]
+
+- title: "HumanMM: Global Human Motion Recovery from Multi-shot Videos"
+  authors: "Yuhong Zhang, Guanlin Wu, Ling-Hao Chen, Zhuokai Zhao, Jing Lin, <strong>Xiaoke Jiang</strong>, Jiamin Wu, Zhuoheng Li, Hao Frank Yang, Haoqian Wang, Lei Zhang"
+  venue: "CVPR 2025"
+  year: 2025
+  url: ""
+  arxiv: ""
+  pdf: "files/humanMM.pdf"
+  tags: ["Hand Reconstruction", "Object Reconstruction"]
+
+- title: "SeqPose: An End-to-End Framework to Unify Single-frame and Video-based RGB Category-Level Pose Estimation"
+  authors: "Yuzhu Ji, Mingshan Sun, Jianyang Shi, <strong>Xiaoke Jiang</strong>, Yiqun Zhang, Haijun Zhang"
+  venue: "IJCAI 2025"
+  year: 2025
+  url: ""
+  arxiv: ""
+  pdf: "files/paper-4424-ijcai25-CR-rev2.pdf"
+  tags: ["6D Pose"]
+
+# 2024
+- title: "Geo6D: Geometric-Constraints-Guided Direct Object 6D Pose Estimation Network"
+  authors: "Jianqiu Chen, Mingshan Sun, Ye Zheng, Tianpeng Bao, Zhenyu He, Donghai Li, Guoqiang Jin, Zhao Rui, Liwei Wu, <strong>Xiaoke Jiang</strong>"
+  venue: "IEEE Transactions on Multimedia (TMM) 2025"
+  year: 2024
+  url: ""
+  arxiv: ""
+  pdf: "files/Geo6D-TMM25.pdf"
+  tags: ["6D Pose"]
+
+# 2023
+- title: "Uni6Dv2: Noise Elimination for 6D Pose Estimation"
+  authors: "Mingshan Sun, Ye Zheng, Tianpeng Bao, Jianqiu Chen, Guoqiang Jin, Liwei Wu, Rui Zhao, <strong>Xiaoke Jiang</strong>"
+  venue: "AISTATS 2025"
+  year: 2023
+  url: ""
+  arxiv: "https://arxiv.org/abs/2208.06416"
+  pdf: "files/Uni6Dv2-AISTATS25.pdf"
+  tags: ["6D Pose", "Robot"]
+
+- title: "Defect classification for specular surfaces based on deflectometry and multi-modal fusion network"
+  authors: "Jingtian Guan, Jingjing Fei, Wei Li, <strong>Xiaoke Jiang</strong>, Liwei Wu, Yakun Liu, Juntong Xi"
+  venue: "Optics and Lasers in Engineering 163 (2023)"
+  year: 2023
+  url: ""
+  arxiv: ""
+  pdf: "files/PMD-OpticsLaser23.pdf"
+  tags: ["Defect Detection"]
+
+# 2022
+- title: "Uni6D: A Unified CNN Framework without Projection Breakdown for 6D Pose Estimation"
+  authors: "<strong>Xiaoke Jiang</strong>, Donghai Li, Hao Chen, Ye Zheng, Rui Zhao, Liwei Wu"
+  venue: "CVPR 2022 (Oral)"
+  year: 2022
+  url: ""
+  arxiv: "https://arxiv.org/abs/2203.14531"
+  pdf: "files/Uni6D-CVPR22.pdf"
+  tags: ["6D Pose", "Robot"]
+
+# 2021
+- title: "SSN3D: Self-Separated Network to Align Parts for 3D Convolution in Video Person Re-Identification"
+  authors: "<strong>Xiaoke Jiang</strong>, Yu Qiao, Junjie Yan, Qichen Li, Wanrong Zheng, Dapeng Chen"
+  venue: "AAAI 2021"
+  year: 2021
+  url: "https://ojs.aaai.org/index.php/AAAI/article/view/16262"
+  arxiv: ""
+  pdf: "files/SSN3D-AAAI21.pdf"
+  tags: ["Person ReID", "3D Detection"]
+
+# 2019
+- title: "ATSRA: An Accelerated Transmission Strategy Based on Request Aggregation in NDN"
+  authors: "Shanshan Shi, Jun Li, Haibo Wu, Yongmao Ren, <strong>Xiaoke Jiang</strong>"
+  venue: "INFOCOM 2019 (poster)"
+  year: 2019
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+# 2018
+- title: "Smart Streaming of Panoramic Video"
+  authors: "Hongwei Ma, <strong>Xiaoke Jiang</strong>, Rui Ma, Zhiyou Ma, Yizhen Cai, Dah Ming Chiu"
+  venue: "ACM SIGCOMM 2018 VR Workshop"
+  year: 2018
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["VR Streaming"]
+
+- title: "Cache and delivery of VR video over named data networking"
+  authors: "Yi Zhang, <strong>Xiaoke Jiang</strong>, Yi Wang, Kai Lei"
+  venue: "IEEE INFOCOM Workshops 2018"
+  year: 2018
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["VR Streaming", "NDN/Networking"]
+
+# 2017
+- title: "NDNS: A DNS-Like Name Service for NDN"
+  authors: "Alexander Afanasyev, <strong>Xiaoke Jiang</strong>, Yingdi Yu, Jiewen Tan, Yumin Xia, Allison Mankin, Lixia Zhang"
+  venue: "ICCCN 2017"
+  year: 2017
+  url: "https://irl.cs.ucla.edu/data/files/papers/2017-icccn-ndns.pdf"
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+# 2016
+- title: "IS: Interest Set to Enhance Flow Transmission in Named-Data Networking"
+  authors: "<strong>Xiaoke Jiang</strong>, Jun Bi"
+  venue: "China Communications (IEEE), Vol.13, 2016"
+  year: 2016
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+# 2015
+- title: "A Survey on Information-Centric Networking: Rationales, Designs and Debates"
+  authors: "<strong>Xiaoke Jiang</strong>, Jun Bi, Guoshun Nan, Zhaogeng Li"
+  venue: "China Communications (IEEE), Vol.12, No.7, 2015"
+  year: 2015
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+# 2014
+- title: "nCDN: CDN Enhanced with NDN"
+  authors: "<strong>Xiaoke Jiang</strong>, Jun Bi"
+  venue: "IEEE INFOCOM 2014, NOM Workshop"
+  year: 2014
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+- title: "What Benefits Does NDN Have in Supporting Mobility"
+  authors: "<strong>Xiaoke Jiang</strong>, Jun Bi, You Wang"
+  venue: "IEEE ISCC 2014"
+  year: 2014
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+- title: "MCBS: Matrix Computation Based Simulator of NDN"
+  authors: "<strong>Xiaoke Jiang</strong>, Jun Bi, You Wang"
+  venue: "Journal of Computers, Vol.9, No.9, 2014"
+  year: 2014
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+# 2013
+- title: "Interest Set Mechanism to Improve the Transport of Named Data Networking"
+  authors: "<strong>Xiaoke Jiang</strong>, Jun Bi"
+  venue: "ACM SIGCOMM 2013 (poster)"
+  year: 2013
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+- title: "An Adaptive Probabilistic Marking Scheme for Fast and Secure Traceback"
+  authors: "Hongcheng Tian, Jun Bi, <strong>Xiaoke Jiang</strong>"
+  venue: "Networking Science (Springer), Vol.2, No.1-2, 2013"
+  year: 2013
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+- title: "MSDN: A Mechanism for Scalable Intradomain Control Plane in SDN"
+  authors: "Pingping Lin, Jun Bi, Hongyu Hu, <strong>Xiaoke Jiang</strong>"
+  venue: "Journal of Chinese Computer Systems, Vol.34, No.9, 2013"
+  year: 2013
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+# 2012
+- title: "A Content Provider Mobility Solution of Named Data Networking"
+  authors: "<strong>Xiaoke Jiang</strong>, Jun Bi, You Wang, Pingping Lin, Zhaogeng Li"
+  venue: "IEEE ICNP 2012"
+  year: 2012
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+- title: "An Easy Matrix Computation based Simulator of NDN"
+  authors: "<strong>Xiaoke Jiang</strong>, Jun Bi, You Wang, Pingping Lin, Zhaogeng Li"
+  venue: "IEEE ICNDC 2012"
+  year: 2012
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+- title: "Mobility Support in the Internet Using Identifiers"
+  authors: "You Wang, Jun Bi, <strong>Xiaoke Jiang</strong>"
+  venue: "ACM CFI 2012"
+  year: 2012
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+- title: "The Compression of Pending Interest Table with Bloom Filter in Content Centric Network"
+  authors: "Zhaogeng Li, Jun Bi, Sen Wang, <strong>Xiaoke Jiang</strong>"
+  venue: "ACM CFI 2012"
+  year: 2012
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+# 2011
+- title: "IPv6 Evolution, Stability and Deployment"
+  authors: "<strong>Xiaoke Jiang</strong>, Jun Bi, Yangyang Wang, Zhijie He, Wei Zhang, Hongchen Tian"
+  venue: "IEEE ICNP 2011"
+  year: 2011
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+- title: "Fast and Secure Probabilistic Marking Technology for IP Traceback"
+  authors: "Hongcheng Tian, Jun Bi, <strong>Xiaoke Jiang</strong>, Dekai Wang, Wei Zhang"
+  venue: "Journal of Tsinghua University, Vol.50, No.4, 2011"
+  year: 2011
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+- title: "EasyTrace: Easily-Deployable Light-Weight IP Traceback on an AS-Level Overlay Network"
+  authors: "Hongcheng Tian, Jun Bi, Wei Zhang, <strong>Xiaoke Jiang</strong>"
+  venue: "IEEE ICNP 2011"
+  year: 2011
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]
+
+- title: "A Quick Survey on Selected Approaches for Preparing Programmable Networks"
+  authors: "Pingping Lin, Jun Bi, Hongyu Hu, Tao Feng, <strong>Xiaoke Jiang</strong>"
+  venue: "ACM AINTEC 2011"
+  year: 2011
+  url: ""
+  arxiv: ""
+  pdf: ""
+  tags: ["NDN/Networking"]

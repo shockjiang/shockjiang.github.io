@@ -1,31 +1,61 @@
----
-layout: compress
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url }}" type="image/x-icon">
+</head>
+<body>
+  <main class="container">
+    {% include profile.html %}
 
-{% include base_path %}
+    <nav class="panel-nav">
+      <div class="panel-links">
+        <a href="#" data-panel="news" class="active">News</a>
+        <a href="#" data-panel="publications">Publications</a>
+        <a href="#" data-panel="projects">Projects</a>
+        <a href="#" data-panel="cv">CV</a>
+      </div>
+      <div class="theme-dots">
+        <span class="theme-dot" data-theme="dark" title="Dark"></span>
+        <span class="theme-dot" data-theme="midnight" title="Midnight"></span>
+        <span class="theme-dot" data-theme="ocean" title="Ocean"></span>
+        <span class="theme-dot" data-theme="warm" title="Warm"></span>
+        <span class="theme-dot" data-theme="light" title="Light"></span>
+      </div>
+      <div class="lang-toggle">
+        <a href="#" data-lang-btn="en" class="active">EN</a>
+        <span class="sep">|</span>
+        <a href="#" data-lang-btn="zh">中文</a>
+      </div>
+    </nav>
 
-<!doctype html>
-<html lang="{{ site.locale | slice: 0,2 }}" class="no-js">
-  <head>
-    {% include head.html %}
-    {% include head/custom.html %}
-  </head>
+    <section id="panel-news" class="panel active">
+      {% include news.html %}
+    </section>
 
-  <body>
+    <section id="panel-publications" class="panel">
+      {% include publications.html %}
+    </section>
 
-    {% include browser-upgrade.html %}
-    {% include masthead.html %}
+    <section id="panel-projects" class="panel">
+      {% include projects.html %}
+    </section>
 
-    {{ content }}
+    <section id="panel-cv" class="panel">
+      {% include cv.html %}
+    </section>
+  </main>
 
-    <div class="page__footer">
-      <footer>
-        {% include footer/custom.html %}
-        {% include footer.html %}
-      </footer>
-    </div>
+  <footer class="footer">
+    <p>&copy; {{ 'now' | date: '%Y' }} Shock (Xiaoke) Jiang</p>
+  </footer>
 
-    {% include scripts.html %}
-
-  </body>
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
 </html>

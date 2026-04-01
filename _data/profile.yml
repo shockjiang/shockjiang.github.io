@@ -1,0 +1,25 @@
+name:
+  en: "Shock (Xiaoke) Jiang"
+  zh: "蒋小可 (Shock Jiang)"
+title:
+  en: "Senior Researcher @ IDEA"
+  zh: "IDEA研究院 高级研究员"
+bio:
+  en: "Explore the world as well as our inner heart"
+  zh: "探索世界，也探索我们的内心"
+location: "Shenzhen, China"
+email: "shock.jiang@outlook.com"
+avatar: "assets/images/profile.png"
+links:
+  - name: "Google Scholar"
+    url: "https://scholar.google.com/citations?user=aDf9fpkAAAAJ"
+    icon: "scholar"
+  - name: "GitHub"
+    url: "https://github.com/shockjiang"
+    icon: "github"
+  - name: "Zhihu"
+    url: "https://www.zhihu.com/people/reseted1647830440000"
+    icon: "zhihu"
+  - name: "Email"
+    url: "mailto:shock.jiang@outlook.com"
+    icon: "email"

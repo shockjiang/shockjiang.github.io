@@ -1,0 +1,39 @@
+- date: "2026-03"
+  content:
+    en: "Our paper SpatialPoint was covered by <a href='https://mp.weixin.qq.com/s/H37Mp48hEAVHwQsUn8hMUA?scene=1' target='_blank'>QbitAI (量子位)</a>!"
+    zh: "我们的论文 SpatialPoint 被<a href='https://mp.weixin.qq.com/s/H37Mp48hEAVHwQsUn8hMUA?scene=1' target='_blank'>量子位</a>报道！"
+
+- date: "2025-11"
+  content:
+    en: "DINO-XGrasp showcased at IDEA Day."
+    zh: "DINO-XGrasp 在 IDEA Day 上亮相。"
+
+- date: "2025-07"
+  content:
+    en: "One paper accepted to ICCV 2025: UniG!"
+    zh: "一篇论文被ICCV 2025录用：UniG！"
+
+- date: "2025-06"
+  content:
+    en: "One paper accepted to IJCAI 2025: SeqPose!"
+    zh: "一篇论文被IJCAI 2025录用：SeqPose！"
+
+- date: "2025-02"
+  content:
+    en: "Three papers accepted to CVPR 2025: LeanGaussian, HandOS, HumanMM!"
+    zh: "三篇论文被CVPR 2025录用：LeanGaussian、HandOS、HumanMM！"
+
+- date: "2024-09"
+  content:
+    en: "Geo6D accepted to IEEE Transactions on Multimedia (TMM)."
+    zh: "Geo6D 被 IEEE Transactions on Multimedia (TMM) 录用。"
+
+- date: "2023-01"
+  content:
+    en: "Uni6Dv2 accepted to AISTATS 2023."
+    zh: "Uni6Dv2 被 AISTATS 2023 录用。"
+
+- date: "2022-03"
+  content:
+    en: "Uni6D accepted as Oral presentation at CVPR 2022!"
+    zh: "Uni6D 被 CVPR 2022 录用为 Oral 报告！"

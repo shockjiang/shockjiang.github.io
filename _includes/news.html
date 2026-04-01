@@ -1,0 +1,11 @@
+<div class="news-list">
+  {% for item in site.data.news %}
+  <div class="news-item">
+    <span class="news-date">{{ item.date }}</span>
+    <span class="news-content">
+      <span data-lang="en">{{ item.content.en }}</span>
+      <span data-lang="zh" style="display:none">{{ item.content.zh }}</span>
+    </span>
+  </div>
+  {% endfor %}
+</div>

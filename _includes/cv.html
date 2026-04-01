@@ -1,0 +1,105 @@
+<div data-lang="en">
+  {% assign cv = site.data.cv_en %}
+
+  <h2 class="cv-section-title">Education</h2>
+  {% for edu in cv.education %}
+  <div class="cv-entry">
+    <div class="cv-period">{{ edu.period }}</div>
+    <div class="cv-body">
+      <div class="cv-heading">{{ edu.institution }}{% if edu.degree != "" %} &mdash; {{ edu.degree }}{% endif %}</div>
+      {% if edu.supervisor %}<div class="cv-supervisor">Supervisor: {{ edu.supervisor }}</div>{% endif %}
+      {% if edu.details %}
+      <ul class="cv-details">
+        {% for d in edu.details %}<li>{{ d }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+
+  <h2 class="cv-section-title">Work Experience</h2>
+  {% for job in cv.work %}
+  <div class="cv-entry">
+    <div class="cv-period">{{ job.period }}</div>
+    <div class="cv-body">
+      <div class="cv-heading"><a href="{{ job.url }}" target="_blank" rel="noopener">{{ job.company }}</a> &mdash; {{ job.role }}</div>
+      {% for h in job.highlights %}
+      <div class="cv-highlight">
+        <strong>{{ h.title }}</strong>{% if h.desc != "" %}: {{ h.desc }}{% endif %}
+        {% if h.demos %}
+        <div class="cv-demos">
+          {% for demo in h.demos %}
+          <a href="{{ demo.url }}" target="_blank" rel="noopener">{{ demo.text }}</a>{% unless forloop.last %} | {% endunless %}
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+
+  <h2 class="cv-section-title">Skills</h2>
+  {% for skill in cv.skills %}
+  <div class="cv-skill">
+    <strong>{{ skill.category }}:</strong>
+    {{ skill.items | join: " / " }}
+  </div>
+  {% endfor %}
+
+  <h2 class="cv-section-title">Hobbies</h2>
+  <p class="cv-hobbies">{{ cv.hobbies | join: " &bull; " }}</p>
+</div>
+
+<div data-lang="zh" style="display:none">
+  {% assign cv = site.data.cv_zh %}
+
+  <h2 class="cv-section-title">教育经历</h2>
+  {% for edu in cv.education %}
+  <div class="cv-entry">
+    <div class="cv-period">{{ edu.period }}</div>
+    <div class="cv-body">
+      <div class="cv-heading">{{ edu.institution }}{% if edu.degree != "" %} &mdash; {{ edu.degree }}{% endif %}</div>
+      {% if edu.supervisor %}<div class="cv-supervisor">导师：{{ edu.supervisor }}</div>{% endif %}
+      {% if edu.details %}
+      <ul class="cv-details">
+        {% for d in edu.details %}<li>{{ d }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+
+  <h2 class="cv-section-title">工作经历</h2>
+  {% for job in cv.work %}
+  <div class="cv-entry">
+    <div class="cv-period">{{ job.period }}</div>
+    <div class="cv-body">
+      <div class="cv-heading"><a href="{{ job.url }}" target="_blank" rel="noopener">{{ job.company }}</a> &mdash; {{ job.role }}</div>
+      {% for h in job.highlights %}
+      <div class="cv-highlight">
+        <strong>{{ h.title }}</strong>{% if h.desc != "" %}：{{ h.desc }}{% endif %}
+        {% if h.demos %}
+        <div class="cv-demos">
+          {% for demo in h.demos %}
+          <a href="{{ demo.url }}" target="_blank" rel="noopener">{{ demo.text }}</a>{% unless forloop.last %} | {% endunless %}
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+
+  <h2 class="cv-section-title">技能</h2>
+  {% for skill in cv.skills %}
+  <div class="cv-skill">
+    <strong>{{ skill.category }}：</strong>
+    {{ skill.items | join: " / " }}
+  </div>
+  {% endfor %}
+
+  <h2 class="cv-section-title">爱好</h2>
+  <p class="cv-hobbies">{{ cv.hobbies | join: " &bull; " }}</p>
+</div>

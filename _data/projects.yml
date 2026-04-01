@@ -1,0 +1,20 @@
+- title: "DINO-XGrasp"
+  subtitle: "Open-Set Robotic Grasping powered by DINO-X"
+  description: "Enabling robots to grasp any object accurately using consumer-level hardware (camera, GPU, robot arm), powered by open-set detection/segmentation, real-time tracking, and 3D ReID."
+  tags: ["VLA", "Robot", "Open-Set Detection", "Pick&Place"]
+  videos:
+    - title: "DINO-XGrasp at IDEA Day"
+      url: "https://www.bilibili.com/video/BV1iXiSBoEsy/"
+      embed: "//player.bilibili.com/player.html?bvid=BV1iXiSBoEsy&autoplay=0"
+    - title: "Robot's working day"
+      url: "https://www.bilibili.com/video/BV1UCmEBQEeD/"
+      embed: "//player.bilibili.com/player.html?bvid=BV1UCmEBQEeD&autoplay=0"
+    - title: "Voice-command grasping"
+      url: "https://www.bilibili.com/video/BV1NLsyzEESB/"
+      embed: "//player.bilibili.com/player.html?bvid=BV1NLsyzEESB&autoplay=0"
+    - title: "Open-set grasping for bottles"
+      url: "https://www.bilibili.com/video/BV1JD37zaErk/"
+      embed: "//player.bilibili.com/player.html?bvid=BV1JD37zaErk&autoplay=0"
+  links:
+    - text: "IDEA Day showcase"
+      url: "https://zhuanlan.zhihu.com/p/1975898373732197681"

@@ -1,0 +1,33 @@
+<div class="tag-bar">
+  <button class="tag-btn active" data-tag="all">All</button>
+  {% assign all_tags = "" | split: "" %}
+  {% for pub in site.data.publications %}
+    {% for tag in pub.tags %}
+      {% unless all_tags contains tag %}
+        {% assign all_tags = all_tags | push: tag %}
+      {% endunless %}
+    {% endfor %}
+  {% endfor %}
+  {% for tag in all_tags %}
+  <button class="tag-btn" data-tag="{{ tag }}">{{ tag }}</button>
+  {% endfor %}
+</div>
+
+<div class="pub-list">
+  {% assign current_year = 0 %}
+  {% for pub in site.data.publications %}
+    {% if pub.year != current_year %}
+      {% assign current_year = pub.year %}
+      <h3 class="pub-year">{{ current_year }}</h3>
+    {% endif %}
+    <div class="pub-item" data-tags="{{ pub.tags | join: '||' }}">
+      <p>{% for tag in pub.tags %}<span class="pub-tag">{{ tag }}</span>{% endfor %}
+        {{ pub.authors }},
+        {% if pub.url != "" %}<a href="{{ pub.url }}" target="_blank" rel="noopener">{{ pub.title }}</a>{% else %}<span class="pub-title">{{ pub.title }}</span>{% endif %},
+        <em>{{ pub.venue }}</em>.
+        {% if pub.arxiv != "" and pub.arxiv %}<a href="{{ pub.arxiv }}" class="pub-pdf" target="_blank" rel="noopener">[arXiv]</a>{% endif %}
+        {% if pub.pdf != "" and pub.pdf %}<a href="{{ pub.pdf | relative_url }}" class="pub-pdf" target="_blank" rel="noopener">[PDF]</a>{% endif %}
+      </p>
+    </div>
+  {% endfor %}
+</div>

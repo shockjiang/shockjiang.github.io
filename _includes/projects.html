@@ -1,0 +1,29 @@
+{% for project in site.data.projects %}
+<div class="project-card">
+  <div class="project-header">
+    <h3 class="project-title">{{ project.title }}</h3>
+    <span class="project-subtitle">{{ project.subtitle }}</span>
+  </div>
+  <div class="project-tags">
+    {% for tag in project.tags %}<span class="pub-tag">{{ tag }}</span>{% endfor %}
+  </div>
+  <p class="project-desc">{{ project.description }}</p>
+  {% if project.links %}
+  <div class="project-links">
+    {% for link in project.links %}
+    <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.text }}</a>{% unless forloop.last %} | {% endunless %}
+    {% endfor %}
+  </div>
+  {% endif %}
+  <div class="project-videos">
+    {% for video in project.videos %}
+    <div class="project-video">
+      <div class="video-wrap">
+        <iframe src="{{ video.embed }}" allowfullscreen scrolling="no" frameborder="0"></iframe>
+      </div>
+      <span class="video-label">{{ video.title }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endfor %}
