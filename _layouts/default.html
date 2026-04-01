@@ -16,8 +16,8 @@
 
     <nav class="panel-nav">
       <div class="panel-links">
-        <a href="#" data-panel="news" class="active">News</a>
-        <a href="#" data-panel="publications">Publications</a>
+        <a href="#" data-panel="news">News</a>
+        <a href="#" data-panel="publications" class="active">Publications</a>
         <a href="#" data-panel="projects">Projects</a>
         <a href="#" data-panel="cv">CV</a>
       </div>
@@ -37,11 +37,11 @@
       </div>
     </nav>
 
-    <section id="panel-news" class="panel active">
+    <section id="panel-news" class="panel">
       {% include news.html %}
     </section>
 
-    <section id="panel-publications" class="panel">
+    <section id="panel-publications" class="panel active">
       {% include publications.html %}
     </section>
 

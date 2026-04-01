@@ -115,9 +115,16 @@ def pubs_html():
         pdf_html = f' <a href="{p["pdf"]}" class="pub-pdf" target="_blank" rel="noopener">[PDF]</a>' if p.get('pdf') else ''
 
         is_highlight = 'Xiaoke Jiang*' in p['authors'] or 'Xiaoke Jiang</strong>,' in p['authors']
-        hl_class = ' pub-item--highlight' if is_highlight else ''
+        venue = p.get('venue', '')
+        is_oral = 'Oral' in venue
+        hl_class = ' pub-item--oral' if is_oral else (' pub-item--highlight' if is_highlight else '')
+        venue_badge = ''
+        if is_oral:
+            venue_badge = ' <span class="venue-badge venue-badge--oral">ORAL</span>'
+        elif any(v in venue for v in ['CVPR', 'ICCV', 'AAAI', 'IJCAI', 'SIGCOMM', 'ICNP']):
+            venue_badge = ' <span class="venue-badge venue-badge--top">TOP</span>'
         items.append(f'''<div class="pub-item{hl_class}" data-tags="{tags_str}">
-      <p>{tag_spans}{p['authors']}, {title_html}, <em>{p['venue']}</em>.{arxiv_html}{pdf_html}</p>
+      <p>{tag_spans}{p['authors']}, {title_html}, <em>{p['venue']}</em>.{venue_badge}{arxiv_html}{pdf_html}</p>
     </div>''')
 
     return f'<div class="tag-bar">\n  {tag_btns}</div>\n<div class="pub-list">\n' + '\n'.join(items) + '\n</div>'
@@ -247,14 +254,19 @@ html = f'''<!DOCTYPE html>
           <div class="profile-links">
             {profile_links_html()}
           </div>
+          <div class="profile-stats">
+            <div class="profile-stat"><span class="stat-num">{len(pubs)}</span><div class="stat-label">Papers</div></div>
+            <div class="profile-stat"><span class="stat-num">10+</span><div class="stat-label">First Author</div></div>
+            <div class="profile-stat"><span class="stat-num">10+</span><div class="stat-label">Corresponding</div></div>
+          </div>
         </div>
       </div>
     </div>
 
     <nav class="panel-nav">
       <div class="panel-links">
-        <a href="#" data-panel="news" class="active">News</a>
-        <a href="#" data-panel="publications">Publications</a>
+        <a href="#" data-panel="news">News</a>
+        <a href="#" data-panel="publications" class="active">Publications</a>
         <a href="#" data-panel="projects">Projects</a>
         <a href="#" data-panel="cv">CV</a>
       </div>
@@ -274,13 +286,13 @@ html = f'''<!DOCTYPE html>
       </div>
     </nav>
 
-    <section id="panel-news" class="panel active">
+    <section id="panel-news" class="panel">
       <div class="news-list">
         {news_html()}
       </div>
     </section>
 
-    <section id="panel-publications" class="panel">
+    <section id="panel-publications" class="panel active">
       {pubs_html()}
     </section>
 
@@ -345,7 +357,7 @@ html = f'''<!DOCTYPE html>
   </div>
 
   <footer class="footer">
-    <p>&copy; 2025 Shock (Xiaoke) Jiang &middot; Built with Jekyll &middot; Hosted on GitHub Pages</p>
+    <p>&copy; {__import__('datetime').date.today().year} Shock (Xiaoke) Jiang &middot; Built with Jekyll &middot; Hosted on GitHub Pages</p>
   </footer>
 
   <script>{js}</script>

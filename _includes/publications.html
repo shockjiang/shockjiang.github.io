@@ -20,11 +20,13 @@
       {% assign current_year = pub.year %}
       <h3 class="pub-year">{{ current_year }}</h3>
     {% endif %}
-    {% assign is_highlight = false %}{% if pub.authors contains "Xiaoke Jiang*" or pub.authors contains "Xiaoke Jiang</strong>," %}{% assign is_highlight = true %}{% endif %}<div class="pub-item{% if is_highlight %} pub-item--highlight{% endif %}" data-tags="{{ pub.tags | join: '||' }}">
+    {% assign is_oral = false %}{% if pub.venue contains "Oral" %}{% assign is_oral = true %}{% endif %}
+    {% assign is_highlight = false %}{% if pub.authors contains "Xiaoke Jiang*" or pub.authors contains "Xiaoke Jiang</strong>," %}{% assign is_highlight = true %}{% endif %}
+    <div class="pub-item{% if is_oral %} pub-item--oral{% elsif is_highlight %} pub-item--highlight{% endif %}" data-tags="{{ pub.tags | join: '||' }}">
       <p>{% for tag in pub.tags %}<span class="pub-tag">{{ tag }}</span>{% endfor %}
         {{ pub.authors }},
         {% if pub.url != "" %}<a href="{{ pub.url }}" target="_blank" rel="noopener">{{ pub.title }}</a>{% else %}<span class="pub-title">{{ pub.title }}</span>{% endif %},
-        <em>{{ pub.venue }}</em>.
+        <em>{{ pub.venue }}</em>.{% if is_oral %}<span class="venue-badge venue-badge--oral">ORAL</span>{% elsif pub.venue contains "CVPR" or pub.venue contains "ICCV" or pub.venue contains "AAAI" or pub.venue contains "IJCAI" or pub.venue contains "SIGCOMM" or pub.venue contains "ICNP" %}<span class="venue-badge venue-badge--top">TOP</span>{% endif %}
         {% if pub.arxiv != "" and pub.arxiv %}<a href="{{ pub.arxiv }}" class="pub-pdf" target="_blank" rel="noopener">[arXiv]</a>{% endif %}
         {% if pub.pdf != "" and pub.pdf %}<a href="{{ pub.pdf | relative_url }}" class="pub-pdf" target="_blank" rel="noopener">[PDF]</a>{% endif %}
       </p>
