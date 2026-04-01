@@ -282,9 +282,21 @@ a {
 
 .profile-bio {
   font-size: 12px;
-  color: var(--text-muted);
+  color: var(--accent);
   font-style: italic;
   margin-top: 2px;
+  opacity: 0.7;
+}
+
+.profile-statement {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: 8px;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.75;
 }
 
 .profile-links {

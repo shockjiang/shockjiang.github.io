@@ -47,6 +47,10 @@
         <span data-lang="en">{{ site.data.profile.bio.en }}</span>
         <span data-lang="zh" style="display:none">{{ site.data.profile.bio.zh }}</span>
       </p>
+      <p class="profile-statement">
+        <span data-lang="en">{{ site.data.profile.statement.en | newline_to_br }}</span>
+        <span data-lang="zh" style="display:none">{{ site.data.profile.statement.zh | newline_to_br }}</span>
+      </p>
       <div class="profile-links">
         {% for link in site.data.profile.links %}
         <a href="{{ link.url }}" class="profile-link" title="{{ link.name }}" target="_blank" rel="noopener">

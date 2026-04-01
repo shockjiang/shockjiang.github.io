@@ -251,6 +251,10 @@ html = f'''<!DOCTYPE html>
             <span data-lang="en">{profile['bio']['en']}</span>
             <span data-lang="zh" style="display:none">{profile['bio']['zh']}</span>
           </p>
+          <p class="profile-statement">
+            <span data-lang="en">{profile['statement']['en'].replace(chr(10), '<br>')}</span>
+            <span data-lang="zh" style="display:none">{profile['statement']['zh'].replace(chr(10), '<br>')}</span>
+          </p>
           <div class="profile-links">
             {profile_links_html()}
           </div>

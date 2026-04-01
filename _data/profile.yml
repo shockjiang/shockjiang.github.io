@@ -7,6 +7,9 @@ title:
 bio:
   en: "Explore the world as well as our inner heart"
   zh: "探索世界，也探索我们的内心"
+statement:
+  en: "A gentle black sheep. I hold warmth toward others while remaining inwardly independent. I'm drawn to clear facts, vivid details, well-reasoned arguments, measured expression paired with a kind heart. I hold no claim to absolute truth, and have little patience for context-free moralizing.\n\nI believe cognition is the act of imposing order — structuring data, layering knowledge, and finding the hierarchy within chaos."
+  zh: "一只羊，保持对他人的尊重和善意，内心独立有态度。喜欢清晰的事实，生动的细节，有条理的逻辑，妥善的表达和善良的心灵；知自己没有掌握真理，也厌烦被脱离场景的真理训诫。\n\n我喜欢秩序，知识要有层次，数据需要结构化，认知的过程就是不断把数据和知识进行秩序化的过程。"
 location: "Shenzhen, China"
 email: "shock.jiang@outlook.com"
 avatar: "assets/images/profile.png"
@@ -72,6 +75,18 @@ skill_tags:
   - name: "Linux / Git"
     name_zh: "Linux / Git"
     tip: "Development environment, version control, CI/CD workflow"
+  - name: "Imitation Learning"
+    name_zh: "模仿学习"
+    tip: "Learning from demonstrations for robotic manipulation"
+  - name: "RL"
+    name_zh: "强化学习"
+    tip: "Reinforcement learning for policy optimization"
+  - name: "Badminton"
+    name_zh: "羽毛球"
+    tip: "Hobby | Regular player, staying sharp on and off the court"
+  - name: "Dev Psychology"
+    name_zh: "发展心理学"
+    tip: "Hobby | Exploring how humans learn, grow, and perceive the world"
 links:
   - name: "Google Scholar"
     url: "https://scholar.google.com/citations?user=aDf9fpkAAAAJ"
