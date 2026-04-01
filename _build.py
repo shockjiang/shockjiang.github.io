@@ -142,8 +142,12 @@ def projects_html():
             links_html = f'<div class="project-links">{link_items}</div>'
         videos = []
         for v in proj.get('videos', []):
+            if v.get('type') == 'video':
+                media = f'<video src="{v["url"]}" controls muted playsinline preload="metadata"></video>'
+            else:
+                media = f'<iframe src="{v["embed"]}" allowfullscreen scrolling="no" frameborder="0"></iframe>'
             videos.append(f'''<div class="project-video">
-        <div class="video-wrap"><iframe src="{v['embed']}" allowfullscreen scrolling="no" frameborder="0"></iframe></div>
+        <div class="video-wrap">{media}</div>
         <span class="video-label">{v['title']}</span>
       </div>''')
         parts.append(f'''<div class="project-card">
@@ -174,30 +178,35 @@ html = f'''<!DOCTYPE html>
 <body>
   <main class="container">
     <div class="profile">
-      <img src="assets/images/profile.png" alt="avatar" class="avatar">
-      <h1 class="profile-name">
-        <span data-lang="en">{profile['name']['en']}</span>
-        <span data-lang="zh" style="display:none">{profile['name']['zh']}</span>
-      </h1>
-      <p class="profile-title">
-        <span data-lang="en">{profile['title']['en']}</span>
-        <span data-lang="zh" style="display:none">{profile['title']['zh']}</span>
-      </p>
-      <p class="profile-bio">
-        <span data-lang="en">{profile['bio']['en']}</span>
-        <span data-lang="zh" style="display:none">{profile['bio']['zh']}</span>
-      </p>
-      <div class="profile-links">
-        {profile_links_html()}
-      </div>
-      <div class="profile-tags experience-tags">
-        {''.join(f'<span class="profile-tag exp-tag">{t}</span>' for t in profile.get('experience_tags', []))}
-      </div>
-      <div class="profile-tags skill-tags">
-        {''.join(f'<span class="profile-tag skill-tag">{t}</span>' for t in profile.get('skill_tags', []))}
-      </div>
-      <div class="profile-tags research-tags">
-        {profile_tags_html()}
+      <div class="profile-layout">
+        <div class="profile-side profile-left">
+          <div class="side-label">Experience</div>
+          {''.join(f'<span class="profile-tag exp-tag">{t}</span>' for t in profile.get('experience_tags', []))}
+        </div>
+        <div class="profile-center">
+          <img src="assets/images/profile.png" alt="avatar" class="avatar">
+          <h1 class="profile-name">
+            <span data-lang="en">{profile['name']['en']}</span>
+            <span data-lang="zh" style="display:none">{profile['name']['zh']}</span>
+          </h1>
+          <p class="profile-title">
+            <span data-lang="en">{profile['title']['en']}</span>
+            <span data-lang="zh" style="display:none">{profile['title']['zh']}</span>
+          </p>
+          <p class="profile-bio">
+            <span data-lang="en">{profile['bio']['en']}</span>
+            <span data-lang="zh" style="display:none">{profile['bio']['zh']}</span>
+          </p>
+          <div class="profile-links">
+            {profile_links_html()}
+          </div>
+        </div>
+        <div class="profile-side profile-right">
+          <div class="side-label">Skills</div>
+          {''.join(f'<span class="profile-tag skill-tag">{t}</span>' for t in profile.get('skill_tags', []))}
+          <div class="side-label" style="margin-top:8px">Research</div>
+          {profile_tags_html()}
+        </div>
       </div>
     </div>
 
@@ -248,9 +257,48 @@ html = f'''<!DOCTYPE html>
 
   <div class="visitor-stats">
     <div class="visitor-title">Visitors</div>
-    <div class="visitor-globe">
-      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5e4x5w2ajfs&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33&amp;bv=80&amp;lx=-420&amp;ly=420&amp;hi=8&amp;he=2&amp;hc=34d399&amp;rs=20" async="async"></script>
+    <div class="visitor-counters">
+      <div class="visitor-counter">
+        <span class="counter-num" id="busuanzi_value_site_uv">--</span>
+        <span class="counter-label">Visitors</span>
+      </div>
+      <div class="visitor-counter">
+        <span class="counter-num" id="busuanzi_value_site_pv">--</span>
+        <span class="counter-label">Page Views</span>
+      </div>
     </div>
+    <div id="visitor-map" class="visitor-map"></div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {{
+        if (document.getElementById('visitor-map') && typeof jsVectorMap !== 'undefined') {{
+          var isDark = !document.documentElement.getAttribute('data-theme') ||
+                       document.documentElement.getAttribute('data-theme') !== 'light';
+          new jsVectorMap({{
+            selector: '#visitor-map',
+            map: 'world',
+            backgroundColor: 'transparent',
+            draggable: true,
+            zoomButtons: false,
+            zoomOnScroll: false,
+            regionStyle: {{
+              initial: {{
+                fill: isDark ? '#1a1a2e' : '#d1d5db',
+                stroke: isDark ? '#2a2a4a' : '#9ca3af',
+                strokeWidth: 0.4
+              }},
+              hover: {{
+                fill: '#34d399',
+                cursor: 'pointer'
+              }}
+            }}
+          }});
+        }}
+      }});
+    </script>
   </div>
 
   <footer class="footer">

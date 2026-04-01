@@ -1,53 +1,60 @@
 <div class="profile">
-  <img src="{{ site.data.profile.avatar | relative_url }}" alt="avatar" class="avatar">
-  <h1 class="profile-name">
-    <span data-lang="en">{{ site.data.profile.name.en }}</span>
-    <span data-lang="zh" style="display:none">{{ site.data.profile.name.zh }}</span>
-  </h1>
-  <p class="profile-title">
-    <span data-lang="en">{{ site.data.profile.title.en }}</span>
-    <span data-lang="zh" style="display:none">{{ site.data.profile.title.zh }}</span>
-  </p>
-  <p class="profile-bio">
-    <span data-lang="en">{{ site.data.profile.bio.en }}</span>
-    <span data-lang="zh" style="display:none">{{ site.data.profile.bio.zh }}</span>
-  </p>
-  <div class="profile-links">
-    {% for link in site.data.profile.links %}
-    <a href="{{ link.url }}" class="profile-link" title="{{ link.name }}" target="_blank" rel="noopener">
-      {% if link.icon == "scholar" %}
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
-      {% elsif link.icon == "github" %}
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-      {% elsif link.icon == "zhihu" %}
-      <svg viewBox="0 0 1024 1024" width="22" height="22" fill="currentColor"><path d="M564.7 230.1V803h-60.3l-20.2 60.8-149.2-60.8H134.8V230.1h429.9zm-404.2 36v500.6h155.5l94.2 38.4 12.7-38.4h105.7V266.1H160.5zm579.9-111.6l27 31.4-41.8 36 27.6 32.2-41.8 35.6 27.6 32.2L697.2 358l27.6 32.2-84.4 72.2V803H480.7V200.2h138.8L556 128.5h88.4zm-23.5 220.8l42.2-36.2-55.2-64.4 42.2-36.2-55.2-64.4 42.2-36.2-55.2-64.4h159.8V803h-121V375.3zm263.4 0V803H859V375.3h121.3z"/></svg>
-      {% elsif link.icon == "email" %}
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      {% endif %}
-    </a>
-    {% endfor %}
-  </div>
-  <div class="profile-tags experience-tags">
-    {% for tag in site.data.profile.experience_tags %}
-    <span class="profile-tag exp-tag">{{ tag }}</span>
-    {% endfor %}
-  </div>
-  <div class="profile-tags skill-tags">
-    {% for tag in site.data.profile.skill_tags %}
-    <span class="profile-tag skill-tag">{{ tag }}</span>
-    {% endfor %}
-  </div>
-  <div class="profile-tags research-tags">
-    {% assign all_tags = "" | split: "" %}
-    {% for pub in site.data.publications %}
-      {% for tag in pub.tags %}
-        {% unless all_tags contains tag %}
-          {% assign all_tags = all_tags | push: tag %}
-        {% endunless %}
+  <div class="profile-layout">
+    <div class="profile-side profile-left">
+      <div class="side-label">Experience</div>
+      {% for tag in site.data.profile.experience_tags %}
+      <span class="profile-tag exp-tag">{{ tag }}</span>
       {% endfor %}
-    {% endfor %}
-    {% for tag in all_tags %}
-    <span class="profile-tag">{{ tag }}</span>
-    {% endfor %}
+    </div>
+
+    <div class="profile-center">
+      <img src="{{ site.data.profile.avatar | relative_url }}" alt="avatar" class="avatar">
+      <h1 class="profile-name">
+        <span data-lang="en">{{ site.data.profile.name.en }}</span>
+        <span data-lang="zh" style="display:none">{{ site.data.profile.name.zh }}</span>
+      </h1>
+      <p class="profile-title">
+        <span data-lang="en">{{ site.data.profile.title.en }}</span>
+        <span data-lang="zh" style="display:none">{{ site.data.profile.title.zh }}</span>
+      </p>
+      <p class="profile-bio">
+        <span data-lang="en">{{ site.data.profile.bio.en }}</span>
+        <span data-lang="zh" style="display:none">{{ site.data.profile.bio.zh }}</span>
+      </p>
+      <div class="profile-links">
+        {% for link in site.data.profile.links %}
+        <a href="{{ link.url }}" class="profile-link" title="{{ link.name }}" target="_blank" rel="noopener">
+          {% if link.icon == "scholar" %}
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+          {% elsif link.icon == "github" %}
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          {% elsif link.icon == "zhihu" %}
+          <svg viewBox="0 0 1024 1024" width="22" height="22" fill="currentColor"><path d="M564.7 230.1V803h-60.3l-20.2 60.8-149.2-60.8H134.8V230.1h429.9zm-404.2 36v500.6h155.5l94.2 38.4 12.7-38.4h105.7V266.1H160.5zm579.9-111.6l27 31.4-41.8 36 27.6 32.2-41.8 35.6 27.6 32.2L697.2 358l27.6 32.2-84.4 72.2V803H480.7V200.2h138.8L556 128.5h88.4zm-23.5 220.8l42.2-36.2-55.2-64.4 42.2-36.2-55.2-64.4 42.2-36.2-55.2-64.4h159.8V803h-121V375.3zm263.4 0V803H859V375.3h121.3z"/></svg>
+          {% elsif link.icon == "email" %}
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          {% endif %}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="profile-side profile-right">
+      <div class="side-label">Skills</div>
+      {% for tag in site.data.profile.skill_tags %}
+      <span class="profile-tag skill-tag">{{ tag }}</span>
+      {% endfor %}
+      <div class="side-label" style="margin-top:8px">Research</div>
+      {% assign all_tags = "" | split: "" %}
+      {% for pub in site.data.publications %}
+        {% for tag in pub.tags %}
+          {% unless all_tags contains tag %}
+            {% assign all_tags = all_tags | push: tag %}
+          {% endunless %}
+        {% endfor %}
+      {% endfor %}
+      {% for tag in all_tags %}
+      <span class="profile-tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
   </div>
 </div>

@@ -54,9 +54,52 @@
 
   <div class="visitor-stats">
     <div class="visitor-title">Visitors</div>
-    <div class="visitor-globe">
-      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5e4x5w2ajfs&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33&amp;bv=80&amp;lx=-420&amp;ly=420&amp;hi=8&amp;he=2&amp;hc=34d399&amp;rs=20" async="async"></script>
+    <div class="visitor-counters">
+      <div class="visitor-counter">
+        <span class="counter-num" id="busuanzi_value_site_uv">--</span>
+        <span class="counter-label">Visitors</span>
+      </div>
+      <div class="visitor-counter">
+        <span class="counter-num" id="busuanzi_value_site_pv">--</span>
+        <span class="counter-label">Page Views</span>
+      </div>
     </div>
+    <div id="visitor-map" class="visitor-map"></div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        if (document.getElementById('visitor-map') && typeof jsVectorMap !== 'undefined') {
+          var root = getComputedStyle(document.documentElement);
+          var isDark = !document.documentElement.getAttribute('data-theme') ||
+                       document.documentElement.getAttribute('data-theme') !== 'light';
+          new jsVectorMap({
+            selector: '#visitor-map',
+            map: 'world',
+            backgroundColor: 'transparent',
+            draggable: true,
+            zoomButtons: false,
+            zoomOnScroll: false,
+            regionStyle: {
+              initial: {
+                fill: isDark ? '#1a1a2e' : '#d1d5db',
+                stroke: isDark ? '#2a2a4a' : '#9ca3af',
+                strokeWidth: 0.4
+              },
+              hover: {
+                fill: '#34d399',
+                cursor: 'pointer'
+              }
+            },
+            regionLabelStyle: {
+              initial: { fontFamily: 'Inter', fontSize: '10px' }
+            }
+          });
+        }
+      });
+    </script>
   </div>
 
   <footer class="footer">
