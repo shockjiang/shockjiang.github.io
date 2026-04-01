@@ -51,10 +51,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var w = document.querySelector('.profile-orbit');
     if (!w) return;
     var ww = w.offsetWidth;
-    var innerRx = Math.min(ww * 0.32, 260);
-    var innerRy = Math.min(160, 140);
-    var outerRx = Math.min(ww * 0.46, 400);
-    var outerRy = Math.min(200, 185);
+    var innerRx = Math.min(ww * 0.35, 300);
+    var innerRy = Math.min(200, 190);
+    var outerRx = Math.min(ww * 0.48, 440);
+    var outerRy = Math.min(245, 235);
     layoutOrbit('.orbit-inner', innerRx, innerRy, -0.3);
     layoutOrbit('.orbit-outer', outerRx, outerRy, 0.15);
   }
