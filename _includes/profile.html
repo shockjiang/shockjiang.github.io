@@ -34,7 +34,10 @@
       {% endfor %}
     </div>
     <div class="profile-center">
-      <img src="{{ site.data.profile.avatar | relative_url }}" alt="avatar" class="avatar">
+      <picture>
+        <source srcset="{{ 'assets/images/profile.webp' | relative_url }}" type="image/webp">
+        <img src="{{ site.data.profile.avatar | relative_url }}" alt="avatar" class="avatar">
+      </picture>
       <h1 class="profile-name">
         <span data-lang="en">{{ site.data.profile.name.en }}</span>
         <span data-lang="zh" style="display:none">{{ site.data.profile.name.zh }}</span>

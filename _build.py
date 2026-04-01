@@ -238,7 +238,10 @@ html = f'''<!DOCTYPE html>
           {profile_tags_html_orbit()}
         </div>
         <div class="profile-center">
-          <img src="assets/images/profile.png" alt="avatar" class="avatar">
+          <picture>
+            <source srcset="assets/images/profile.webp" type="image/webp">
+            <img src="assets/images/profile.png" alt="avatar" class="avatar">
+          </picture>
           <h1 class="profile-name">
             <span data-lang="en">{profile['name']['en']}</span>
             <span data-lang="zh" style="display:none">{profile['name']['zh']}</span>
