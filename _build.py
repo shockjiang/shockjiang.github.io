@@ -30,6 +30,24 @@ icons = {
     'email': '<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>',
 }
 
+def profile_tags_html_orbit():
+    all_tags = []
+    tag_tips = {}
+    for p in pubs:
+        for t in p.get('tags', []):
+            if t not in all_tags:
+                all_tags.append(t)
+                tag_tips[t] = []
+            tag_tips[t].append(p['title'])
+    parts = []
+    for t in all_tags:
+        tip = '; '.join(tag_tips[t])
+        if len(tip) > 120:
+            tip = tip[:117] + '...'
+        tip_escaped = tip.replace('"', '&quot;')
+        parts.append(f'<span class="profile-tag orbit-tag" data-tooltip="{tip_escaped}" data-link="publications">{t}</span>')
+    return '\n'.join(parts)
+
 def profile_tags_html():
     all_tags = []
     for p in pubs:
@@ -37,6 +55,20 @@ def profile_tags_html():
             if t not in all_tags:
                 all_tags.append(t)
     return '\n'.join(f'<span class="profile-tag">{t}</span>' for t in all_tags)
+
+def exp_tags_html():
+    return '\n'.join(
+        '<span class="profile-tag exp-tag orbit-tag" data-tooltip="{tip}" data-link="{link}"><span data-lang="en">{name}</span><span data-lang="zh" style="display:none">{name_zh}</span></span>'.format(
+            tip=t['tip'].replace('"', '&quot;'), name=t['name'], name_zh=t.get('name_zh', t['name']), link=t.get('link', 'cv')
+        ) for t in profile.get('experience_tags', [])
+    )
+
+def skill_tags_html():
+    return '\n'.join(
+        '<span class="profile-tag skill-tag orbit-tag" data-tooltip="{tip}" data-link="cv"><span data-lang="en">{name}</span><span data-lang="zh" style="display:none">{name_zh}</span></span>'.format(
+            tip=t['tip'].replace('"', '&quot;'), name=t['name'], name_zh=t.get('name_zh', t['name'])
+        ) for t in profile.get('skill_tags', [])
+    )
 
 def profile_links_html():
     parts = []
@@ -82,7 +114,9 @@ def pubs_html():
         arxiv_html = f' <a href="{p["arxiv"]}" class="pub-pdf" target="_blank" rel="noopener">[arXiv]</a>' if p.get('arxiv') else ''
         pdf_html = f' <a href="{p["pdf"]}" class="pub-pdf" target="_blank" rel="noopener">[PDF]</a>' if p.get('pdf') else ''
 
-        items.append(f'''<div class="pub-item" data-tags="{tags_str}">
+        is_highlight = 'Xiaoke Jiang*' in p['authors'] or 'Xiaoke Jiang</strong>,' in p['authors']
+        hl_class = ' pub-item--highlight' if is_highlight else ''
+        items.append(f'''<div class="pub-item{hl_class}" data-tags="{tags_str}">
       <p>{tag_spans}{p['authors']}, {title_html}, <em>{p['venue']}</em>.{arxiv_html}{pdf_html}</p>
     </div>''')
 
@@ -140,6 +174,15 @@ def projects_html():
         if proj.get('links'):
             link_items = ' | '.join(f'<a href="{l["url"]}" target="_blank" rel="noopener">{l["text"]}</a>' for l in proj['links'])
             links_html = f'<div class="project-links">{link_items}</div>'
+        images_html = ''
+        if proj.get('images'):
+            img_items = []
+            for img in proj['images']:
+                img_items.append(f'''<div class="project-image">
+      <a href="{img['url']}" target="_blank" rel="noopener"><img src="{img['url']}" alt="{img['title']}" loading="lazy"></a>
+      <span class="video-label">{img['title']}</span>
+    </div>''')
+            images_html = f'<div class="project-gallery">{"".join(img_items)}</div>'
         videos = []
         for v in proj.get('videos', []):
             if v.get('type') == 'video':
@@ -158,6 +201,7 @@ def projects_html():
   <div class="project-tags">{tag_spans}</div>
   <p class="project-desc">{proj['description']}</p>
   {links_html}
+  {images_html}
   <div class="project-videos">
     {''.join(videos)}
   </div>
@@ -178,10 +222,13 @@ html = f'''<!DOCTYPE html>
 <body>
   <main class="container">
     <div class="profile">
-      <div class="profile-layout">
-        <div class="profile-side profile-left">
-          <div class="side-label">Experience</div>
-          {''.join(f'<span class="profile-tag exp-tag">{t}</span>' for t in profile.get('experience_tags', []))}
+      <div class="profile-orbit">
+        <div class="orbit-ring orbit-inner">
+          {exp_tags_html()}
+        </div>
+        <div class="orbit-ring orbit-outer">
+          {skill_tags_html()}
+          {profile_tags_html_orbit()}
         </div>
         <div class="profile-center">
           <img src="assets/images/profile.png" alt="avatar" class="avatar">
@@ -201,12 +248,6 @@ html = f'''<!DOCTYPE html>
             {profile_links_html()}
           </div>
         </div>
-        <div class="profile-side profile-right">
-          <div class="side-label">Skills</div>
-          {''.join(f'<span class="profile-tag skill-tag">{t}</span>' for t in profile.get('skill_tags', []))}
-          <div class="side-label" style="margin-top:8px">Research</div>
-          {profile_tags_html()}
-        </div>
       </div>
     </div>
 
@@ -217,6 +258,7 @@ html = f'''<!DOCTYPE html>
         <a href="#" data-panel="projects">Projects</a>
         <a href="#" data-panel="cv">CV</a>
       </div>
+      <span class="nav-divider"></span>
       <div class="theme-dots">
         <span class="theme-dot" data-theme="dark" title="Dark"></span>
         <span class="theme-dot" data-theme="midnight" title="Midnight"></span>
@@ -224,6 +266,7 @@ html = f'''<!DOCTYPE html>
         <span class="theme-dot" data-theme="warm" title="Warm"></span>
         <span class="theme-dot" data-theme="light" title="Light"></span>
       </div>
+      <span class="nav-divider"></span>
       <div class="lang-toggle">
         <a href="#" data-lang-btn="en" class="active">EN</a>
         <span class="sep">|</span>
@@ -302,7 +345,7 @@ html = f'''<!DOCTYPE html>
   </div>
 
   <footer class="footer">
-    <p>&copy; 2025 Shock (Xiaoke) Jiang</p>
+    <p>&copy; 2025 Shock (Xiaoke) Jiang &middot; Built with Jekyll &middot; Hosted on GitHub Pages</p>
   </footer>
 
   <script>{js}</script>

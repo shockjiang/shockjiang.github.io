@@ -66,7 +66,7 @@ work:
       - title: "关键点检测"
         desc: "野外场景下的关键点检测"
       - title: "3D 重建与新视角合成"
-        desc: "LeanGaussian (CVPR'25)、UniG (ICCV'25)、JocSplat (进行中)"
+        desc: "LeanGaussian (CVPR'25)、UniG (ICCV'25)、Coca-Splat (arXiv'25)"
       - title: "惯性导航"
         desc: "IMU + GPS + 轮式里程计融合"
 

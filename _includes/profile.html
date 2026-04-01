@@ -1,12 +1,38 @@
 <div class="profile">
-  <div class="profile-layout">
-    <div class="profile-side profile-left">
-      <div class="side-label">Experience</div>
+  <div class="profile-orbit">
+    <div class="orbit-ring orbit-inner">
       {% for tag in site.data.profile.experience_tags %}
-      <span class="profile-tag exp-tag">{{ tag }}</span>
+      <span class="profile-tag exp-tag orbit-tag" data-tooltip="{{ tag.tip }}" data-link="{{ tag.link }}" data-name-en="{{ tag.name }}" data-name-zh="{{ tag.name_zh }}"><span data-lang="en">{{ tag.name }}</span><span data-lang="zh" style="display:none">{{ tag.name_zh }}</span></span>
       {% endfor %}
     </div>
-
+    <div class="orbit-ring orbit-outer">
+      {% for tag in site.data.profile.skill_tags %}
+      <span class="profile-tag skill-tag orbit-tag" data-tooltip="{{ tag.tip }}" data-link="cv" data-name-en="{{ tag.name }}" data-name-zh="{{ tag.name_zh }}"><span data-lang="en">{{ tag.name }}</span><span data-lang="zh" style="display:none">{{ tag.name_zh }}</span></span>
+      {% endfor %}
+      {% assign all_tags = "" | split: "" %}
+      {% assign all_tips = "" | split: "" %}
+      {% for pub in site.data.publications %}
+        {% for tag in pub.tags %}
+          {% unless all_tags contains tag %}
+            {% assign all_tags = all_tags | push: tag %}
+            {% assign tip_papers = "" %}
+            {% for p in site.data.publications %}
+              {% if p.tags contains tag %}
+                {% if tip_papers == "" %}
+                  {% assign tip_papers = p.title %}
+                {% else %}
+                  {% assign tip_papers = tip_papers | append: "; " | append: p.title %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+            {% assign all_tips = all_tips | push: tip_papers %}
+          {% endunless %}
+        {% endfor %}
+      {% endfor %}
+      {% for tag in all_tags %}
+      <span class="profile-tag orbit-tag" data-tooltip="{{ all_tips[forloop.index0] | truncate: 120 }}" data-link="publications">{{ tag }}</span>
+      {% endfor %}
+    </div>
     <div class="profile-center">
       <img src="{{ site.data.profile.avatar | relative_url }}" alt="avatar" class="avatar">
       <h1 class="profile-name">
@@ -36,25 +62,6 @@
         </a>
         {% endfor %}
       </div>
-    </div>
-
-    <div class="profile-side profile-right">
-      <div class="side-label">Skills</div>
-      {% for tag in site.data.profile.skill_tags %}
-      <span class="profile-tag skill-tag">{{ tag }}</span>
-      {% endfor %}
-      <div class="side-label" style="margin-top:8px">Research</div>
-      {% assign all_tags = "" | split: "" %}
-      {% for pub in site.data.publications %}
-        {% for tag in pub.tags %}
-          {% unless all_tags contains tag %}
-            {% assign all_tags = all_tags | push: tag %}
-          {% endunless %}
-        {% endfor %}
-      {% endfor %}
-      {% for tag in all_tags %}
-      <span class="profile-tag">{{ tag }}</span>
-      {% endfor %}
     </div>
   </div>
 </div>

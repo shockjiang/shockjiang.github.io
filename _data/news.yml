@@ -1,12 +1,12 @@
 - date: "2026-03"
   content:
-    en: "Our paper SpatialPoint was covered by <a href='https://mp.weixin.qq.com/s/H37Mp48hEAVHwQsUn8hMUA?scene=1' target='_blank'>QbitAI (量子位)</a>!"
-    zh: "我们的论文 SpatialPoint 被<a href='https://mp.weixin.qq.com/s/H37Mp48hEAVHwQsUn8hMUA?scene=1' target='_blank'>量子位</a>报道！"
+    en: "SpatialPoint released on <a href='https://arxiv.org/abs/2603.26690' target='_blank'>arXiv</a>, covered by <a href='https://mp.weixin.qq.com/s/H37Mp48hEAVHwQsUn8hMUA?scene=1' target='_blank'>QbitAI (量子位)</a>!"
+    zh: "SpatialPoint 在 <a href='https://arxiv.org/abs/2603.26690' target='_blank'>arXiv</a> 发布，被<a href='https://mp.weixin.qq.com/s/H37Mp48hEAVHwQsUn8hMUA?scene=1' target='_blank'>量子位</a>报道！"
 
 - date: "2025-11"
   content:
-    en: "DINO-XGrasp showcased at IDEA Day."
-    zh: "DINO-XGrasp 在 IDEA Day 上亮相。"
+    en: "DINO-XGrasp showcased at <a href='https://zhuanlan.zhihu.com/p/1975898373732197681' target='_blank'>IDEA Day</a> (<a href='https://www.bilibili.com/video/BV1iXiSBoEsy/' target='_blank'>demo video</a>)."
+    zh: "DINO-XGrasp 在 <a href='https://zhuanlan.zhihu.com/p/1975898373732197681' target='_blank'>IDEA Day</a> 上亮相（<a href='https://www.bilibili.com/video/BV1iXiSBoEsy/' target='_blank'>演示视频</a>）。"
 
 - date: "2025-07"
   content:
@@ -32,6 +32,11 @@
   content:
     en: "Uni6Dv2 accepted to AISTATS 2023."
     zh: "Uni6Dv2 被 AISTATS 2023 录用。"
+
+- date: "2022-06"
+  content:
+    en: "Shared Uni6D at <a href='https://zhuanlan.zhihu.com/p/525023076' target='_blank'>SenseTime CVPR 2022 Paper Session</a>."
+    zh: "在<a href='https://zhuanlan.zhihu.com/p/525023076' target='_blank'>商汤 CVPR 2022 论文分享会</a>上分享 Uni6D。"
 
 - date: "2022-03"
   content:

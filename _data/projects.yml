@@ -19,25 +19,24 @@
     - text: "IDEA Day showcase"
       url: "https://zhuanlan.zhihu.com/p/1975898373732197681"
 
-- title: "oVP: Open Visual Perception"
-  subtitle: "Grounding DINO 1.5/1.6 & Supervised Prompt Tuning"
-  description: "Open-vocabulary detection, keypoint detection, and prompt tuning to customize detection targets with minimal labeled data. Grounding DINO 1.6 Pro achieves 55.4 AP on COCO and 57.7 AP on LVIS-minival. The Edge model runs at 14 FPS on edge devices. Supervised Prompt Tuning (SPT) enables customized detection for specialized scenarios."
-  tags: ["Open-Set Detection", "Keypoint Detection", "3D Detection"]
-  videos:
-    - title: "Grounding DINO 1.6 Pro"
-      url: "https://dds-frontend.oss-accelerate.aliyuncs.com/static_files/video/banner_grounding-dino_1.6_pro.mp4"
-      type: "video"
-    - title: "Grounding DINO 1.6 Edge"
-      url: "https://dds-frontend.oss-cn-shenzhen.aliyuncs.com/static_files/video/banner_video_edge_20240718.mp4"
-      type: "video"
+- title: "oVP: Optimized Visual Prompt"
+  subtitle: "Supervised Prompt Tuning for Customized Detection"
+  description: "oVP uses Supervised Prompt Tuning (SPT) to generate optimized visual prompts that customize open-set detection for specialized scenarios. Unlike text prompts that rely on category names, SPT learns domain-specific prompt embeddings from as few as 7 labeled images. Only prompt embeddings are updated during training — no model fine-tuning needed. SPT+Grounding DINO 1.6 consistently outperforms YOLOv8 across 12 industry domains (agriculture, construction, manufacturing, retail, etc.), with advantages intensifying as training data decreases."
+  tags: ["Open-Set Detection"]
+  images:
+    - title: "SPT accuracy across 12 industry scenarios"
+      url: "https://dds-blogs.oss-accelerate.aliyuncs.com/assets/Grounding-DINO-1.6-Pro/accur.png"
+    - title: "SPT accuracy with varying training data"
+      url: "https://dds-blogs.oss-accelerate.aliyuncs.com/assets/Grounding-DINO-1.6-Pro/accuracy-varying.png"
+    - title: "Port terminal detection with 7 labeled images"
+      url: "https://dds-blogs.oss-accelerate.aliyuncs.com/assets/Grounding-DINO-1.6-Pro/5A.png"
+    - title: "Text prompt vs. optimized visual prompt"
+      url: "https://dds-blogs.oss-accelerate.aliyuncs.com/assets/Grounding-DINO-1.6-Pro/5B.png"
+  videos: []
   links:
-    - text: "Grounding DINO 1.6 Blog"
+    - text: "Grounding DINO 1.6 Blog (SPT section)"
       url: "https://visincept.com/blog/6"
-    - text: "Try Demo"
-      url: "https://deepdataspace.com/playground/grounding_dino"
     - text: "DINO-X Report"
       url: "https://arxiv.org/abs/2411.14347"
-    - text: "Grounding DINO 1.5 Report"
-      url: "https://arxiv.org/abs/2405.10300"
     - text: "GitHub"
       url: "https://github.com/IDEA-Research/Grounding-DINO-1.5-API"

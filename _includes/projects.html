@@ -15,6 +15,18 @@
     {% endfor %}
   </div>
   {% endif %}
+  {% if project.images %}
+  <div class="project-gallery">
+    {% for img in project.images %}
+    <div class="project-image">
+      <a href="{{ img.url }}" target="_blank" rel="noopener">
+        <img src="{{ img.url }}" alt="{{ img.title }}" loading="lazy">
+      </a>
+      <span class="video-label">{{ img.title }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
   <div class="project-videos">
     {% for video in project.videos %}
     <div class="project-video">

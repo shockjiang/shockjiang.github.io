@@ -61,7 +61,7 @@
   url: ""
   arxiv: ""
   pdf: "files/humanMM.pdf"
-  tags: ["Hand Reconstruction", "Object Reconstruction"]
+  tags: ["Human Motion", "Object Reconstruction"]
 
 - title: "SeqPose: An End-to-End Framework to Unify Single-frame and Video-based RGB Category-Level Pose Estimation"
   authors: "Yuzhu Ji, Mingshan Sun, Jianyang Shi, <strong>Xiaoke Jiang</strong>, Yiqun Zhang, Haijun Zhang"
@@ -76,7 +76,7 @@
 - title: "Geo6D: Geometric-Constraints-Guided Direct Object 6D Pose Estimation Network"
   authors: "Jianqiu Chen, Mingshan Sun, Ye Zheng, Tianpeng Bao, Zhenyu He, Donghai Li, Guoqiang Jin, Zhao Rui, Liwei Wu, <strong>Xiaoke Jiang</strong>"
   venue: "IEEE Transactions on Multimedia (TMM) 2025"
-  year: 2024
+  year: 2025
   url: ""
   arxiv: ""
   pdf: "files/Geo6D-TMM25.pdf"
@@ -86,7 +86,7 @@
 - title: "Uni6Dv2: Noise Elimination for 6D Pose Estimation"
   authors: "Mingshan Sun, Ye Zheng, Tianpeng Bao, Jianqiu Chen, Guoqiang Jin, Liwei Wu, Rui Zhao, <strong>Xiaoke Jiang</strong>"
   venue: "AISTATS 2025"
-  year: 2023
+  year: 2025
   url: ""
   arxiv: "https://arxiv.org/abs/2208.06416"
   pdf: "files/Uni6Dv2-AISTATS25.pdf"
@@ -96,6 +96,7 @@
   authors: "Jingtian Guan, Jingjing Fei, Wei Li, <strong>Xiaoke Jiang</strong>, Liwei Wu, Yakun Liu, Juntong Xi"
   venue: "Optics and Lasers in Engineering 163 (2023)"
   year: 2023
+
   url: ""
   arxiv: ""
   pdf: "files/PMD-OpticsLaser23.pdf"

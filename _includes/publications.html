@@ -20,7 +20,7 @@
       {% assign current_year = pub.year %}
       <h3 class="pub-year">{{ current_year }}</h3>
     {% endif %}
-    <div class="pub-item" data-tags="{{ pub.tags | join: '||' }}">
+    {% assign is_highlight = false %}{% if pub.authors contains "Xiaoke Jiang*" or pub.authors contains "Xiaoke Jiang</strong>," %}{% assign is_highlight = true %}{% endif %}<div class="pub-item{% if is_highlight %} pub-item--highlight{% endif %}" data-tags="{{ pub.tags | join: '||' }}">
       <p>{% for tag in pub.tags %}<span class="pub-tag">{{ tag }}</span>{% endfor %}
         {{ pub.authors }},
         {% if pub.url != "" %}<a href="{{ pub.url }}" target="_blank" rel="noopener">{{ pub.title }}</a>{% else %}<span class="pub-title">{{ pub.title }}</span>{% endif %},
