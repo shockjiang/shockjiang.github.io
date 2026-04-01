@@ -96,6 +96,6 @@ skills:
   - category: "数学"
     items: ["线性代数", "李代数/旋转群", "概率论", "泰勒展开", "优化理论"]
   - category: "编程"
-    items: ["语言：Python, GoLang, C++", "工具：Linux, git, make, gcc, ffmpeg", "库：PyTorch, mmengine, PyTorch Lightning, OpenCV, scikit-learn, matplotlib"]
+    items: ["语言：Python, GoLang, C++", "工具：Linux, git, make, gcc, ffmpeg", "库：PyTorch, mmengine, PyTorch Lightning, OpenCV, scikit-learn, matplotlib", "Vibe Coding：Claude Code, Cursor"]
 
 hobbies: ["羽毛球", "徒步", "编程解决实际问题", "小说阅读", "哲学思考"]

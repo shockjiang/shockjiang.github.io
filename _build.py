@@ -190,7 +190,13 @@ html = f'''<!DOCTYPE html>
       <div class="profile-links">
         {profile_links_html()}
       </div>
-      <div class="profile-tags">
+      <div class="profile-tags experience-tags">
+        {''.join(f'<span class="profile-tag exp-tag">{t}</span>' for t in profile.get('experience_tags', []))}
+      </div>
+      <div class="profile-tags skill-tags">
+        {''.join(f'<span class="profile-tag skill-tag">{t}</span>' for t in profile.get('skill_tags', []))}
+      </div>
+      <div class="profile-tags research-tags">
         {profile_tags_html()}
       </div>
     </div>
@@ -239,6 +245,13 @@ html = f'''<!DOCTYPE html>
       </div>
     </section>
   </main>
+
+  <div class="visitor-stats">
+    <div class="visitor-title">Visitors</div>
+    <div class="visitor-globe">
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5e4x5w2ajfs&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33&amp;bv=80&amp;lx=-420&amp;ly=420&amp;hi=8&amp;he=2&amp;hc=34d399&amp;rs=20" async="async"></script>
+    </div>
+  </div>
 
   <footer class="footer">
     <p>&copy; 2025 Shock (Xiaoke) Jiang</p>

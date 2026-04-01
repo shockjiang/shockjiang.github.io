@@ -116,6 +116,8 @@ a {
   margin-right: auto;
 }
 
+.profile-tags.experience-tags { margin-bottom: 6px; }
+
 .profile-tag {
   background: var(--bg2);
   color: var(--text-muted);
@@ -126,6 +128,22 @@ a {
   font-family: 'JetBrains Mono', monospace;
   transition: border-color 0.2s, color 0.2s;
   &:hover { border-color: var(--accent); color: var(--accent); }
+}
+
+.profile-tags.skill-tags { margin-bottom: 6px; }
+
+.skill-tag {
+  background: rgba(56, 189, 248, 0.08);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.2);
+  &:hover { border-color: #38bdf8; color: #38bdf8; }
+}
+
+.exp-tag {
+  background: rgba(167, 139, 250, 0.08);
+  color: var(--nav-active);
+  border-color: rgba(167, 139, 250, 0.2);
+  &:hover { border-color: var(--nav-active); color: var(--nav-active); }
 }
 
 /* Panel nav */
@@ -444,6 +462,27 @@ a {
 
 @media (max-width: 600px) {
   .project-videos { grid-template-columns: 1fr; }
+}
+
+/* Visitor stats */
+.visitor-stats {
+  text-align: center;
+  margin-top: 32px;
+  padding: 16px;
+}
+
+.visitor-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.visitor-globe {
+  display: flex;
+  justify-content: center;
 }
 
 /* Footer */

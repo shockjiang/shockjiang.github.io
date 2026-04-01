@@ -1,6 +1,6 @@
 # 2026
 - title: "SpatialPoint: Spatial-aware Point Prediction for Embodied Localization"
-  authors: "Qiming Zhu, Zhirui Fang, Tianming Zhang, Chuanxiu Liu, <strong>Xiaoke Jiang</strong>, Lei Zhang"
+  authors: "Qiming Zhu, Zhirui Fang, Tianming Zhang, Chuanxiu Liu, <strong>Xiaoke Jiang*</strong>, Lei Zhang"
   venue: "arXiv 2026"
   year: 2026
   url: ""
@@ -10,7 +10,7 @@
 
 # 2025
 - title: "3DRot: Rediscovering the Missing Primitive for RGB-Based 3D Augmentation"
-  authors: "Shitian Yang, Deyu Li, <strong>Xiaoke Jiang</strong>, Lei Zhang"
+  authors: "Shitian Yang, Deyu Li, <strong>Xiaoke Jiang*</strong>, Lei Zhang"
   venue: "arXiv 2025"
   year: 2025
   url: ""
@@ -19,7 +19,7 @@
   tags: ["6D Pose", "3D Detection"]
 
 - title: "Coca-Splat: Collaborative Optimization for Camera Parameters and 3D Gaussians"
-  authors: "Jiamin Wu, Hongyang Li, <strong>Xiaoke Jiang</strong>, Yuan Yao, Lei Zhang"
+  authors: "Jiamin Wu, Hongyang Li, <strong>Xiaoke Jiang*</strong>, Yuan Yao, Lei Zhang"
   venue: "arXiv 2025"
   year: 2025
   url: ""

@@ -96,6 +96,6 @@ skills:
   - category: "Mathematics"
     items: ["Linear Algebra", "Lie Algebra / Rotation Group", "Probability Theory", "Taylor Expansion", "Optimization Theory"]
   - category: "Programming"
-    items: ["Languages: Python, GoLang, C++", "Tools: Linux, git, make, gcc, ffmpeg", "Libraries: PyTorch, mmengine, PyTorch Lightning, OpenCV, scikit-learn, matplotlib"]
+    items: ["Languages: Python, GoLang, C++", "Tools: Linux, git, make, gcc, ffmpeg", "Libraries: PyTorch, mmengine, PyTorch Lightning, OpenCV, scikit-learn, matplotlib", "Vibe Coding: Claude Code, Cursor"]
 
 hobbies: ["Badminton", "Hiking", "Programming to solve real-world problems", "Reading novels", "Philosophy"]

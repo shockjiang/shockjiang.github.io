@@ -27,7 +27,17 @@
     </a>
     {% endfor %}
   </div>
-  <div class="profile-tags">
+  <div class="profile-tags experience-tags">
+    {% for tag in site.data.profile.experience_tags %}
+    <span class="profile-tag exp-tag">{{ tag }}</span>
+    {% endfor %}
+  </div>
+  <div class="profile-tags skill-tags">
+    {% for tag in site.data.profile.skill_tags %}
+    <span class="profile-tag skill-tag">{{ tag }}</span>
+    {% endfor %}
+  </div>
+  <div class="profile-tags research-tags">
     {% assign all_tags = "" | split: "" %}
     {% for pub in site.data.publications %}
       {% for tag in pub.tags %}
