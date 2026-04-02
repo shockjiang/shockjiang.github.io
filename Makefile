@@ -1,6 +1,6 @@
 
 build:
-    python3 _build.py
+	python3 _build.py
 
 clean:
-    rm -rf _site
+	rm -rf _site
