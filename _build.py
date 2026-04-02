@@ -276,7 +276,7 @@ html = f'''<!DOCTYPE html>
         <a href="#" data-panel="news">News</a>
         <a href="#" data-panel="publications" class="active">Publications</a>
         <a href="#" data-panel="projects">Projects</a>
-        <a href="#" data-panel="cv">CV</a>
+        <a href="#" data-panel="cv">Resume</a>
       </div>
       <span class="nav-divider"></span>
       <div class="theme-dots">
