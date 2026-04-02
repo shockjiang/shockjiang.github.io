@@ -2,12 +2,12 @@
   <div class="profile-orbit">
     <div class="orbit-ring orbit-inner">
       {% for tag in site.data.profile.experience_tags %}
-      <span class="profile-tag exp-tag orbit-tag" data-tooltip="{{ tag.tip }}" data-link="{{ tag.link }}" data-name-en="{{ tag.name }}" data-name-zh="{{ tag.name_zh }}"><span data-lang="en">{{ tag.name }}</span><span data-lang="zh" style="display:none">{{ tag.name_zh }}</span></span>
+      <span class="profile-tag exp-tag orbit-tag" data-tooltip="{{ tag.tip }}" data-link="{{ tag.link }}" data-name-en="{{ tag.name }}" data-name-zh="{{ tag.name_zh }}"><span data-lang="en" style="display:none">{{ tag.name }}</span><span data-lang="zh">{{ tag.name_zh }}</span></span>
       {% endfor %}
     </div>
     <div class="orbit-ring orbit-outer">
       {% for tag in site.data.profile.skill_tags %}
-      <span class="profile-tag skill-tag orbit-tag" data-tooltip="{{ tag.tip }}" data-link="cv" data-name-en="{{ tag.name }}" data-name-zh="{{ tag.name_zh }}"><span data-lang="en">{{ tag.name }}</span><span data-lang="zh" style="display:none">{{ tag.name_zh }}</span></span>
+      <span class="profile-tag skill-tag orbit-tag" data-tooltip="{{ tag.tip }}" data-link="cv" data-name-en="{{ tag.name }}" data-name-zh="{{ tag.name_zh }}"><span data-lang="en" style="display:none">{{ tag.name }}</span><span data-lang="zh">{{ tag.name_zh }}</span></span>
       {% endfor %}
       {% assign all_tags = "" | split: "" %}
       {% assign all_tips = "" | split: "" %}
@@ -39,20 +39,20 @@
         <img src="{{ site.data.profile.avatar | relative_url }}" alt="avatar" class="avatar">
       </picture>
       <h1 class="profile-name">
-        <span data-lang="en">{{ site.data.profile.name.en }}</span>
-        <span data-lang="zh" style="display:none">{{ site.data.profile.name.zh }}</span>
+        <span data-lang="en" style="display:none">{{ site.data.profile.name.en }}</span>
+        <span data-lang="zh">{{ site.data.profile.name.zh }}</span>
       </h1>
       <p class="profile-title">
-        <span data-lang="en">{{ site.data.profile.title.en }}</span>
-        <span data-lang="zh" style="display:none">{{ site.data.profile.title.zh }}</span>
+        <span data-lang="en" style="display:none">{{ site.data.profile.title.en }}</span>
+        <span data-lang="zh">{{ site.data.profile.title.zh }}</span>
       </p>
       <p class="profile-bio">
-        <span data-lang="en">{{ site.data.profile.bio.en }}</span>
-        <span data-lang="zh" style="display:none">{{ site.data.profile.bio.zh }}</span>
+        <span data-lang="en" style="display:none">{{ site.data.profile.bio.en }}</span>
+        <span data-lang="zh">{{ site.data.profile.bio.zh }}</span>
       </p>
       <p class="profile-statement">
-        <span data-lang="en">{{ site.data.profile.statement.en | newline_to_br }}</span>
-        <span data-lang="zh" style="display:none">{{ site.data.profile.statement.zh | newline_to_br }}</span>
+        <span data-lang="en" style="display:none">{{ site.data.profile.statement.en | newline_to_br }}</span>
+        <span data-lang="zh">{{ site.data.profile.statement.zh | newline_to_br }}</span>
       </p>
       <div class="profile-links">
         {% for link in site.data.profile.links %}

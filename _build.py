@@ -58,14 +58,14 @@ def profile_tags_html():
 
 def exp_tags_html():
     return '\n'.join(
-        '<span class="profile-tag exp-tag orbit-tag" data-tooltip="{tip}" data-link="{link}"><span data-lang="en">{name}</span><span data-lang="zh" style="display:none">{name_zh}</span></span>'.format(
+        '<span class="profile-tag exp-tag orbit-tag" data-tooltip="{tip}" data-link="{link}"><span data-lang="en" style="display:none">{name}</span><span data-lang="zh">{name_zh}</span></span>'.format(
             tip=t['tip'].replace('"', '&quot;'), name=t['name'], name_zh=t.get('name_zh', t['name']), link=t.get('link', 'cv')
         ) for t in profile.get('experience_tags', [])
     )
 
 def skill_tags_html():
     return '\n'.join(
-        '<span class="profile-tag skill-tag orbit-tag" data-tooltip="{tip}" data-link="cv"><span data-lang="en">{name}</span><span data-lang="zh" style="display:none">{name_zh}</span></span>'.format(
+        '<span class="profile-tag skill-tag orbit-tag" data-tooltip="{tip}" data-link="cv"><span data-lang="en" style="display:none">{name}</span><span data-lang="zh">{name_zh}</span></span>'.format(
             tip=t['tip'].replace('"', '&quot;'), name=t['name'], name_zh=t.get('name_zh', t['name'])
         ) for t in profile.get('skill_tags', [])
     )
@@ -83,8 +83,8 @@ def news_html():
         parts.append(f'''<div class="news-item">
     <span class="news-date">{item['date']}</span>
     <span class="news-content">
-      <span data-lang="en">{item['content']['en']}</span>
-      <span data-lang="zh" style="display:none">{item['content']['zh']}</span>
+      <span data-lang="en" style="display:none">{item['content']['en']}</span>
+      <span data-lang="zh">{item['content']['zh']}</span>
     </span>
   </div>''')
     return '\n'.join(parts)
@@ -244,20 +244,20 @@ html = f'''<!DOCTYPE html>
             <img src="assets/images/profile.png" alt="avatar" class="avatar">
           </picture>
           <h1 class="profile-name">
-            <span data-lang="en">{profile['name']['en']}</span>
-            <span data-lang="zh" style="display:none">{profile['name']['zh']}</span>
+            <span data-lang="en" style="display:none">{profile['name']['en']}</span>
+            <span data-lang="zh">{profile['name']['zh']}</span>
           </h1>
           <p class="profile-title">
-            <span data-lang="en">{profile['title']['en']}</span>
-            <span data-lang="zh" style="display:none">{profile['title']['zh']}</span>
+            <span data-lang="en" style="display:none">{profile['title']['en']}</span>
+            <span data-lang="zh">{profile['title']['zh']}</span>
           </p>
           <p class="profile-bio">
-            <span data-lang="en">{profile['bio']['en']}</span>
-            <span data-lang="zh" style="display:none">{profile['bio']['zh']}</span>
+            <span data-lang="en" style="display:none">{profile['bio']['en']}</span>
+            <span data-lang="zh">{profile['bio']['zh']}</span>
           </p>
           <p class="profile-statement">
-            <span data-lang="en">{profile['statement']['en'].replace(chr(10), '<br>')}</span>
-            <span data-lang="zh" style="display:none">{profile['statement']['zh'].replace(chr(10), '<br>')}</span>
+            <span data-lang="en" style="display:none">{profile['statement']['en'].replace(chr(10), '<br>')}</span>
+            <span data-lang="zh">{profile['statement']['zh'].replace(chr(10), '<br>')}</span>
           </p>
           <div class="profile-links">
             {profile_links_html()}
@@ -288,9 +288,9 @@ html = f'''<!DOCTYPE html>
       </div>
       <span class="nav-divider"></span>
       <div class="lang-toggle">
-        <a href="#" data-lang-btn="en" class="active">EN</a>
+        <a href="#" data-lang-btn="en">EN</a>
         <span class="sep">|</span>
-        <a href="#" data-lang-btn="zh">中文</a>
+        <a href="#" data-lang-btn="zh" class="active">中文</a>
       </div>
     </nav>
 
@@ -309,10 +309,10 @@ html = f'''<!DOCTYPE html>
     </section>
 
     <section id="panel-cv" class="panel">
-      <div data-lang="en">
+      <div data-lang="en" style="display:none">
         {cv_section_html(cv_en, en_labels)}
       </div>
-      <div data-lang="zh" style="display:none">
+      <div data-lang="zh">
         {cv_section_html(cv_zh, zh_labels)}
       </div>
     </section>
