@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build static HTML from Jekyll data files for local preview."""
-import yaml, os, shutil
+import yaml, os, shutil, sass
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.join(ROOT, '_site')
@@ -19,7 +19,8 @@ pubs = load('publications.yml')
 cv_en = load('cv_en.yml')
 cv_zh = load('cv_zh.yml')
 projects = load('projects.yml')
-css = read('assets/css/style.scss').split('---')[-1]  # strip frontmatter
+css_raw = read('assets/css/style.scss').split('---')[-1]  # strip frontmatter
+css = sass.compile(string=css_raw, output_style='compressed')
 js = read('assets/js/main.js')
 
 # Icon SVGs
@@ -110,9 +111,7 @@ def pubs_html():
 
         tags_str = '||'.join(p.get('tags', []))
         tag_spans = ''.join(f'<span class="pub-tag">{t}</span>' for t in p.get('tags', []))
-        title_html = f'<a href="{p["url"]}" target="_blank" rel="noopener">{p["title"]}</a>' if p.get('url') else f'<span class="pub-title">{p["title"]}</span>'
-        arxiv_html = f' <a href="{p["arxiv"]}" class="pub-pdf" target="_blank" rel="noopener">[arXiv]</a>' if p.get('arxiv') else ''
-        pdf_html = f' <a href="{p["pdf"]}" class="pub-pdf" target="_blank" rel="noopener">[PDF]</a>' if p.get('pdf') else ''
+        title_html = f'<a href="{p["url"]}" target="_blank" rel="noopener">{p["title"]}</a>' if p.get('url') else p['title']
 
         is_highlight = 'Xiaoke Jiang*' in p['authors'] or 'Xiaoke Jiang</strong>,' in p['authors']
         venue = p.get('venue', '')
@@ -120,11 +119,36 @@ def pubs_html():
         hl_class = ' pub-item--oral' if is_oral else (' pub-item--highlight' if is_highlight else '')
         venue_badge = ''
         if is_oral:
-            venue_badge = ' <span class="venue-badge venue-badge--oral">ORAL</span>'
-        elif any(v in venue for v in ['CVPR', 'ICCV', 'AAAI', 'IJCAI', 'SIGCOMM', 'ICNP']):
-            venue_badge = ' <span class="venue-badge venue-badge--top">TOP</span>'
-        items.append(f'''<div class="pub-item{hl_class}" data-tags="{tags_str}">
-      <p>{tag_spans}{p['authors']}, {title_html}, <em>{p['venue']}</em>.{venue_badge}{arxiv_html}{pdf_html}</p>
+            venue_badge = '<span class="venue-badge venue-badge--oral">ORAL</span>'
+
+        thumb = f'<div class="pub-thumb"><img src="{p["image"]}" alt="{p["title"]}" loading="lazy"></div>' if p.get('image') else ''
+
+        action_links = []
+        if p.get('arxiv'): action_links.append(f'<a href="{p["arxiv"]}" target="_blank" rel="noopener">arXiv</a>')
+        if p.get('pdf'): action_links.append(f'<a href="{p["pdf"]}" target="_blank" rel="noopener">PDF</a>')
+        if p.get('code'): action_links.append(f'<a href="{p["code"]}" target="_blank" rel="noopener">Code</a>')
+        if p.get('project'): action_links.append(f'<a href="{p["project"]}" target="_blank" rel="noopener">Project</a>')
+        action_links.append('<a href="#" class="bibtex-toggle" onclick="event.preventDefault();this.parentElement.parentElement.parentElement.querySelector(\'.bibtex-box\').classList.toggle(\'show\')">BibTeX</a>')
+
+        import re
+        authors_plain = re.sub(r'<[^>]+>', '', p['authors']).replace('*', '')
+        bib_key = p['title'].split(':')[0].lower().replace(' ', '')
+        bibtex = f'''@article{{{bib_key}{p['year']},
+  title={{{p['title']}}},
+  author={{{authors_plain}}},
+  journal={{{venue}}},
+  year={{{p['year']}}}
+}}'''
+
+        items.append(f'''<div class="pub-card{hl_class}" data-tags="{tags_str}">
+      {thumb}
+      <div class="pub-body">
+        <div class="pub-card-title">{title_html}</div>
+        <div class="pub-authors">{p['authors']}</div>
+        <div class="pub-venue"><em>{venue}</em>{venue_badge}</div>
+        <div class="pub-actions">{tag_spans}<span class="pub-action-links">{''.join(action_links)}</span></div>
+        <pre class="bibtex-box">{bibtex}</pre>
+      </div>
     </div>''')
 
     return f'<div class="tag-bar">\n  {tag_btns}</div>\n<div class="pub-list">\n' + '\n'.join(items) + '\n</div>'

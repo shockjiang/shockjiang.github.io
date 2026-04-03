@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
       document.querySelectorAll('.tag-btn').forEach(function (b) { b.classList.remove('active'); });
       btn.classList.add('active');
 
-      var items = document.querySelectorAll('.pub-item');
+      var items = document.querySelectorAll('.pub-card');
       items.forEach(function (item) {
         var tags = item.dataset.tags.split('||');
         if (tag === 'all' || tags.indexOf(tag) !== -1) {
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var next = header.nextElementSibling;
         var hasVisible = false;
         while (next && !next.classList.contains('pub-year')) {
-          if (next.classList.contains('pub-item') && next.style.display !== 'none') {
+          if (next.classList.contains('pub-card') && next.style.display !== 'none') {
             hasVisible = true;
           }
           next = next.nextElementSibling;
