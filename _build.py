@@ -124,12 +124,13 @@ def pubs_html():
 
         authors_plain = re.sub(r'<[^>]+>', '', p['authors']).replace('*', '')
         bib_key = p['title'].split(':')[0].lower().replace(' ', '')
-        bibtex = f'''@article{{{bib_key}{p['year']},
+        bibtex_content = f'''@article{{{bib_key}{p['year']},
   title={{{p['title']}}},
   author={{{authors_plain}}},
   journal={{{venue}}},
   year={{{p['year']}}}
 }}'''
+        bibtex = f'<button class="bibtex-copy">Copy</button>{bibtex_content}'
 
         items.append(f'''<div class="pub-card{hl_class}" data-tags="{tags_str}">
       {thumb}
@@ -142,7 +143,7 @@ def pubs_html():
       </div>
     </div>''')
 
-    return f'<div class="tag-bar">\n  {tag_btns}</div>\n<div class="pub-list">\n' + '\n'.join(items) + '\n</div>'
+    return f'<div class="tag-bar">\n  {tag_btns}</div>\n<button class="show-older-btn" id="show-older">Show earlier papers (2011-2019) &#9656;</button>\n<div class="pub-list">\n' + '\n'.join(items) + '\n</div>'
 
 def cv_section_html(cv, labels):
     parts = []
@@ -217,7 +218,7 @@ def projects_html():
             if v.get('type') == 'video':
                 media = f'<video src="{v["url"]}" controls muted playsinline preload="metadata"></video>'
             else:
-                media = f'<iframe src="{v["embed"]}" allowfullscreen scrolling="no" frameborder="0"></iframe>'
+                media = f'<iframe data-src="{v["embed"]}" allowfullscreen scrolling="no" frameborder="0"></iframe>'
             videos.append(f'''<div class="project-video">
         <div class="video-wrap">{media}</div>
         <span class="video-label">{v['title']}</span>

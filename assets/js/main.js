@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', function () {
       document.querySelectorAll('.panel-nav a[data-panel]').forEach(function (a) { a.classList.remove('active'); });
       document.getElementById('panel-' + link.dataset.panel).style.display = 'block';
       link.classList.add('active');
+      if (link.dataset.panel === 'projects') {
+        document.querySelectorAll('#panel-projects iframe[data-src]').forEach(function(iframe) {
+          if (!iframe.src) { iframe.src = iframe.dataset.src; iframe.removeAttribute('data-src'); }
+        });
+      }
     });
   });
 
@@ -148,5 +153,55 @@ document.addEventListener('DOMContentLoaded', function () {
         header.style.display = hasVisible ? '' : 'none';
       });
     });
+  });
+
+  // Hide older papers by default (before 2021)
+  function setOlderPapersVisibility(show) {
+    document.querySelectorAll('.pub-year').forEach(function (header) {
+      var yearNum = parseInt(header.textContent.trim(), 10);
+      if (yearNum < 2021) {
+        header.style.display = show ? '' : 'none';
+        var next = header.nextElementSibling;
+        while (next && !next.classList.contains('pub-year')) {
+          if (next.classList.contains('pub-card')) {
+            next.style.display = show ? '' : 'none';
+          }
+          next = next.nextElementSibling;
+        }
+      }
+    });
+  }
+  setOlderPapersVisibility(false);
+
+  var showOlderBtn = document.getElementById('show-older');
+  if (showOlderBtn) {
+    var olderVisible = false;
+    showOlderBtn.addEventListener('click', function () {
+      olderVisible = !olderVisible;
+      setOlderPapersVisibility(olderVisible);
+      showOlderBtn.textContent = olderVisible ? 'Hide earlier papers \u25be' : 'Show earlier papers (2011-2019) \u25b8';
+    });
+  }
+
+  // BibTeX copy button
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('bibtex-copy')) {
+      var text = e.target.parentElement.textContent.replace('Copy', '').trim();
+      navigator.clipboard.writeText(text).then(function() {
+        e.target.textContent = 'Copied!';
+        setTimeout(function() { e.target.textContent = 'Copy'; }, 1500);
+      });
+    }
+  });
+
+  // Mark recent news (within 90 days)
+  var now = new Date();
+  document.querySelectorAll('.news-date').forEach(function(el) {
+    var parts = el.textContent.trim().split('-');
+    var newsDate = new Date(parts[0], (parts[1] || 1) - 1);
+    var diffDays = (now - newsDate) / (1000 * 60 * 60 * 24);
+    if (diffDays < 90) {
+      el.insertAdjacentHTML('afterend', '<span class="news-new">NEW</span>');
+    }
   });
 });

@@ -34,7 +34,7 @@
         {% if video.type == "video" %}
         <video src="{{ video.url }}" controls muted playsinline preload="metadata"></video>
         {% else %}
-        <iframe src="{{ video.embed }}" allowfullscreen scrolling="no" frameborder="0"></iframe>
+        <iframe data-src="{{ video.embed }}" allowfullscreen scrolling="no" frameborder="0"></iframe>
         {% endif %}
       </div>
       <span class="video-label">{{ video.title }}</span>
