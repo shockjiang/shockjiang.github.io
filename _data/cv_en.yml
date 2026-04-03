@@ -86,6 +86,8 @@ work:
     desc: SSN3D (AAAI'21)
   - title: AI Automation in Transportation
     desc: ''
+  - title: Outstanding Employee Award
+    desc: Received the Outstanding Employee Award in 2019
   logo: assets/images/logos/sensetime.png
 - period: 2016 - 2018
   company: Kandao Technology
@@ -94,6 +96,8 @@ work:
   highlights:
   - title: VR Video Streaming & CDN
     desc: Smart Streaming of Panoramic Video (SIGCOMM'18 VR Workshop)
+  - title: Outstanding Employee Award
+    desc: Received the Outstanding Employee Award in 2017
   logo: assets/images/logos/kandao.svg
 skills:
 - category: Mathematics

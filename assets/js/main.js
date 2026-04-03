@@ -43,61 +43,52 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!count) return;
     var cx = container.offsetWidth / 2;
     var cy = container.offsetHeight / 2;
-    // Get profile center card bounds relative to container
+    // Get card bounds to avoid top/bottom placement
     var card = container.querySelector('.profile-center');
-    var cardRect = null;
+    var cardTop = 0, cardBottom = 0;
     if (card) {
       var cRect = card.getBoundingClientRect();
       var pRect = container.getBoundingClientRect();
-      var pad = 6;
-      cardRect = {
-        left: cRect.left - pRect.left - pad,
-        right: cRect.right - pRect.left + pad,
-        top: cRect.top - pRect.top - pad,
-        bottom: cRect.bottom - pRect.top + pad
-      };
+      cardTop = cRect.top - pRect.top - 10;
+      cardBottom = cRect.bottom - pRect.top + 10;
     }
-    tags.forEach(function(tag, i) {
-      var angle = (2 * Math.PI * i / count) + (offsetAngle || 0);
+    // Distribute tags on the ellipse but only in left/right arcs
+    // Left arc: angles from ~0.6pi to ~1.4pi, Right arc: ~-0.4pi to ~0.4pi
+    var half = Math.ceil(count / 2);
+    var rightCount = half;
+    var leftCount = count - half;
+    function place(tag, angle) {
       var x = cx + radiusX * Math.cos(angle) - tag.offsetWidth / 2;
       var y = cy + radiusY * Math.sin(angle) - tag.offsetHeight / 2;
-      // If tag overlaps the center card, push to nearest edge (left/right/bottom)
-      if (cardRect) {
-        var tw = tag.offsetWidth;
-        var th = tag.offsetHeight;
-        var overlapX = x + tw > cardRect.left && x < cardRect.right;
-        var overlapY = y + th > cardRect.top && y < cardRect.bottom;
-        if (overlapX && overlapY) {
-          var tagCx = x + tw / 2;
-          var cardCx = (cardRect.left + cardRect.right) / 2;
-          var distLeft = Math.abs(x + tw - cardRect.left);
-          var distRight = Math.abs(x - cardRect.right);
-          var distBottom = Math.abs(y - cardRect.bottom);
-          // Push to the nearest side
-          if (tagCx < cardCx && distLeft <= distBottom) {
-            x = cardRect.left - tw - 4;
-          } else if (tagCx >= cardCx && distRight <= distBottom) {
-            x = cardRect.right + 4;
-          } else {
-            y = cardRect.bottom + 4;
-          }
-        }
-      }
+      x = Math.max(4, Math.min(x, container.offsetWidth - tag.offsetWidth - 4));
+      y = Math.max(4, Math.min(y, container.offsetHeight - tag.offsetHeight - 4));
       tag.style.left = x + 'px';
       tag.style.top = y + 'px';
-    });
+    }
+    // Right arc: spread from -arcSpan to +arcSpan
+    var arcSpan = Math.PI * 0.38;
+    for (var i = 0; i < rightCount; i++) {
+      var a = -arcSpan + (2 * arcSpan * i / Math.max(rightCount - 1, 1)) + (offsetAngle || 0);
+      place(tags[i], a);
+    }
+    // Left arc: spread from pi-arcSpan to pi+arcSpan
+    for (var j = 0; j < leftCount; j++) {
+      var a = (Math.PI - arcSpan) + (2 * arcSpan * j / Math.max(leftCount - 1, 1)) + (offsetAngle || 0);
+      place(tags[rightCount + j], a);
+    }
   }
 
   function layoutAllOrbits() {
     var w = document.querySelector('.profile-orbit');
     if (!w) return;
     var ww = w.offsetWidth;
-    var innerRx = Math.min(ww * 0.35, 300);
-    var innerRy = Math.min(200, 190);
-    var outerRx = Math.min(ww * 0.48, 440);
-    var outerRy = Math.min(245, 235);
-    layoutOrbit('.orbit-inner', innerRx, innerRy, -0.3);
-    layoutOrbit('.orbit-outer', outerRx, outerRy, 0.15);
+    // Inner (experience) = closer ellipse, outer (skills) = wider ellipse
+    var innerRx = Math.min(ww * 0.32, 270);
+    var innerRy = Math.min(170, 160);
+    var outerRx = Math.min(ww * 0.46, 420);
+    var outerRy = Math.min(220, 210);
+    layoutOrbit('.orbit-inner', innerRx, innerRy, 0);
+    layoutOrbit('.orbit-outer', outerRx, outerRy, 0.05);
   }
 
   layoutAllOrbits();
