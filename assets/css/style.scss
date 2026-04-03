@@ -647,6 +647,21 @@ a {
   backdrop-filter: blur(4px);
 }
 
+.cv-logos {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.cv-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #fff;
+  padding: 3px;
+}
+
 .cv-period {
   flex-shrink: 0;
   width: 120px;

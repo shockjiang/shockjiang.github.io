@@ -1,101 +1,116 @@
 education:
-  - period: "Aug 2010 - Jun 2016"
-    institution: "Tsinghua University"
-    degree: "Ph.D., Computer Science & Technology"
-    details:
-      - "Excellent Graduate of CS Department: published 17 peer-reviewed papers, 9 as first author"
-      - "Thesis: <a href='https://github.com/shockjiang/public-data/blob/main/doc/ndn-usability_phd.pdf'>Research on the Key Issues of Usability of Named Data Networking</a>"
-    supervisor: "<a href='https://scholar.google.com/citations?user=9c8plF0AAAAJ'>Prof. Jun Bi</a>"
-
-  - period: "Jul 2014 - Jul 2015"
-    institution: "University of California Los Angeles (UCLA)"
-    degree: "Joint PhD Program"
-    details:
-      - "ICCCN'17 paper: <a href='https://irl.cs.ucla.edu/data/files/papers/2017-icccn-ndns.pdf'>NDNS: A DNS-Like Name Service for NDN</a>"
-      - "Open source: <a href='https://github.com/named-data/ndns'>ndns</a> — the DNS system for NDN testbed"
-    supervisor: "<a href='http://cs.ucla.edu/~lixia/'>Prof. Lixia Zhang</a>"
-
-  - period: "Aug 2011 - Jul 2012"
-    institution: "Tsinghua-Berkeley Global Technology Entrepreneurship Program"
-    degree: ""
-    details:
-      - "Served as tech leader of 2nd Award Team"
-
-  - period: "Sep 2006 - Jun 2010"
-    institution: "Tsinghua University"
-    degree: "B.S., School of Software"
-    details:
-      - "Thesis: <a href='https://github.com/shockjiang/public-data/blob/main/doc/ipv6-evolution_bachelor.pdf'>Research on the Evolution of IPv6</a>"
-    supervisor: "<a href='http://netarchlab.tsinghua.edu.cn/~junbi/'>Prof. Jun Bi</a> and <a href='https://www.thss.tsinghua.edu.cn/info/1057/1237.htm'>Prof. Fei He</a>"
-
+- period: Aug 2010 - Jun 2016
+  institution: Tsinghua University
+  degree: Ph.D., Computer Science & Technology
+  details:
+  - 'Excellent Graduate of CS Department: published 17 peer-reviewed papers, 9 as first author'
+  - 'Thesis: <a href=''https://github.com/shockjiang/public-data/blob/main/doc/ndn-usability_phd.pdf''>Research on the Key Issues of Usability of Named Data Networking</a>'
+  supervisor: <a href='https://scholar.google.com/citations?user=9c8plF0AAAAJ'>Prof. Jun Bi</a>
+  logo: assets/images/logos/tsinghua.png
+- period: Jul 2014 - Jul 2015
+  institution: University of California Los Angeles (UCLA)
+  degree: Joint PhD Program
+  details:
+  - 'ICCCN''17 paper: <a href=''https://irl.cs.ucla.edu/data/files/papers/2017-icccn-ndns.pdf''>NDNS: A DNS-Like Name Service for NDN</a>'
+  - 'Open source: <a href=''https://github.com/named-data/ndns''>ndns</a> — the DNS system for NDN testbed'
+  supervisor: <a href='http://cs.ucla.edu/~lixia/'>Prof. Lixia Zhang</a>
+  logo: assets/images/logos/ucla.png
+- period: Aug 2011 - Jul 2012
+  institution: Tsinghua-Berkeley Global Technology Entrepreneurship Program
+  degree: ''
+  details:
+  - Served as tech leader of 2nd Award Team
+  logos:
+  - assets/images/logos/tsinghua.png
+  - assets/images/logos/berkeley.png
+- period: Sep 2006 - Jun 2010
+  institution: Tsinghua University
+  degree: B.S., School of Software
+  details:
+  - 'Thesis: <a href=''https://github.com/shockjiang/public-data/blob/main/doc/ipv6-evolution_bachelor.pdf''>Research on the Evolution of IPv6</a>'
+  supervisor: <a href='http://netarchlab.tsinghua.edu.cn/~junbi/'>Prof. Jun Bi</a> and <a href='https://www.thss.tsinghua.edu.cn/info/1057/1237.htm'>Prof. Fei He</a>
+  logo: assets/images/logos/tsinghua.png
 work:
-  - period: "2022 - now"
-    company: "IDEA"
-    url: "https://www.idea.edu.cn/research/cvr.html"
-    role: "Senior CV Researcher"
-    highlights:
-      - title: "Open-set Grasping & VLA"
-        desc: "Developing systems to enable robots to grasp any object using consumer-level hardware, powered by open-set detection/segmentation, real-time tracking, and 3D ReID"
-        demos:
-          - text: "DINO-XGrasp at IDEA Day"
-            url: "https://www.bilibili.com/video/BV1iXiSBoEsy/"
-          - text: "Robot's working day"
-            url: "https://www.bilibili.com/video/BV1UCmEBQEeD/"
-          - text: "Voice-command grasping"
-            url: "https://www.bilibili.com/video/BV1NLsyzEESB/"
-          - text: "Open-set grasping for bottles"
-            url: "https://www.bilibili.com/video/BV1JD37zaErk/"
-      - title: "Open-set 3D Detection"
-        desc: "Monocular 3D Detection and RGB-D based 3D Detection"
-        demos:
-          - text: "Monocular 3D detection"
-            url: "https://www.bilibili.com/video/BV1cS37zAELN/"
-          - text: "RGB-D 3D detection: chair"
-            url: "https://www.bilibili.com/video/BV1tgsyzDEy3/"
-          - text: "RGB-D 3D detection: room"
-            url: "https://www.bilibili.com/video/BV1tgsyzDEcS/"
-      - title: "Open-Set Detection & Prompt Tuning"
-        desc: "Customize detection targets given labeled dataset and pretrained model"
-        demos:
-          - text: "DINO-X report"
-            url: "https://arxiv.org/abs/2411.14347"
-          - text: "Grounding DINO 1.6 blog"
-            url: "https://deepdataspace.com/blog/6"
-          - text: "Grounding DINO 1.5 report"
-            url: "https://arxiv.org/abs/2405.10300"
-      - title: "Keypoint Detection"
-        desc: "Keypoints detection in the wild"
-      - title: "3D Reconstruction & Novel View Synthesis"
-        desc: "LeanGaussian (CVPR'25), UniG (ICCV'25), Coca-Splat (arXiv'25)"
-      - title: "Inertial Navigation"
-        desc: "IMU + GPS + wheel odometry fusion"
-
-  - period: "2018 - 2022"
-    company: "SenseTime"
-    url: "https://www.sensetime.com/"
-    role: "Senior Researcher"
-    highlights:
-      - title: "Defect Detection"
-        desc: "Structured light imaging, defect detection in automobile smart manufacturing"
-      - title: "6D Pose Estimation"
-        desc: "Uni6D (CVPR'22 Oral), Uni6Dv2 (AISTATS'23)"
-      - title: "Person Re-identification"
-        desc: "SSN3D (AAAI'21)"
-      - title: "AI Automation in Transportation"
-        desc: ""
-
-  - period: "2016 - 2018"
-    company: "Kandao Technology"
-    url: "https://www.kandaovr.com/"
-    role: "Senior Engineer"
-    highlights:
-      - title: "VR Video Streaming & CDN"
-        desc: "Smart Streaming of Panoramic Video (SIGCOMM'18 VR Workshop)"
-
+- period: 2022 - now
+  company: IDEA
+  url: https://www.idea.edu.cn/research/cvr.html
+  role: Senior CV Researcher
+  highlights:
+  - title: Open-set Grasping & VLA
+    desc: Developing systems to enable robots to grasp any object using consumer-level hardware, powered by open-set detection/segmentation, real-time tracking, and 3D ReID
+    demos:
+    - text: DINO-XGrasp at IDEA Day
+      url: https://www.bilibili.com/video/BV1iXiSBoEsy/
+    - text: Robot's working day
+      url: https://www.bilibili.com/video/BV1UCmEBQEeD/
+    - text: Voice-command grasping
+      url: https://www.bilibili.com/video/BV1NLsyzEESB/
+    - text: Open-set grasping for bottles
+      url: https://www.bilibili.com/video/BV1JD37zaErk/
+  - title: Open-set 3D Detection
+    desc: Monocular 3D Detection and RGB-D based 3D Detection
+    demos:
+    - text: Monocular 3D detection
+      url: https://www.bilibili.com/video/BV1cS37zAELN/
+    - text: 'RGB-D 3D detection: chair'
+      url: https://www.bilibili.com/video/BV1tgsyzDEy3/
+    - text: 'RGB-D 3D detection: room'
+      url: https://www.bilibili.com/video/BV1tgsyzDEcS/
+  - title: Open-Set Detection & Prompt Tuning
+    desc: Customize detection targets given labeled dataset and pretrained model
+    demos:
+    - text: DINO-X report
+      url: https://arxiv.org/abs/2411.14347
+    - text: Grounding DINO 1.6 blog
+      url: https://deepdataspace.com/blog/6
+    - text: Grounding DINO 1.5 report
+      url: https://arxiv.org/abs/2405.10300
+  - title: Keypoint Detection
+    desc: Keypoints detection in the wild
+  - title: 3D Reconstruction & Novel View Synthesis
+    desc: LeanGaussian (CVPR'25), UniG (ICCV'25), Coca-Splat (arXiv'25)
+  - title: Inertial Navigation
+    desc: IMU + GPS + wheel odometry fusion
+  logo: assets/images/logos/idea.png
+- period: 2018 - 2022
+  company: SenseTime
+  url: https://www.sensetime.com/
+  role: Senior Researcher
+  highlights:
+  - title: Defect Detection
+    desc: Structured light imaging, defect detection in automobile smart manufacturing
+  - title: 6D Pose Estimation
+    desc: Uni6D (CVPR'22 Oral), Uni6Dv2 (AISTATS'23)
+  - title: Person Re-identification
+    desc: SSN3D (AAAI'21)
+  - title: AI Automation in Transportation
+    desc: ''
+  logo: assets/images/logos/sensetime.png
+- period: 2016 - 2018
+  company: Kandao Technology
+  url: https://www.kandaovr.com/
+  role: Senior Engineer
+  highlights:
+  - title: VR Video Streaming & CDN
+    desc: Smart Streaming of Panoramic Video (SIGCOMM'18 VR Workshop)
+  logo: assets/images/logos/kandao.svg
 skills:
-  - category: "Mathematics"
-    items: ["Linear Algebra", "Lie Algebra / Rotation Group", "Probability Theory", "Taylor Expansion", "Optimization Theory"]
-  - category: "Programming"
-    items: ["Languages: Python, GoLang, C++", "Tools: Linux, git, make, gcc, ffmpeg", "Libraries: PyTorch, mmengine, PyTorch Lightning, OpenCV, scikit-learn, matplotlib", "Vibe Coding: Claude Code, Cursor"]
-
-hobbies: ["Badminton", "Hiking", "Programming to solve real-world problems", "Reading novels", "Philosophy"]
+- category: Mathematics
+  items:
+  - Linear Algebra
+  - Lie Algebra / Rotation Group
+  - Probability Theory
+  - Taylor Expansion
+  - Optimization Theory
+- category: Programming
+  items:
+  - 'Languages: Python, GoLang, C++'
+  - 'Tools: Linux, git, make, gcc, ffmpeg'
+  - 'Libraries: PyTorch, mmengine, PyTorch Lightning, OpenCV, scikit-learn, matplotlib'
+  - 'Vibe Coding: Claude Code, Cursor'
+hobbies:
+- Badminton
+- Hiking
+- Programming to solve real-world problems
+- Reading novels
+- Philosophy

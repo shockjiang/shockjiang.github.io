@@ -1,101 +1,116 @@
 education:
-  - period: "2010.08 - 2016.06"
-    institution: "清华大学"
-    degree: "博士，计算机科学与技术系"
-    details:
-      - "计算机系优秀毕业生：博士期间发表17篇同行评审论文，其中9篇为第一作者"
-      - "论文：<a href='https://github.com/shockjiang/public-data/blob/main/doc/ndn-usability_phd.pdf'>命名数据网络可用性关键问题研究</a>"
-    supervisor: "<a href='https://scholar.google.com/citations?user=9c8plF0AAAAJ'>毕军教授</a>"
-
-  - period: "2014.07 - 2015.07"
-    institution: "加州大学洛杉矶分校 (UCLA)"
-    degree: "联合培养博士"
-    details:
-      - "ICCCN'17 论文：<a href='https://irl.cs.ucla.edu/data/files/papers/2017-icccn-ndns.pdf'>NDNS: A DNS-Like Name Service for NDN</a>"
-      - "开源项目：<a href='https://github.com/named-data/ndns'>ndns</a> — NDN 测试网络的 DNS 系统"
-    supervisor: "<a href='http://cs.ucla.edu/~lixia/'>Lixia Zhang 教授</a>"
-
-  - period: "2011.08 - 2012.07"
-    institution: "清华-伯克利全球技术创业项目"
-    degree: ""
-    details:
-      - "担任二等奖团队技术负责人"
-
-  - period: "2006.09 - 2010.06"
-    institution: "清华大学"
-    degree: "学士，软件学院"
-    details:
-      - "论文：<a href='https://github.com/shockjiang/public-data/blob/main/doc/ipv6-evolution_bachelor.pdf'>IPv6 演进研究</a>"
-    supervisor: "<a href='http://netarchlab.tsinghua.edu.cn/~junbi/'>毕军教授</a> 和 <a href='https://www.thss.tsinghua.edu.cn/info/1057/1237.htm'>何飞教授</a>"
-
+- period: 2010.08 - 2016.06
+  institution: 清华大学
+  degree: 博士，计算机科学与技术系
+  details:
+  - 计算机系优秀毕业生：博士期间发表17篇同行评审论文，其中9篇为第一作者
+  - 论文：<a href='https://github.com/shockjiang/public-data/blob/main/doc/ndn-usability_phd.pdf'>命名数据网络可用性关键问题研究</a>
+  supervisor: <a href='https://scholar.google.com/citations?user=9c8plF0AAAAJ'>毕军教授</a>
+  logo: assets/images/logos/tsinghua.png
+- period: 2014.07 - 2015.07
+  institution: 加州大学洛杉矶分校 (UCLA)
+  degree: 联合培养博士
+  details:
+  - 'ICCCN''17 论文：<a href=''https://irl.cs.ucla.edu/data/files/papers/2017-icccn-ndns.pdf''>NDNS: A DNS-Like Name Service for NDN</a>'
+  - 开源项目：<a href='https://github.com/named-data/ndns'>ndns</a> — NDN 测试网络的 DNS 系统
+  supervisor: <a href='http://cs.ucla.edu/~lixia/'>Lixia Zhang 教授</a>
+  logo: assets/images/logos/ucla.png
+- period: 2011.08 - 2012.07
+  institution: 清华-伯克利全球技术创业项目
+  degree: ''
+  details:
+  - 担任二等奖团队技术负责人
+  logos:
+  - assets/images/logos/tsinghua.png
+  - assets/images/logos/berkeley.png
+- period: 2006.09 - 2010.06
+  institution: 清华大学
+  degree: 学士，软件学院
+  details:
+  - 论文：<a href='https://github.com/shockjiang/public-data/blob/main/doc/ipv6-evolution_bachelor.pdf'>IPv6 演进研究</a>
+  supervisor: <a href='http://netarchlab.tsinghua.edu.cn/~junbi/'>毕军教授</a> 和 <a href='https://www.thss.tsinghua.edu.cn/info/1057/1237.htm'>何飞教授</a>
+  logo: assets/images/logos/tsinghua.png
 work:
-  - period: "2022 - 至今"
-    company: "IDEA 研究院"
-    url: "https://www.idea.edu.cn/research/cvr.html"
-    role: "高级计算机视觉研究员"
-    highlights:
-      - title: "开放集抓取与 VLA"
-        desc: "开发使机器人使用消费级硬件（相机、GPU、机械臂）精准抓取任意物体的系统"
-        demos:
-          - text: "DINO-XGrasp 亮相 IDEA Day"
-            url: "https://www.bilibili.com/video/BV1iXiSBoEsy/"
-          - text: "机器人的工作日"
-            url: "https://www.bilibili.com/video/BV1UCmEBQEeD/"
-          - text: "语音指令抓取"
-            url: "https://www.bilibili.com/video/BV1NLsyzEESB/"
-          - text: "开放集瓶子抓取"
-            url: "https://www.bilibili.com/video/BV1JD37zaErk/"
-      - title: "开放集 3D 检测"
-        desc: "单目 3D 检测和 RGB-D 3D 检测"
-        demos:
-          - text: "单目 3D 检测"
-            url: "https://www.bilibili.com/video/BV1cS37zAELN/"
-          - text: "RGB-D 3D 检测：椅子"
-            url: "https://www.bilibili.com/video/BV1tgsyzDEy3/"
-          - text: "RGB-D 3D 检测：房间"
-            url: "https://www.bilibili.com/video/BV1tgsyzDEcS/"
-      - title: "开放集检测与提示调优"
-        desc: "基于标注数据集和预训练模型自定义检测目标"
-        demos:
-          - text: "DINO-X 报告"
-            url: "https://arxiv.org/abs/2411.14347"
-          - text: "Grounding DINO 1.6 博客"
-            url: "https://deepdataspace.com/blog/6"
-          - text: "Grounding DINO 1.5 报告"
-            url: "https://arxiv.org/abs/2405.10300"
-      - title: "关键点检测"
-        desc: "野外场景下的关键点检测"
-      - title: "3D 重建与新视角合成"
-        desc: "LeanGaussian (CVPR'25)、UniG (ICCV'25)、Coca-Splat (arXiv'25)"
-      - title: "惯性导航"
-        desc: "IMU + GPS + 轮式里程计融合"
-
-  - period: "2018 - 2022"
-    company: "商汤科技"
-    url: "https://www.sensetime.com/"
-    role: "高级研究员"
-    highlights:
-      - title: "缺陷检测"
-        desc: "结构光成像、汽车智能制造缺陷检测"
-      - title: "6D 位姿估计"
-        desc: "Uni6D (CVPR'22 Oral)、Uni6Dv2 (AISTATS'23)"
-      - title: "行人重识别"
-        desc: "SSN3D (AAAI'21)"
-      - title: "交通系统 AI 自动化"
-        desc: ""
-
-  - period: "2016 - 2018"
-    company: "看到科技"
-    url: "https://www.kandaovr.com/"
-    role: "高级工程师"
-    highlights:
-      - title: "VR 视频流优化与 CDN"
-        desc: "全景视频智能传输 (SIGCOMM'18 VR Workshop)"
-
+- period: 2022 - 至今
+  company: IDEA 研究院
+  url: https://www.idea.edu.cn/research/cvr.html
+  role: 高级计算机视觉研究员
+  highlights:
+  - title: 开放集抓取与 VLA
+    desc: 开发使机器人使用消费级硬件（相机、GPU、机械臂）精准抓取任意物体的系统
+    demos:
+    - text: DINO-XGrasp 亮相 IDEA Day
+      url: https://www.bilibili.com/video/BV1iXiSBoEsy/
+    - text: 机器人的工作日
+      url: https://www.bilibili.com/video/BV1UCmEBQEeD/
+    - text: 语音指令抓取
+      url: https://www.bilibili.com/video/BV1NLsyzEESB/
+    - text: 开放集瓶子抓取
+      url: https://www.bilibili.com/video/BV1JD37zaErk/
+  - title: 开放集 3D 检测
+    desc: 单目 3D 检测和 RGB-D 3D 检测
+    demos:
+    - text: 单目 3D 检测
+      url: https://www.bilibili.com/video/BV1cS37zAELN/
+    - text: RGB-D 3D 检测：椅子
+      url: https://www.bilibili.com/video/BV1tgsyzDEy3/
+    - text: RGB-D 3D 检测：房间
+      url: https://www.bilibili.com/video/BV1tgsyzDEcS/
+  - title: 开放集检测与提示调优
+    desc: 基于标注数据集和预训练模型自定义检测目标
+    demos:
+    - text: DINO-X 报告
+      url: https://arxiv.org/abs/2411.14347
+    - text: Grounding DINO 1.6 博客
+      url: https://deepdataspace.com/blog/6
+    - text: Grounding DINO 1.5 报告
+      url: https://arxiv.org/abs/2405.10300
+  - title: 关键点检测
+    desc: 野外场景下的关键点检测
+  - title: 3D 重建与新视角合成
+    desc: LeanGaussian (CVPR'25)、UniG (ICCV'25)、Coca-Splat (arXiv'25)
+  - title: 惯性导航
+    desc: IMU + GPS + 轮式里程计融合
+  logo: assets/images/logos/idea.png
+- period: 2018 - 2022
+  company: 商汤科技
+  url: https://www.sensetime.com/
+  role: 高级研究员
+  highlights:
+  - title: 缺陷检测
+    desc: 结构光成像、汽车智能制造缺陷检测
+  - title: 6D 位姿估计
+    desc: Uni6D (CVPR'22 Oral)、Uni6Dv2 (AISTATS'23)
+  - title: 行人重识别
+    desc: SSN3D (AAAI'21)
+  - title: 交通系统 AI 自动化
+    desc: ''
+  logo: assets/images/logos/sensetime.png
+- period: 2016 - 2018
+  company: 看到科技
+  url: https://www.kandaovr.com/
+  role: 高级工程师
+  highlights:
+  - title: VR 视频流优化与 CDN
+    desc: 全景视频智能传输 (SIGCOMM'18 VR Workshop)
+  logo: assets/images/logos/kandao.svg
 skills:
-  - category: "数学"
-    items: ["线性代数", "李代数/旋转群", "概率论", "泰勒展开", "优化理论"]
-  - category: "编程"
-    items: ["语言：Python, GoLang, C++", "工具：Linux, git, make, gcc, ffmpeg", "库：PyTorch, mmengine, PyTorch Lightning, OpenCV, scikit-learn, matplotlib", "Vibe Coding：Claude Code, Cursor"]
-
-hobbies: ["羽毛球", "徒步", "编程解决实际问题", "小说阅读", "哲学思考"]
+- category: 数学
+  items:
+  - 线性代数
+  - 李代数/旋转群
+  - 概率论
+  - 泰勒展开
+  - 优化理论
+- category: 编程
+  items:
+  - 语言：Python, GoLang, C++
+  - 工具：Linux, git, make, gcc, ffmpeg
+  - 库：PyTorch, mmengine, PyTorch Lightning, OpenCV, scikit-learn, matplotlib
+  - Vibe Coding：Claude Code, Cursor
+hobbies:
+- 羽毛球
+- 徒步
+- 编程解决实际问题
+- 小说阅读
+- 哲学思考

@@ -4,7 +4,7 @@
   <h2 class="cv-section-title">Education</h2>
   {% for edu in cv.education %}
   <div class="cv-entry">
-    <div class="cv-period">{{ edu.period }}</div>
+    <div class="cv-period">{{ edu.period }}{% if edu.logos %}<div class="cv-logos">{% for logo in edu.logos %}<img src="{{ logo | relative_url }}" class="cv-logo" alt="{{ edu.institution }}">{% endfor %}</div>{% elsif edu.logo %}<div class="cv-logos"><img src="{{ edu.logo | relative_url }}" class="cv-logo" alt="{{ edu.institution }}"></div>{% endif %}</div>
     <div class="cv-body">
       <div class="cv-heading">{{ edu.institution }}{% if edu.degree != "" %} &mdash; {{ edu.degree }}{% endif %}</div>
       {% if edu.supervisor %}<div class="cv-supervisor">Supervisor: {{ edu.supervisor }}</div>{% endif %}
@@ -20,7 +20,7 @@
   <h2 class="cv-section-title">Work Experience</h2>
   {% for job in cv.work %}
   <div class="cv-entry">
-    <div class="cv-period">{{ job.period }}</div>
+    <div class="cv-period">{{ job.period }}{% if job.logo %}<div class="cv-logos"><img src="{{ job.logo | relative_url }}" class="cv-logo" alt="{{ job.company }}"></div>{% endif %}</div>
     <div class="cv-body">
       <div class="cv-heading"><a href="{{ job.url }}" target="_blank" rel="noopener">{{ job.company }}</a> &mdash; {{ job.role }}</div>
       {% for h in job.highlights %}
@@ -57,7 +57,7 @@
   <h2 class="cv-section-title">教育经历</h2>
   {% for edu in cv.education %}
   <div class="cv-entry">
-    <div class="cv-period">{{ edu.period }}</div>
+    <div class="cv-period">{{ edu.period }}{% if edu.logos %}<div class="cv-logos">{% for logo in edu.logos %}<img src="{{ logo | relative_url }}" class="cv-logo" alt="{{ edu.institution }}">{% endfor %}</div>{% elsif edu.logo %}<div class="cv-logos"><img src="{{ edu.logo | relative_url }}" class="cv-logo" alt="{{ edu.institution }}"></div>{% endif %}</div>
     <div class="cv-body">
       <div class="cv-heading">{{ edu.institution }}{% if edu.degree != "" %} &mdash; {{ edu.degree }}{% endif %}</div>
       {% if edu.supervisor %}<div class="cv-supervisor">导师：{{ edu.supervisor }}</div>{% endif %}
@@ -73,7 +73,7 @@
   <h2 class="cv-section-title">工作经历</h2>
   {% for job in cv.work %}
   <div class="cv-entry">
-    <div class="cv-period">{{ job.period }}</div>
+    <div class="cv-period">{{ job.period }}{% if job.logo %}<div class="cv-logos"><img src="{{ job.logo | relative_url }}" class="cv-logo" alt="{{ job.company }}"></div>{% endif %}</div>
     <div class="cv-body">
       <div class="cv-heading"><a href="{{ job.url }}" target="_blank" rel="noopener">{{ job.company }}</a> &mdash; {{ job.role }}</div>
       {% for h in job.highlights %}

@@ -153,8 +153,14 @@ def cv_section_html(cv, labels):
         details = ''
         if edu.get('details'):
             details = '<ul class="cv-details">' + ''.join(f'<li>{d}</li>' for d in edu['details']) + '</ul>'
+        if edu.get('logos'):
+            logo = '<div class="cv-logos">' + ''.join(f'<img src="{l}" class="cv-logo" alt="{edu["institution"]}">' for l in edu['logos']) + '</div>'
+        elif edu.get('logo'):
+            logo = f'<div class="cv-logos"><img src="{edu["logo"]}" class="cv-logo" alt="{edu["institution"]}"></div>'
+        else:
+            logo = ''
         parts.append(f'''<div class="cv-entry">
-    <div class="cv-period">{edu['period']}</div>
+    <div class="cv-period">{edu['period']}{logo}</div>
     <div class="cv-body">
       <div class="cv-heading">{edu['institution']}{deg}</div>
       {sup}{details}
@@ -172,8 +178,9 @@ def cv_section_html(cv, labels):
                 demos = f'<div class="cv-demos">{demo_links}</div>'
             highlights.append(f'<div class="cv-highlight"><strong>{h["title"]}</strong>{desc}{demos}</div>')
 
+        logo = f'<div class="cv-logos"><img src="{job["logo"]}" class="cv-logo" alt="{job["company"]}"></div>' if job.get('logo') else ''
         parts.append(f'''<div class="cv-entry">
-    <div class="cv-period">{job['period']}</div>
+    <div class="cv-period">{job['period']}{logo}</div>
     <div class="cv-body">
       <div class="cv-heading"><a href="{job.get('url','#')}" target="_blank" rel="noopener">{job['company']}</a> &mdash; {job['role']}</div>
       {''.join(highlights)}
