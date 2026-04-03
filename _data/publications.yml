@@ -42,8 +42,8 @@
   venue: ICCV 2025
   year: 2025
   url: https://kenkunliu.github.io/UniG/
-  arxiv: ''
-  pdf: files/UniGS-ICCV25.pdf
+  arxiv: https://arxiv.org/abs/2410.13195
+  pdf: ''
   image: https://kenkunliu.github.io/UniG/static/images/method.png
   code: https://github.com/jwubz123/UNIG
   project: https://kenkunliu.github.io/UniG/
@@ -80,9 +80,9 @@
   authors: Yuhong Zhang, Guanlin Wu, Ling-Hao Chen, Zhuokai Zhao, Jing Lin, <strong>Xiaoke Jiang</strong>, Jiamin Wu, Zhuoheng Li, Hao Frank Yang, Haoqian Wang, Lei Zhang
   venue: CVPR 2025
   year: 2025
-  url: https://zhangyuhong01.github.io/HumanMM/
+  url: https://arxiv.org/abs/2503.07597
   arxiv: https://arxiv.org/abs/2503.07597
-  pdf: files/humanMM.pdf
+  pdf: ''
   image: https://arxiv.org/html/2503.07597v1/x2.png
   code: https://github.com/zhangyuhong01/HumanMM-code
   project: https://zhangyuhong01.github.io/HumanMM/
@@ -119,7 +119,7 @@
   year: 2025
   url: https://arxiv.org/abs/2208.06416
   arxiv: https://arxiv.org/abs/2208.06416
-  pdf: files/Uni6Dv2-AISTATS25.pdf
+  pdf: ''
   image: https://ar5iv.labs.arxiv.org/html/2208.06416/assets/figures/fig2.png
   code: ''
   project: ''
@@ -144,7 +144,7 @@
   year: 2022
   url: https://arxiv.org/abs/2203.14531
   arxiv: https://arxiv.org/abs/2203.14531
-  pdf: files/Uni6D-CVPR22.pdf
+  pdf: ''
   image: https://ar5iv.labs.arxiv.org/html/2203.14531/assets/x3.png
   code: ''
   project: ''

@@ -74,7 +74,6 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         if (document.getElementById('visitor-map') && typeof jsVectorMap !== 'undefined') {
-          var root = getComputedStyle(document.documentElement);
           var isDark = !document.documentElement.getAttribute('data-theme') ||
                        document.documentElement.getAttribute('data-theme') !== 'light';
           new jsVectorMap({

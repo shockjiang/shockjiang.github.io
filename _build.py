@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build static HTML from Jekyll data files for local preview."""
-import yaml, os, shutil, sass
+import datetime, yaml, os, re, shutil, sass
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.join(ROOT, '_site')
@@ -31,7 +31,8 @@ icons = {
     'email': '<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>',
 }
 
-def profile_tags_html_orbit():
+def collect_pub_tags():
+    """Collect unique tags and their associated paper titles from publications."""
     all_tags = []
     tag_tips = {}
     for p in pubs:
@@ -40,6 +41,10 @@ def profile_tags_html_orbit():
                 all_tags.append(t)
                 tag_tips[t] = []
             tag_tips[t].append(p['title'])
+    return all_tags, tag_tips
+
+def profile_tags_html_orbit():
+    all_tags, tag_tips = collect_pub_tags()
     parts = []
     for t in all_tags:
         tip = '; '.join(tag_tips[t])
@@ -48,14 +53,6 @@ def profile_tags_html_orbit():
         tip_escaped = tip.replace('"', '&quot;')
         parts.append(f'<span class="profile-tag orbit-tag" data-tooltip="{tip_escaped}" data-link="publications">{t}</span>')
     return '\n'.join(parts)
-
-def profile_tags_html():
-    all_tags = []
-    for p in pubs:
-        for t in p.get('tags', []):
-            if t not in all_tags:
-                all_tags.append(t)
-    return '\n'.join(f'<span class="profile-tag">{t}</span>' for t in all_tags)
 
 def exp_tags_html():
     return '\n'.join(
@@ -91,12 +88,7 @@ def news_html():
     return '\n'.join(parts)
 
 def pubs_html():
-    # Collect unique tags
-    all_tags = []
-    for p in pubs:
-        for t in p.get('tags', []):
-            if t not in all_tags:
-                all_tags.append(t)
+    all_tags, _ = collect_pub_tags()
 
     tag_btns = '<button class="tag-btn active" data-tag="all">All</button>\n'
     for t in all_tags:
@@ -130,7 +122,6 @@ def pubs_html():
         if p.get('project'): action_links.append(f'<a href="{p["project"]}" target="_blank" rel="noopener">Project</a>')
         action_links.append('<a href="#" class="bibtex-toggle" onclick="event.preventDefault();this.parentElement.parentElement.parentElement.querySelector(\'.bibtex-box\').classList.toggle(\'show\')">BibTeX</a>')
 
-        import re
         authors_plain = re.sub(r'<[^>]+>', '', p['authors']).replace('*', '')
         bib_key = p['title'].split(':')[0].lower().replace(' ', '')
         bibtex = f'''@article{{{bib_key}{p['year']},
@@ -389,7 +380,7 @@ html = f'''<!DOCTYPE html>
   </div>
 
   <footer class="footer">
-    <p>&copy; {__import__('datetime').date.today().year} Shock (Xiaoke) Jiang &middot; Built with Jekyll &middot; Hosted on GitHub Pages</p>
+    <p>&copy; {datetime.date.today().year} Shock (Xiaoke) Jiang &middot; Built with Jekyll &middot; Hosted on GitHub Pages</p>
   </footer>
 
   <script>{js}</script>
