@@ -162,7 +162,7 @@ def cv_section_html(cv, labels):
         parts.append(f'''<div class="cv-entry">
     <div class="cv-period">{edu['period']}{logo}</div>
     <div class="cv-body">
-      <div class="cv-heading">{edu['institution']}{deg}</div>
+      <div class="cv-heading">{'<a href="' + edu['url'] + '" target="_blank" rel="noopener">' + edu['institution'] + '</a>' if edu.get('url') else edu['institution']}{deg}</div>
       {sup}{details}
     </div>
   </div>''')
