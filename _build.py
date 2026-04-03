@@ -143,7 +143,7 @@ def pubs_html():
       </div>
     </div>''')
 
-    return f'<div class="tag-bar">\n  {tag_btns}</div>\n<button class="show-older-btn" id="show-older">Show earlier papers (2011-2019) &#9656;</button>\n<div class="pub-list">\n' + '\n'.join(items) + '\n</div>'
+    return f'<div class="tag-bar">\n  {tag_btns}</div>\n<div class="pub-list">\n' + '\n'.join(items) + '\n<button class="show-older-btn" id="show-older">Show earlier papers (2011-2019) &#9656;</button>\n</div>'
 
 def cv_section_html(cv, labels):
     parts = []

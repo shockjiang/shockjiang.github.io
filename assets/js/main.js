@@ -43,10 +43,46 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!count) return;
     var cx = container.offsetWidth / 2;
     var cy = container.offsetHeight / 2;
+    // Get profile center card bounds relative to container
+    var card = container.querySelector('.profile-center');
+    var cardRect = null;
+    if (card) {
+      var cRect = card.getBoundingClientRect();
+      var pRect = container.getBoundingClientRect();
+      var pad = 6;
+      cardRect = {
+        left: cRect.left - pRect.left - pad,
+        right: cRect.right - pRect.left + pad,
+        top: cRect.top - pRect.top - pad,
+        bottom: cRect.bottom - pRect.top + pad
+      };
+    }
     tags.forEach(function(tag, i) {
       var angle = (2 * Math.PI * i / count) + (offsetAngle || 0);
       var x = cx + radiusX * Math.cos(angle) - tag.offsetWidth / 2;
       var y = cy + radiusY * Math.sin(angle) - tag.offsetHeight / 2;
+      // If tag overlaps the center card, push to nearest edge (left/right/bottom)
+      if (cardRect) {
+        var tw = tag.offsetWidth;
+        var th = tag.offsetHeight;
+        var overlapX = x + tw > cardRect.left && x < cardRect.right;
+        var overlapY = y + th > cardRect.top && y < cardRect.bottom;
+        if (overlapX && overlapY) {
+          var tagCx = x + tw / 2;
+          var cardCx = (cardRect.left + cardRect.right) / 2;
+          var distLeft = Math.abs(x + tw - cardRect.left);
+          var distRight = Math.abs(x - cardRect.right);
+          var distBottom = Math.abs(y - cardRect.bottom);
+          // Push to the nearest side
+          if (tagCx < cardCx && distLeft <= distBottom) {
+            x = cardRect.left - tw - 4;
+          } else if (tagCx >= cardCx && distRight <= distBottom) {
+            x = cardRect.right + 4;
+          } else {
+            y = cardRect.bottom + 4;
+          }
+        }
+      }
       tag.style.left = x + 'px';
       tag.style.top = y + 'px';
     });

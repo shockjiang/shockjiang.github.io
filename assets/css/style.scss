@@ -605,16 +605,17 @@ a {
 .show-older-btn {
   display: block;
   margin: 16px auto;
-  background: transparent;
-  color: var(--text-muted);
-  border: 1px dashed var(--border);
+  background: linear-gradient(135deg, var(--accent), #e879f9, #38bdf8);
+  color: #fff;
+  border: none;
   border-radius: 6px;
-  padding: 6px 16px;
+  padding: 8px 20px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
-  &:hover { color: var(--accent); border-color: var(--accent); }
+  transition: all 0.3s;
+  &:hover { filter: brightness(1.15); transform: scale(1.03); }
 }
 
 .news-new {
@@ -698,8 +699,8 @@ a {
 }
 
 .cv-logo {
-  width: 36px;
-  height: 36px;
+  width: 56px;
+  height: 56px;
   object-fit: contain;
   border-radius: 6px;
   background: #fff;
