@@ -221,6 +221,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  // Video poster click-to-play
+  document.addEventListener('click', function(e) {
+    var poster = e.target.closest('.video-poster');
+    if (poster) {
+      var embed = poster.dataset.embed;
+      var iframe = document.createElement('iframe');
+      iframe.src = embed;
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('frameborder', '0');
+      poster.parentElement.replaceChild(iframe, poster);
+    }
+  });
+
   // Mark recent news (within 90 days)
   var now = new Date();
   document.querySelectorAll('.news-date').forEach(function(el) {

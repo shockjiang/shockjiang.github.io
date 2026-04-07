@@ -33,6 +33,11 @@
       <div class="video-wrap">
         {% if video.type == "video" %}
         <video src="{{ video.url }}" controls muted playsinline preload="metadata"></video>
+        {% elsif video.poster %}
+        <div class="video-poster" data-embed="{{ video.embed }}">
+          <img src="{{ video.poster | relative_url }}" alt="{{ video.title }}" loading="lazy">
+          <div class="play-btn">▶</div>
+        </div>
         {% else %}
         <iframe data-src="{{ video.embed }}" allowfullscreen scrolling="no" frameborder="0"></iframe>
         {% endif %}

@@ -217,6 +217,8 @@ def projects_html():
         for v in proj.get('videos', []):
             if v.get('type') == 'video':
                 media = f'<video src="{v["url"]}" controls muted playsinline preload="metadata"></video>'
+            elif v.get('poster'):
+                media = f'<div class="video-poster" data-embed="{v["embed"]}"><img src="{v["poster"]}" alt="{v["title"]}" loading="lazy"><div class="play-btn">▶</div></div>'
             else:
                 media = f'<iframe data-src="{v["embed"]}" allowfullscreen scrolling="no" frameborder="0"></iframe>'
             videos.append(f'''<div class="project-video">
