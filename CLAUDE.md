@@ -58,17 +58,29 @@ cd _site && python3 -m http.server 4000   # serve at localhost:4000
 
 ### Important Notes
 - `_build.py` and Jekyll templates must stay in sync — both render the same page
+- `_build.py` uses `libsass` (Python `sass` module) to compile SCSS → CSS. Raw SCSS inlined as `<style>` will break nested selectors in browsers.
 - `publications.yml` uses `year` field for grouping — use the publication/acceptance year, not submission year
 - Experience/skill tags in `profile.yml` have `name`, `name_zh`, `tip`, `link` fields
 - Research tags are auto-derived from `publications.yml` tags
 - Orbit layout JS runs on DOMContentLoaded and window resize, also re-runs after language toggle
 - `pointer-events: none` on `.orbit-ring` is critical — without it, orbit rings block profile center links
 - The `profile-center` frosted glass card uses hardcoded rgba, not CSS var — intentional for dark themes
+- **Chinese is default language**: `data-lang="zh"` spans are visible, `data-lang="en"` has `style="display:none"`. When adding bilingual content, ZH is shown first.
 - RevolverMaps was removed (unreachable from China), replaced with busuanzi + jsvectormap
+- Papers before 2021 are hidden by default — toggled via "Show earlier papers" button
+- Each paper has a BibTeX toggle with copy button
+- If a paper has an `arxiv` link, don't set `pdf` — arXiv serves as the primary access
+- Project iframes lazy-load via `data-src`, activated when Projects panel is shown
+
+### Gotchas
+- **Dual build sync**: Every change to `_includes/`, `_layouts/`, or `assets/` MUST also be applied to `_build.py`. They render the same page independently. Forgetting one causes silent drift.
+- **Paper thumbnails**: Check in order: (1) arxiv HTML `https://arxiv.org/html/{id}v1/x1.png`, (2) ar5iv `https://ar5iv.labs.arxiv.org/html/{id}/assets/figures/fig1.png`, (3) project page, (4) GitHub README, (5) extract from local PDF via `pdf2image`. ResearchGate/IEEE block automated access.
 
 ### Content Quick Reference
-- **Add a paper**: append to `_data/publications.yml` with title, authors, venue, year, url, arxiv, pdf, tags
+- **Add a paper**: append to `_data/publications.yml` with title, authors, venue, year, url, arxiv, pdf, image, code, project, tags
 - **Add news**: prepend to `_data/news.yml` (newest first), supports HTML in content
 - **Add a project**: append to `_data/projects.yml` with videos (bilibili embed or mp4) and/or images
+- **Add a Bilibili video**: Use `poster` field in projects.yml pointing to a local cover image (`assets/images/videos/`). Download covers via `curl -s "https://api.bilibili.com/x/web-interface/view?bvid=BVID"` and extract `.data.pic`. Embed uses `data-src` (lazy) with `autoplay=1`.
 - **Add a tag**: just use it in publications.yml — it auto-appears in orbit and filter bar
 - **Mark corresponding author**: use `<strong>Xiaoke Jiang*</strong>` in authors field
+- **Add CV logo**: Add `logo: assets/images/logos/name.png` to education/work entry in cv_en.yml and cv_zh.yml. Use `logos: [path1, path2]` for dual logos. Images should have white background (`padding: 3px; background: #fff`).

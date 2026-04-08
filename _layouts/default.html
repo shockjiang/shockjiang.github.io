@@ -7,6 +7,8 @@
   <meta name="description" content="{{ site.description }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@500&family=Noto+Sans+SC:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@500&family=Noto+Sans+SC:wght@400;700&display=swap"></noscript>
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="icon" href="{{ '/assets/images/favicon.png' | relative_url }}" type="image/png">
 </head>
@@ -68,9 +70,9 @@
     </div>
     <div id="visitor-map" class="visitor-map"></div>
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css" media="print" onload="this.media='all'">
+    <script defer src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         if (document.getElementById('visitor-map') && typeof jsVectorMap !== 'undefined') {

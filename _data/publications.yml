@@ -5,7 +5,7 @@
   url: https://arxiv.org/abs/2603.26690
   arxiv: https://arxiv.org/abs/2603.26690
   pdf: ''
-  image: https://arxiv.org/html/2603.26690v1/x2.png
+  image: assets/images/papers/spatialpoint.jpg
   code: ''
   project: ''
   tags:
@@ -18,7 +18,7 @@
   url: https://arxiv.org/abs/2508.01423
   arxiv: https://arxiv.org/abs/2508.01423
   pdf: ''
-  image: https://arxiv.org/html/2508.01423v1/x1.png
+  image: assets/images/papers/3drot.jpg
   code: ''
   project: ''
   tags:
@@ -31,7 +31,7 @@
   url: https://arxiv.org/abs/2504.00639
   arxiv: https://arxiv.org/abs/2504.00639
   pdf: ''
-  image: https://arxiv.org/html/2504.00639v1/x2.png
+  image: assets/images/papers/coca-splat.jpg
   code: ''
   project: ''
   tags:
@@ -44,7 +44,7 @@
   url: https://kenkunliu.github.io/UniG/
   arxiv: https://arxiv.org/abs/2410.13195
   pdf: ''
-  image: https://kenkunliu.github.io/UniG/static/images/method.png
+  image: assets/images/papers/unig.jpg
   code: https://github.com/jwubz123/UNIG
   project: https://kenkunliu.github.io/UniG/
   tags:
@@ -57,7 +57,7 @@
   url: https://kenkunliu.github.io/DIG3D/
   arxiv: ''
   pdf: files/LeanGaussian-CVPR25.pdf
-  image: https://kenkunliu.github.io/DIG3D/static/images/method.png
+  image: assets/images/papers/leangaussian.jpg
   code: https://github.com/jwubz123/LeanGaussian
   project: https://kenkunliu.github.io/DIG3D/
   tags:
@@ -70,7 +70,7 @@
   url: https://idea-research.github.io/HandOSweb/
   arxiv: ''
   pdf: files/HandOS-CVPR25.pdf
-  image: https://idea-research.github.io/HandOSweb/images/teaser.jpg
+  image: assets/images/papers/handos.jpg
   code: ''
   project: https://idea-research.github.io/HandOSweb/
   tags:
@@ -83,7 +83,7 @@
   url: https://arxiv.org/abs/2503.07597
   arxiv: https://arxiv.org/abs/2503.07597
   pdf: ''
-  image: https://arxiv.org/html/2503.07597v1/x2.png
+  image: assets/images/papers/humanmm.jpg
   code: https://github.com/zhangyuhong01/HumanMM-code
   project: https://zhangyuhong01.github.io/HumanMM/
   tags:
@@ -96,7 +96,7 @@
   url: https://andrewchiyz.github.io/vision.3dv.seqpose/
   arxiv: ''
   pdf: files/paper-4424-ijcai25-CR-rev2.pdf
-  image: https://andrewchiyz.github.io/vision.3dv.seqpose/static/images/fig1-overview-rev7-CR.png
+  image: assets/images/papers/seqpose.jpg
   code: ''
   project: https://andrewchiyz.github.io/vision.3dv.seqpose/
   tags:
@@ -108,7 +108,7 @@
   url: https://github.com/Jianqiuer/Geo6D
   arxiv: ''
   pdf: files/Geo6D-TMM25.pdf
-  image: https://raw.githubusercontent.com/Jianqiuer/Geo6D/main/assert/fig1.png
+  image: assets/images/papers/geo6d.jpg
   code: https://github.com/Jianqiuer/Geo6D
   project: ''
   tags:
@@ -120,7 +120,7 @@
   url: https://arxiv.org/abs/2208.06416
   arxiv: https://arxiv.org/abs/2208.06416
   pdf: ''
-  image: https://ar5iv.labs.arxiv.org/html/2208.06416/assets/figures/fig2.png
+  image: assets/images/papers/uni6dv2.jpg
   code: ''
   project: ''
   tags:
@@ -145,7 +145,7 @@
   url: https://arxiv.org/abs/2203.14531
   arxiv: https://arxiv.org/abs/2203.14531
   pdf: ''
-  image: https://ar5iv.labs.arxiv.org/html/2203.14531/assets/x3.png
+  image: assets/images/papers/uni6d.jpg
   code: ''
   project: ''
   tags:

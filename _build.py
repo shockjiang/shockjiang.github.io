@@ -56,14 +56,14 @@ def profile_tags_html_orbit():
 
 def exp_tags_html():
     return '\n'.join(
-        '<span class="profile-tag exp-tag orbit-tag" data-tooltip="{tip}" data-link="{link}"><span data-lang="en" style="display:none">{name}</span><span data-lang="zh">{name_zh}</span></span>'.format(
+        '<span class="profile-tag exp-tag orbit-tag" data-tooltip="{tip}" data-link="{link}" data-name-en="{name}" data-name-zh="{name_zh}"><span data-lang="en" style="display:none">{name}</span><span data-lang="zh">{name_zh}</span></span>'.format(
             tip=t['tip'].replace('"', '&quot;'), name=t['name'], name_zh=t.get('name_zh', t['name']), link=t.get('link', 'cv')
         ) for t in profile.get('experience_tags', [])
     )
 
 def skill_tags_html():
     return '\n'.join(
-        '<span class="profile-tag skill-tag orbit-tag" data-tooltip="{tip}" data-link="cv"><span data-lang="en" style="display:none">{name}</span><span data-lang="zh">{name_zh}</span></span>'.format(
+        '<span class="profile-tag skill-tag orbit-tag" data-tooltip="{tip}" data-link="cv" data-name-en="{name}" data-name-zh="{name_zh}"><span data-lang="en" style="display:none">{name}</span><span data-lang="zh">{name_zh}</span></span>'.format(
             tip=t['tip'].replace('"', '&quot;'), name=t['name'], name_zh=t.get('name_zh', t['name'])
         ) for t in profile.get('skill_tags', [])
     )
@@ -250,6 +250,9 @@ html = f'''<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{profile['name']['en']}</title>
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@500&family=Noto+Sans+SC:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <style>{css}</style>
 </head>
 <body>
@@ -357,8 +360,8 @@ html = f'''<!DOCTYPE html>
     </div>
     <div id="visitor-map" class="visitor-map"></div>
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css" media="print" onload="this.media='all'">
+    <script defer src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {{

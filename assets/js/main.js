@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
       link.classList.add('active');
       if (link.dataset.panel === 'projects') {
         document.querySelectorAll('#panel-projects iframe[data-src]').forEach(function(iframe) {
-          if (!iframe.src) { iframe.src = iframe.dataset.src; iframe.removeAttribute('data-src'); }
+          if (!iframe.getAttribute('src')) { iframe.src = iframe.dataset.src; iframe.removeAttribute('data-src'); }
         });
       }
     });
@@ -128,8 +128,11 @@ document.addEventListener('DOMContentLoaded', function () {
       var navLink = document.querySelector('.panel-nav a[data-panel="' + panel + '"]');
       if (navLink) navLink.click();
       // For research tags, also activate the matching tag filter
-      var tagText = tag.textContent.trim();
       if (panel === 'publications') {
+        var activeLang = document.querySelector('[data-lang-btn].active');
+        var lang = activeLang ? activeLang.dataset.langBtn : 'zh';
+        var langEl = tag.querySelector('[data-lang="' + lang + '"]');
+        var tagText = langEl ? langEl.textContent.trim() : tag.textContent.trim();
         var filterBtn = document.querySelector('.tag-btn[data-tag="' + tagText + '"]');
         if (filterBtn) filterBtn.click();
       }
@@ -150,62 +153,56 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Shared state for tag filter + older papers toggle
+  var activeTag = 'all';
+  var olderVisible = false;
+
+  function applyFilters() {
+    document.querySelectorAll('.pub-card').forEach(function (item) {
+      var tags = item.dataset.tags.split('||');
+      var matchesTag = (activeTag === 'all' || tags.indexOf(activeTag) !== -1);
+      var yearHeader = item.previousElementSibling;
+      while (yearHeader && !yearHeader.classList.contains('pub-year')) {
+        yearHeader = yearHeader.previousElementSibling;
+      }
+      var yearNum = yearHeader ? parseInt(yearHeader.textContent.trim(), 10) : 9999;
+      var isOld = yearNum < 2021;
+      var showByAge = isOld ? olderVisible : true;
+      item.style.display = (matchesTag && showByAge) ? '' : 'none';
+    });
+    // Hide year headers with no visible papers
+    document.querySelectorAll('.pub-year').forEach(function (header) {
+      var yearNum = parseInt(header.textContent.trim(), 10);
+      var isOld = yearNum < 2021;
+      if (isOld && !olderVisible) { header.style.display = 'none'; return; }
+      var next = header.nextElementSibling;
+      var hasVisible = false;
+      while (next && !next.classList.contains('pub-year')) {
+        if (next.classList.contains('pub-card') && next.style.display !== 'none') hasVisible = true;
+        next = next.nextElementSibling;
+      }
+      header.style.display = hasVisible ? '' : 'none';
+    });
+  }
+
   // Tag filtering
   document.querySelectorAll('.tag-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var tag = btn.dataset.tag;
+      activeTag = btn.dataset.tag;
       document.querySelectorAll('.tag-btn').forEach(function (b) { b.classList.remove('active'); });
       btn.classList.add('active');
-
-      var items = document.querySelectorAll('.pub-card');
-      items.forEach(function (item) {
-        var tags = item.dataset.tags.split('||');
-        if (tag === 'all' || tags.indexOf(tag) !== -1) {
-          item.style.display = '';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-
-      // Hide year headers with no visible papers
-      document.querySelectorAll('.pub-year').forEach(function (header) {
-        var next = header.nextElementSibling;
-        var hasVisible = false;
-        while (next && !next.classList.contains('pub-year')) {
-          if (next.classList.contains('pub-card') && next.style.display !== 'none') {
-            hasVisible = true;
-          }
-          next = next.nextElementSibling;
-        }
-        header.style.display = hasVisible ? '' : 'none';
-      });
+      applyFilters();
     });
   });
 
-  // Hide older papers by default (before 2021)
-  function setOlderPapersVisibility(show) {
-    document.querySelectorAll('.pub-year').forEach(function (header) {
-      var yearNum = parseInt(header.textContent.trim(), 10);
-      if (yearNum < 2021) {
-        header.style.display = show ? '' : 'none';
-        var next = header.nextElementSibling;
-        while (next && !next.classList.contains('pub-year')) {
-          if (next.classList.contains('pub-card')) {
-            next.style.display = show ? '' : 'none';
-          }
-          next = next.nextElementSibling;
-        }
-      }
-    });
-  }
-  setOlderPapersVisibility(false);
+  // Hide older papers by default
+  applyFilters();
 
   var showOlderBtn = document.getElementById('show-older');
   if (showOlderBtn) {
-    var olderVisible = false;
     showOlderBtn.addEventListener('click', function () {
       olderVisible = !olderVisible;
-      setOlderPapersVisibility(olderVisible);
+      applyFilters();
       showOlderBtn.textContent = olderVisible ? 'Hide earlier papers \u25be' : 'Show earlier papers (2011-2019) \u25b8';
     });
   }
@@ -213,7 +210,11 @@ document.addEventListener('DOMContentLoaded', function () {
   // BibTeX copy button
   document.addEventListener('click', function(e) {
     if (e.target.classList.contains('bibtex-copy')) {
-      var text = e.target.parentElement.textContent.replace('Copy', '').trim();
+      var box = e.target.parentElement;
+      var clone = box.cloneNode(true);
+      var btn = clone.querySelector('.bibtex-copy');
+      if (btn) btn.remove();
+      var text = clone.textContent.trim();
       navigator.clipboard.writeText(text).then(function() {
         e.target.textContent = 'Copied!';
         setTimeout(function() { e.target.textContent = 'Copy'; }, 1500);
