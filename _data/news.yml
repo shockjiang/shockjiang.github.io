@@ -1,3 +1,8 @@
+- date: "2026-04"
+  content:
+    en: "🔥 <b>Hiring interns!</b> Research topics: World Model (video hand-to-gripper transfer, value function in RL, 3D Vision-Language, etc.). Contact: <a href='mailto:shock.jiang@outlook.com'>shock.jiang@outlook.com</a>"
+    zh: "🔥 <b>招收实习生！</b>研究方向：世界模型（视频中手到夹爪的迁移、强化学习中的价值函数、3D 视觉语言等）。联系：<a href='mailto:shock.jiang@outlook.com'>shock.jiang@outlook.com</a>"
+
 - date: "2026-03"
   content:
     en: "SpatialPoint released on <a href='https://arxiv.org/abs/2603.26690' target='_blank'>arXiv</a>, covered by <a href='https://mp.weixin.qq.com/s/H37Mp48hEAVHwQsUn8hMUA?scene=1' target='_blank'>QbitAI (量子位)</a>!"
