@@ -33,7 +33,7 @@
           {% if pub.url != "" and pub.url %}<a href="{{ pub.url }}" target="_blank" rel="noopener">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}
         </div>
         <div class="pub-authors">{{ pub.authors }}</div>
-        <div class="pub-venue"><em>{{ pub.venue }}</em>{% if is_oral %}<span class="venue-badge venue-badge--oral">ORAL</span>{% endif %}</div>
+        <div class="pub-venue"><em>{{ pub.venue }}</em>{% if is_oral %}<span class="venue-badge venue-badge--oral">ORAL</span>{% endif %}{% if pub.ccf == "A" %}<span class="venue-badge venue-badge--ccfa">CCF-A</span>{% endif %}</div>
         <div class="pub-actions">
           {% for tag in pub.tags %}<span class="pub-tag">{{ tag }}</span>{% endfor %}
           <span class="pub-action-links">

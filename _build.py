@@ -112,6 +112,8 @@ def pubs_html():
         venue_badge = ''
         if is_oral:
             venue_badge = '<span class="venue-badge venue-badge--oral">ORAL</span>'
+        if p.get('ccf') == 'A':
+            venue_badge += '<span class="venue-badge venue-badge--ccfa">CCF-A</span>'
 
         thumb = f'<div class="pub-thumb"><img src="{p["image"]}" alt="{p["title"]}" loading="lazy"></div>' if p.get('image') else ''
 

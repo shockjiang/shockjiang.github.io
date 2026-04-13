@@ -654,15 +654,23 @@ a {
 }
 
 .venue-badge--oral {
-  background: rgba(52, 211, 153, 0.15);
-  color: var(--accent);
-  border: 1px solid rgba(52, 211, 153, 0.3);
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.25), rgba(56, 189, 248, 0.2));
+  color: #fff;
+  border: 1px solid rgba(52, 211, 153, 0.5);
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.3), 0 0 16px rgba(52, 211, 153, 0.1);
+  animation: oral-glow 2s ease-in-out infinite;
+  letter-spacing: 1px;
 }
 
-.venue-badge--top {
-  background: rgba(167, 139, 250, 0.1);
-  color: var(--nav-active);
-  border: 1px solid rgba(167, 139, 250, 0.2);
+@keyframes oral-glow {
+  0%, 100% { box-shadow: 0 0 6px rgba(52, 211, 153, 0.2); }
+  50% { box-shadow: 0 0 12px rgba(52, 211, 153, 0.5), 0 0 24px rgba(52, 211, 153, 0.15); }
+}
+
+.venue-badge--ccfa {
+  background: rgba(249, 115, 22, 0.12);
+  color: var(--accent2);
+  border: 1px solid rgba(249, 115, 22, 0.25);
 }
 
 @media (max-width: 600px) {

@@ -11,6 +11,7 @@
   tags:
   - VLA
   - Robot
+  ccf: ''
 - title: '3DRot: Rediscovering the Missing Primitive for RGB-Based 3D Augmentation'
   authors: Shitian Yang, Deyu Li, <strong>Xiaoke Jiang*</strong>, Lei Zhang
   venue: arXiv 2025
@@ -24,6 +25,7 @@
   tags:
   - 6D Pose
   - 3D Detection
+  ccf: ''
 - title: 'Coca-Splat: Collaborative Optimization for Camera Parameters and 3D Gaussians'
   authors: Jiamin Wu, Hongyang Li, <strong>Xiaoke Jiang*</strong>, Yuan Yao, Lei Zhang
   venue: arXiv 2025
@@ -37,9 +39,10 @@
   tags:
   - 3DGS
   - Object Reconstruction
+  ccf: ''
 - title: 'UniG: Modelling Unitary 3D Gaussians for View-Consistent 3D Reconstruction'
   authors: Jiamin Wu, Kenkun Liu, Yukai Shi, <strong>Xiaoke Jiang*</strong>, Yuan Yao, Lei Zhang
-  venue: ICCV 2025
+  venue: International Conference on Computer Vision (ICCV) 2025
   year: 2025
   url: https://kenkunliu.github.io/UniG/
   arxiv: https://arxiv.org/abs/2410.13195
@@ -50,9 +53,10 @@
   tags:
   - 3DGS
   - Object Reconstruction
+  ccf: A
 - title: 'LeanGaussian: Breaking Pixel or Point Cloud Correspondence in Modeling 3D Gaussians'
   authors: Jiamin Wu, Kenkun Liu, Han Gao, <strong>Xiaoke Jiang*</strong>, Yuan Yao, Lei Zhang
-  venue: CVPR 2025
+  venue: Conference on Computer Vision and Pattern Recognition (CVPR) 2025
   year: 2025
   url: https://kenkunliu.github.io/DIG3D/
   arxiv: ''
@@ -63,9 +67,10 @@
   tags:
   - 3DGS
   - Object Reconstruction
+  ccf: A
 - title: 'HandOS: 3D Hand Reconstruction in One Stage'
   authors: Xingyu Chen, Zhuheng Song, <strong>Xiaoke Jiang</strong>, Yaoqing Hu, Junzhi Yu, Lei Zhang
-  venue: CVPR 2025
+  venue: Conference on Computer Vision and Pattern Recognition (CVPR) 2025
   year: 2025
   url: https://idea-research.github.io/HandOSweb/
   arxiv: ''
@@ -76,9 +81,10 @@
   tags:
   - Hand Reconstruction
   - Keypoint Detection
+  ccf: A
 - title: 'HumanMM: Global Human Motion Recovery from Multi-shot Videos'
   authors: Yuhong Zhang, Guanlin Wu, Ling-Hao Chen, Zhuokai Zhao, Jing Lin, <strong>Xiaoke Jiang</strong>, Jiamin Wu, Zhuoheng Li, Hao Frank Yang, Haoqian Wang, Lei Zhang
-  venue: CVPR 2025
+  venue: Conference on Computer Vision and Pattern Recognition (CVPR) 2025
   year: 2025
   url: https://arxiv.org/abs/2503.07597
   arxiv: https://arxiv.org/abs/2503.07597
@@ -89,9 +95,10 @@
   tags:
   - Human Motion
   - Object Reconstruction
+  ccf: A
 - title: 'SeqPose: An End-to-End Framework to Unify Single-frame and Video-based RGB Category-Level Pose Estimation'
   authors: Yuzhu Ji, Mingshan Sun, Jianyang Shi, <strong>Xiaoke Jiang</strong>, Yiqun Zhang, Haijun Zhang
-  venue: IJCAI 2025
+  venue: International Joint Conference on Artificial Intelligence (IJCAI) 2025
   year: 2025
   url: https://andrewchiyz.github.io/vision.3dv.seqpose/
   arxiv: ''
@@ -101,6 +108,7 @@
   project: https://andrewchiyz.github.io/vision.3dv.seqpose/
   tags:
   - 6D Pose
+  ccf: A
 - title: 'Geo6D: Geometric-Constraints-Guided Direct Object 6D Pose Estimation Network'
   authors: Jianqiu Chen, Mingshan Sun, Ye Zheng, Tianpeng Bao, Zhenyu He, Donghai Li, Guoqiang Jin, Zhao Rui, Liwei Wu, <strong>Xiaoke Jiang</strong>
   venue: IEEE Transactions on Multimedia (TMM) 2025
@@ -113,9 +121,10 @@
   project: ''
   tags:
   - 6D Pose
+  ccf: ''
 - title: 'Uni6Dv2: Noise Elimination for 6D Pose Estimation'
   authors: Mingshan Sun, Ye Zheng, Tianpeng Bao, Jianqiu Chen, Guoqiang Jin, Liwei Wu, Rui Zhao, <strong>Xiaoke Jiang</strong>
-  venue: AISTATS 2025
+  venue: International Conference on Artificial Intelligence and Statistics (AISTATS) 2025
   year: 2025
   url: https://arxiv.org/abs/2208.06416
   arxiv: https://arxiv.org/abs/2208.06416
@@ -126,6 +135,7 @@
   tags:
   - 6D Pose
   - Robot
+  ccf: ''
 - title: Defect classification for specular surfaces based on deflectometry and multi-modal fusion network
   authors: Jingtian Guan, Jingjing Fei, Wei Li, <strong>Xiaoke Jiang</strong>, Liwei Wu, Yakun Liu, Juntong Xi
   venue: Optics and Lasers in Engineering 163 (2023)
@@ -138,9 +148,10 @@
   project: https://tanasguan.github.io/SpecularDefect9/
   tags:
   - Defect Detection
+  ccf: ''
 - title: 'Uni6D: A Unified CNN Framework without Projection Breakdown for 6D Pose Estimation'
   authors: <strong>Xiaoke Jiang</strong>, Donghai Li, Hao Chen, Ye Zheng, Rui Zhao, Liwei Wu
-  venue: CVPR 2022 (Oral)
+  venue: Conference on Computer Vision and Pattern Recognition (CVPR) 2022 (Oral)
   year: 2022
   url: https://arxiv.org/abs/2203.14531
   arxiv: https://arxiv.org/abs/2203.14531
@@ -151,9 +162,10 @@
   tags:
   - 6D Pose
   - Robot
+  ccf: A
 - title: 'SSN3D: Self-Separated Network to Align Parts for 3D Convolution in Video Person Re-Identification'
   authors: <strong>Xiaoke Jiang</strong>, Yu Qiao, Junjie Yan, Qichen Li, Wanrong Zheng, Dapeng Chen
-  venue: AAAI 2021
+  venue: AAAI Conference on Artificial Intelligence (AAAI) 2021
   year: 2021
   url: https://ojs.aaai.org/index.php/AAAI/article/view/16262
   arxiv: ''
@@ -164,9 +176,10 @@
   tags:
   - Person ReID
   - 3D Detection
+  ccf: A
 - title: 'ATSRA: An Accelerated Transmission Strategy Based on Request Aggregation in NDN'
   authors: Shanshan Shi, Jun Li, Haibo Wu, Yongmao Ren, <strong>Xiaoke Jiang</strong>
-  venue: INFOCOM 2019 (poster)
+  venue: IEEE International Conference on Computer Communications (INFOCOM) 2019 (poster)
   year: 2019
   url: https://www.researchgate.net/publication/336010358
   arxiv: ''
@@ -176,6 +189,7 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: A
 - title: Smart Streaming of Panoramic Video
   authors: Hongwei Ma, <strong>Xiaoke Jiang</strong>, Rui Ma, Zhiyou Ma, Yizhen Cai, Dah Ming Chiu
   venue: ACM SIGCOMM 2018 VR Workshop
@@ -188,6 +202,7 @@
   project: ''
   tags:
   - VR Streaming
+  ccf: A
 - title: Cache and delivery of VR video over named data networking
   authors: Yi Zhang, <strong>Xiaoke Jiang</strong>, Yi Wang, Kai Lei
   venue: IEEE INFOCOM Workshops 2018
@@ -201,9 +216,10 @@
   tags:
   - VR Streaming
   - NDN/Networking
+  ccf: A
 - title: 'NDNS: A DNS-Like Name Service for NDN'
   authors: Alexander Afanasyev, <strong>Xiaoke Jiang</strong>, Yingdi Yu, Jiewen Tan, Yumin Xia, Allison Mankin, Lixia Zhang
-  venue: ICCCN 2017
+  venue: International Conference on Computer Communications and Networks (ICCCN) 2017
   year: 2017
   url: https://irl.cs.ucla.edu/data/files/papers/2017-icccn-ndns.pdf
   arxiv: ''
@@ -213,6 +229,7 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: 'IS: Interest Set to Enhance Flow Transmission in Named-Data Networking'
   authors: <strong>Xiaoke Jiang</strong>, Jun Bi
   venue: China Communications (IEEE), Vol.13, 2016
@@ -225,6 +242,7 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: 'A Survey on Information-Centric Networking: Rationales, Designs and Debates'
   authors: <strong>Xiaoke Jiang</strong>, Jun Bi, Guoshun Nan, Zhaogeng Li
   venue: China Communications (IEEE), Vol.12, No.7, 2015
@@ -237,6 +255,7 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: 'nCDN: CDN Enhanced with NDN'
   authors: <strong>Xiaoke Jiang</strong>, Jun Bi
   venue: IEEE INFOCOM 2014, NOM Workshop
@@ -249,9 +268,10 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: A
 - title: What Benefits Does NDN Have in Supporting Mobility
   authors: <strong>Xiaoke Jiang</strong>, Jun Bi, You Wang
-  venue: IEEE ISCC 2014
+  venue: IEEE Symposium on Computers and Communications (ISCC) 2014
   year: 2014
   url: https://www.researchgate.net/publication/272289434
   arxiv: ''
@@ -261,6 +281,7 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: 'MCBS: Matrix Computation Based Simulator of NDN'
   authors: <strong>Xiaoke Jiang</strong>, Jun Bi, You Wang
   venue: Journal of Computers, Vol.9, No.9, 2014
@@ -273,9 +294,10 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: Interest Set Mechanism to Improve the Transport of Named Data Networking
   authors: <strong>Xiaoke Jiang</strong>, Jun Bi
-  venue: ACM SIGCOMM 2013 (poster)
+  venue: ACM SIGCOMM Conference on Data Communication 2013 (poster)
   year: 2013
   url: https://conferences.sigcomm.org/sigcomm/2013/papers/sigcomm/p515.pdf
   arxiv: ''
@@ -285,6 +307,7 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: A
 - title: An Adaptive Probabilistic Marking Scheme for Fast and Secure Traceback
   authors: Hongcheng Tian, Jun Bi, <strong>Xiaoke Jiang</strong>
   venue: Networking Science (Springer), Vol.2, No.1-2, 2013
@@ -297,6 +320,7 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: 'MSDN: A Mechanism for Scalable Intradomain Control Plane in SDN'
   authors: Pingping Lin, Jun Bi, Hongyu Hu, <strong>Xiaoke Jiang</strong>
   venue: Journal of Chinese Computer Systems, Vol.34, No.9, 2013
@@ -309,9 +333,10 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: A Content Provider Mobility Solution of Named Data Networking
   authors: <strong>Xiaoke Jiang</strong>, Jun Bi, You Wang, Pingping Lin, Zhaogeng Li
-  venue: IEEE ICNP 2012
+  venue: IEEE International Conference on Network Protocols (ICNP) 2012
   year: 2012
   url: https://ieeexplore.ieee.org/document/6459937
   arxiv: ''
@@ -321,9 +346,10 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: An Easy Matrix Computation based Simulator of NDN
   authors: <strong>Xiaoke Jiang</strong>, Jun Bi, You Wang, Pingping Lin, Zhaogeng Li
-  venue: IEEE ICNDC 2012
+  venue: IEEE International Conference on Networking and Distributed Computing (ICNDC) 2012
   year: 2012
   url: https://www.researchgate.net/publication/261488266
   arxiv: ''
@@ -333,9 +359,10 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: Mobility Support in the Internet Using Identifiers
   authors: You Wang, Jun Bi, <strong>Xiaoke Jiang</strong>
-  venue: ACM CFI 2012
+  venue: ACM International Conference on Future Internet Technologies (CFI) 2012
   year: 2012
   url: https://www.researchgate.net/publication/263806654
   arxiv: ''
@@ -345,9 +372,10 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: The Compression of Pending Interest Table with Bloom Filter in Content Centric Network
   authors: Zhaogeng Li, Jun Bi, Sen Wang, <strong>Xiaoke Jiang</strong>
-  venue: ACM CFI 2012
+  venue: ACM International Conference on Future Internet Technologies (CFI) 2012
   year: 2012
   url: https://www.researchgate.net/publication/262154796
   arxiv: ''
@@ -357,9 +385,10 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: IPv6 Evolution, Stability and Deployment
   authors: <strong>Xiaoke Jiang</strong>, Jun Bi, Yangyang Wang, Zhijie He, Wei Zhang, Hongchen Tian
-  venue: IEEE ICNP 2011
+  venue: IEEE International Conference on Network Protocols (ICNP) 2011
   year: 2011
   url: https://ieeexplore.ieee.org/document/6089035
   arxiv: ''
@@ -369,6 +398,7 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: Fast and Secure Probabilistic Marking Technology for IP Traceback
   authors: Hongcheng Tian, Jun Bi, <strong>Xiaoke Jiang</strong>, Dekai Wang, Wei Zhang
   venue: Journal of Tsinghua University, Vol.50, No.4, 2011
@@ -381,9 +411,10 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: 'EasyTrace: Easily-Deployable Light-Weight IP Traceback on an AS-Level Overlay Network'
   authors: Hongcheng Tian, Jun Bi, Wei Zhang, <strong>Xiaoke Jiang</strong>
-  venue: IEEE ICNP 2011
+  venue: IEEE International Conference on Network Protocols (ICNP) 2011
   year: 2011
   url: https://www.researchgate.net/publication/220977868
   arxiv: ''
@@ -393,9 +424,10 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
 - title: A Quick Survey on Selected Approaches for Preparing Programmable Networks
   authors: Pingping Lin, Jun Bi, Hongyu Hu, Tao Feng, <strong>Xiaoke Jiang</strong>
-  venue: ACM AINTEC 2011
+  venue: Asian Internet Engineering Conference (AINTEC) 2011
   year: 2011
   url: ''
   arxiv: ''
@@ -405,3 +437,4 @@
   project: ''
   tags:
   - NDN/Networking
+  ccf: ''
