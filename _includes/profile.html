@@ -1,5 +1,9 @@
 <div class="profile">
   <div class="profile-orbit">
+    <svg class="orbit-paths" aria-hidden="true">
+      <ellipse class="orbit-path orbit-path-inner" cx="50%" cy="50%" rx="0" ry="0"></ellipse>
+      <ellipse class="orbit-path orbit-path-outer" cx="50%" cy="50%" rx="0" ry="0"></ellipse>
+    </svg>
     <div class="orbit-ring orbit-inner">
       {% for tag in site.data.profile.experience_tags %}
       <span class="profile-tag exp-tag orbit-tag" data-tooltip="{{ tag.tip }}" data-link="{{ tag.link }}" data-name-en="{{ tag.name }}" data-name-zh="{{ tag.name_zh }}"><span data-lang="en" style="display:none">{{ tag.name }}</span><span data-lang="zh">{{ tag.name_zh }}</span></span>
@@ -68,11 +72,6 @@
           {% endif %}
         </a>
         {% endfor %}
-      </div>
-      <div class="profile-stats">
-        <div class="profile-stat"><span class="stat-num">{{ site.data.publications | size }}</span><div class="stat-label">Papers</div></div>
-        <div class="profile-stat"><span class="stat-num">10+</span><div class="stat-label">First Author</div></div>
-        <div class="profile-stat"><span class="stat-num">10+</span><div class="stat-label">Corresponding</div></div>
       </div>
       </div>
     </div>

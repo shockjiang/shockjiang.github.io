@@ -254,13 +254,17 @@ html = f'''<!DOCTYPE html>
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@500&family=Noto+Sans+SC:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Inconsolata:wght@500&family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <style>{css}</style>
 </head>
 <body>
   <main class="container">
     <div class="profile">
       <div class="profile-orbit">
+        <svg class="orbit-paths" aria-hidden="true">
+          <ellipse class="orbit-path orbit-path-inner" cx="50%" cy="50%" rx="0" ry="0"></ellipse>
+          <ellipse class="orbit-path orbit-path-outer" cx="50%" cy="50%" rx="0" ry="0"></ellipse>
+        </svg>
         <div class="orbit-ring orbit-inner">
           {exp_tags_html()}
         </div>
@@ -291,11 +295,6 @@ html = f'''<!DOCTYPE html>
           </p>
           <div class="profile-links">
             {profile_links_html()}
-          </div>
-          <div class="profile-stats">
-            <div class="profile-stat"><span class="stat-num">{len(pubs)}</span><div class="stat-label">Papers</div></div>
-            <div class="profile-stat"><span class="stat-num">10+</span><div class="stat-label">First Author</div></div>
-            <div class="profile-stat"><span class="stat-num">10+</span><div class="stat-label">Corresponding</div></div>
           </div>
         </div>
       </div>

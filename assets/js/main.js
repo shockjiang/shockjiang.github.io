@@ -47,8 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Orbit tag positioning
-  function layoutOrbit(selector, radiusX, radiusY, offsetAngle) {
+  // Orbit tag positioning.
+  // `placed` is shared across rings so outer tags don't land on inner ones.
+  function layoutOrbit(selector, radiusX, radiusY, offsetAngle, placed) {
     var container = document.querySelector('.profile-orbit');
     if (!container) return;
     var tags = container.querySelectorAll(selector + ' .orbit-tag');
@@ -56,38 +57,61 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!count) return;
     var cx = container.offsetWidth / 2;
     var cy = container.offsetHeight / 2;
-    // Get card bounds to avoid top/bottom placement
+    var maxX = container.offsetWidth;
+    var maxY = container.offsetHeight;
+    // Card bounds — used to repel tags that would overlap the center card
+    var cardRect = null;
     var card = container.querySelector('.profile-center');
-    var cardTop = 0, cardBottom = 0;
     if (card) {
       var cRect = card.getBoundingClientRect();
       var pRect = container.getBoundingClientRect();
-      cardTop = cRect.top - pRect.top - 10;
-      cardBottom = cRect.bottom - pRect.top + 10;
+      cardRect = {
+        left:   cRect.left   - pRect.left   - 8,
+        right:  cRect.right  - pRect.left   + 8,
+        top:    cRect.top    - pRect.top    - 8,
+        bottom: cRect.bottom - pRect.top    + 8,
+      };
     }
-    // Distribute tags on the ellipse but only in left/right arcs
-    // Left arc: angles from ~0.6pi to ~1.4pi, Right arc: ~-0.4pi to ~0.4pi
-    var half = Math.ceil(count / 2);
-    var rightCount = half;
-    var leftCount = count - half;
+    function intersectsCard(x, y, w, h) {
+      if (!cardRect) return false;
+      return !(x + w < cardRect.left || x > cardRect.right
+            || y + h < cardRect.top  || y > cardRect.bottom);
+    }
+    var GAP = 4; // min pixel gap between any two tag pills
+    function intersectsAny(x, y, w, h) {
+      for (var k = 0; k < placed.length; k++) {
+        var r = placed[k];
+        if (!(x + w + GAP < r.x || x - GAP > r.x + r.w
+           || y + h + GAP < r.y || y - GAP > r.y + r.h)) return true;
+      }
+      return false;
+    }
     function place(tag, angle) {
-      var x = cx + radiusX * Math.cos(angle) - tag.offsetWidth / 2;
-      var y = cy + radiusY * Math.sin(angle) - tag.offsetHeight / 2;
-      x = Math.max(4, Math.min(x, container.offsetWidth - tag.offsetWidth - 4));
-      y = Math.max(4, Math.min(y, container.offsetHeight - tag.offsetHeight - 4));
+      // Push outward radially until the tag clears the card AND every other tag
+      var rx = radiusX, ry = radiusY, x, y, attempts = 0;
+      do {
+        x = cx + rx * Math.cos(angle) - tag.offsetWidth / 2;
+        y = cy + ry * Math.sin(angle) - tag.offsetHeight / 2;
+        var bad = intersectsCard(x, y, tag.offsetWidth, tag.offsetHeight)
+               || intersectsAny (x, y, tag.offsetWidth, tag.offsetHeight);
+        if (!bad) break;
+        rx *= 1.05;
+        ry *= 1.04;
+        attempts++;
+      } while (attempts < 50);
+      x = Math.max(4, Math.min(x, maxX - tag.offsetWidth - 4));
+      y = Math.max(4, Math.min(y, maxY - tag.offsetHeight - 4));
       tag.style.left = x + 'px';
       tag.style.top = y + 'px';
+      placed.push({ x: x, y: y, w: tag.offsetWidth, h: tag.offsetHeight });
     }
-    // Right arc: spread from -arcSpan to +arcSpan
-    var arcSpan = Math.PI * 0.38;
-    for (var i = 0; i < rightCount; i++) {
-      var a = -arcSpan + (2 * arcSpan * i / Math.max(rightCount - 1, 1)) + (offsetAngle || 0);
+    // Distribute around the FULL ellipse — card collision pushes top/bottom
+    // tags outward automatically, so we don't need the old "left/right arc only".
+    // Start from the right and walk counter-clockwise so the first few tags
+    // (most prominent positions) land on the right side.
+    for (var i = 0; i < count; i++) {
+      var a = (2 * Math.PI * i / count) + (offsetAngle || 0);
       place(tags[i], a);
-    }
-    // Left arc: spread from pi-arcSpan to pi+arcSpan
-    for (var j = 0; j < leftCount; j++) {
-      var a = (Math.PI - arcSpan) + (2 * arcSpan * j / Math.max(leftCount - 1, 1)) + (offsetAngle || 0);
-      place(tags[rightCount + j], a);
     }
   }
 
@@ -96,16 +120,66 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!w) return;
     var ww = w.offsetWidth;
     // Inner (experience) = closer ellipse, outer (skills) = wider ellipse
-    var innerRx = Math.min(ww * 0.32, 270);
-    var innerRy = Math.min(170, 160);
-    var outerRx = Math.min(ww * 0.46, 420);
-    var outerRy = Math.min(220, 210);
-    layoutOrbit('.orbit-inner', innerRx, innerRy, 0);
-    layoutOrbit('.orbit-outer', outerRx, outerRy, 0.05);
+    var innerRx = Math.min(ww * 0.30, 350);
+    var innerRy = 160;
+    var outerRx = Math.min(ww * 0.44, 540);
+    var outerRy = 210;
+    var placed = []; // shared so outer tags avoid inner tags
+    layoutOrbit('.orbit-inner', innerRx, innerRy, 0,    placed);
+    layoutOrbit('.orbit-outer', outerRx, outerRy, 0.05, placed);
+    var innerEll = document.querySelector('.orbit-path-inner');
+    var outerEll = document.querySelector('.orbit-path-outer');
+    if (innerEll) { innerEll.setAttribute('rx', innerRx); innerEll.setAttribute('ry', innerRy); }
+    if (outerEll) { outerEll.setAttribute('rx', outerRx); outerEll.setAttribute('ry', outerRy); }
   }
 
   layoutAllOrbits();
   window.addEventListener('resize', layoutAllOrbits);
+
+  // Randomize orbit-tag colors from a curated palette.
+  // Deterministic shuffle (seeded by a hash of the tag text) so colors
+  // stay stable across reloads but feel scattered around the orbit.
+  var TAG_PALETTE = [
+    '52, 211, 153',   // emerald
+    '56, 189, 248',   // sky
+    '167, 139, 250',  // violet
+    '244, 114, 182',  // pink
+    '251, 191, 36',   // amber
+    '34, 211, 238',   // cyan
+    '251, 146, 60',   // orange
+    '129, 230, 217',  // mint
+    '248, 113, 113',  // rose
+  ];
+  function hashStr(s) {
+    var h = 0;
+    for (var i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+    return Math.abs(h);
+  }
+  function applyTagColors() {
+    // Light themes need higher alpha for the pill background to be visible.
+    // Fall back to localStorage in case this runs before the theme is restored.
+    var theme = document.documentElement.dataset.theme
+             || localStorage.getItem('theme')
+             || 'dark';
+    var isLight = theme === 'light';
+    var bgA = isLight ? 0.16 : 0.08;
+    var brA = isLight ? 0.45 : 0.28;
+    document.querySelectorAll('.orbit-tag').forEach(function (tag, i) {
+      var key = (tag.textContent || '').trim() + ':' + i;
+      var c = TAG_PALETTE[hashStr(key) % TAG_PALETTE.length];
+      tag.style.setProperty('--tag-c',      'rgb('  + c + ')');
+      tag.style.setProperty('--tag-bg',     'rgba(' + c + ', ' + bgA + ')');
+      tag.style.setProperty('--tag-border', 'rgba(' + c + ', ' + brA + ')');
+      tag.style.setProperty('--glow',       'rgba(' + c + ', 0.5)');
+      tag.style.setProperty('--glow-outer', 'rgba(' + c + ', 0.15)');
+      tag.style.setProperty('--spark',      'rgba(' + c + ', 0.7)');
+    });
+  }
+  applyTagColors();
+  // Re-apply when theme changes
+  document.querySelectorAll('.theme-dot').forEach(function (d) {
+    d.addEventListener('click', function () { setTimeout(applyTagColors, 0); });
+  });
 
   // Tooltip
   var tipBox = document.createElement('div');
