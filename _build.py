@@ -245,6 +245,117 @@ def projects_html():
 en_labels = {'edu': 'Education', 'work': 'Work Experience', 'skills': 'Skills', 'hobbies': 'Hobbies', 'sup': 'Supervisor'}
 zh_labels = {'edu': '教育经历', 'work': '工作经历', 'skills': '技能', 'hobbies': '爱好', 'sup': '导师'}
 
+# Visitor stats block (kept outside the f-string so JS braces don't need escaping).
+visitor_html = '''<div class="visitor-stats">
+    <div class="visitor-title">Visitors</div>
+    <div class="visitor-counters">
+      <div class="visitor-counter">
+        <span class="counter-num" id="visitor-uv">--</span>
+        <span class="counter-label">Visitors</span>
+      </div>
+      <div class="visitor-counter">
+        <span class="counter-num" id="visitor-pv">--</span>
+        <span class="counter-label">Page Views</span>
+      </div>
+    </div>
+    <div id="visitor-map" class="visitor-map"></div>
+
+    <!-- GoatCounter analytics (replaces busuanzi). The tracker is anonymous
+         and needs no token. Paste a read-only API token into window.__GC.token
+         below to enable the per-country heatmap. -->
+    <script data-goatcounter="https://shockjiang.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css" media="print" onload="this.media='all'">
+    <script defer src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
+
+    <script>
+      window.__GC = {
+        domain: 'shockjiang.goatcounter.com',
+        token: '1uuj1ovikc9pxfkmya5a618u91o35yrvv8jcz2191yoxxfoa0pq'
+      };
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var DOMAIN = window.__GC.domain;
+        var TOKEN  = window.__GC.token;
+
+        fetch('https://' + DOMAIN + '/counter/TOTAL.json')
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            var pv = document.getElementById('visitor-pv');
+            var uv = document.getElementById('visitor-uv');
+            if (pv) pv.textContent = d.count        || '0';
+            if (uv) uv.textContent = d.count_unique || '0';
+          })
+          .catch(function () {});
+
+        function isDarkTheme() {
+          return (document.documentElement.getAttribute('data-theme') || 'dark') !== 'light';
+        }
+
+        function initMap(values) {
+          if (typeof jsVectorMap === 'undefined') return;
+          var dark = isDarkTheme();
+          var opts = {
+            selector: '#visitor-map',
+            map: 'world',
+            backgroundColor: 'transparent',
+            draggable: true,
+            zoomButtons: false,
+            zoomOnScroll: false,
+            regionStyle: {
+              initial: {
+                fill:        dark ? '#1a1a2e' : '#e5e7eb',
+                stroke:      dark ? '#2a2a4a' : '#9ca3af',
+                strokeWidth: 0.4
+              },
+              hover: { fill: '#fbbf24', cursor: 'pointer' }
+            },
+            regionLabelStyle: { initial: { fontFamily: 'Inter', fontSize: '10px' } }
+          };
+          if (values && Object.keys(values).length) {
+            opts.series = {
+              regions: [{
+                attribute: 'fill',
+                values: values,
+                scale: dark ? ['#1a1a2e', '#34d399'] : ['#d1fae5', '#059669'],
+                normalizeFunction: 'polynomial'
+              }]
+            };
+          }
+          new jsVectorMap(opts);
+        }
+
+        function whenMapReady(cb) {
+          if (typeof jsVectorMap !== 'undefined') return cb();
+          var iv = setInterval(function () {
+            if (typeof jsVectorMap !== 'undefined') { clearInterval(iv); cb(); }
+          }, 50);
+          setTimeout(function () { clearInterval(iv); cb(); }, 5000);
+        }
+
+        if (TOKEN && document.getElementById('visitor-map')) {
+          fetch('https://' + DOMAIN + '/api/v0/stats/locations', {
+            headers: { 'Authorization': 'Bearer ' + TOKEN }
+          })
+            .then(function (r) { return r.ok ? r.json() : { stats: [] }; })
+            .then(function (d) {
+              var values = {};
+              (d.stats || []).forEach(function (loc) {
+                if (loc.id && loc.id.length === 2) values[loc.id] = loc.count;
+              });
+              whenMapReady(function () { initMap(values); });
+            })
+            .catch(function () { whenMapReady(function () { initMap(); }); });
+        } else if (document.getElementById('visitor-map')) {
+          whenMapReady(function () { initMap(); });
+        }
+      });
+    </script>
+  </div>'''
+
 html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -347,51 +458,7 @@ html = f'''<!DOCTYPE html>
     </section>
   </main>
 
-  <div class="visitor-stats">
-    <div class="visitor-title">Visitors</div>
-    <div class="visitor-counters">
-      <div class="visitor-counter">
-        <span class="counter-num" id="busuanzi_value_site_uv">--</span>
-        <span class="counter-label">Visitors</span>
-      </div>
-      <div class="visitor-counter">
-        <span class="counter-num" id="busuanzi_value_site_pv">--</span>
-        <span class="counter-label">Page Views</span>
-      </div>
-    </div>
-    <div id="visitor-map" class="visitor-map"></div>
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css" media="print" onload="this.media='all'">
-    <script defer src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {{
-        if (document.getElementById('visitor-map') && typeof jsVectorMap !== 'undefined') {{
-          var isDark = !document.documentElement.getAttribute('data-theme') ||
-                       document.documentElement.getAttribute('data-theme') !== 'light';
-          new jsVectorMap({{
-            selector: '#visitor-map',
-            map: 'world',
-            backgroundColor: 'transparent',
-            draggable: true,
-            zoomButtons: false,
-            zoomOnScroll: false,
-            regionStyle: {{
-              initial: {{
-                fill: isDark ? '#1a1a2e' : '#d1d5db',
-                stroke: isDark ? '#2a2a4a' : '#9ca3af',
-                strokeWidth: 0.4
-              }},
-              hover: {{
-                fill: '#34d399',
-                cursor: 'pointer'
-              }}
-            }}
-          }});
-        }}
-      }});
-    </script>
-  </div>
+  {visitor_html}
 
   <footer class="footer">
     <p>&copy; {datetime.date.today().year} Shock (Xiaoke) Jiang &middot; Built with Jekyll &middot; Hosted on GitHub Pages</p>
