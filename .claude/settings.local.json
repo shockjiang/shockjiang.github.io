@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(pip3 install:*)",
+      "Read(//opt/homebrew/bin/**)",
+      "Bash(pip3 list *)",
+      "Bash(/usr/bin/python3 -c \"import sass, yaml; print\\('ok'\\)\")",
+      "Bash(/opt/homebrew/bin/python3 _build.py)",
+      "Bash(xargs -r kill)",
+      "Bash(/opt/homebrew/bin/python3 -m http.server 4000)",
+      "Bash(curl *)",
+      "Read(//tmp/**)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --hide-scrollbars --no-sandbox --screenshot=/tmp/site-desktop.png --window-size=1280,1800 http://localhost:4000/)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --hide-scrollbars --no-sandbox --screenshot=/tmp/site-mobile.png --window-size=420,1400 http://localhost:4000/)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --hide-scrollbars --no-sandbox --screenshot=/tmp/site-after.png --window-size=1280,1100 http://localhost:4000/)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --hide-scrollbars --no-sandbox --screenshot=/tmp/site-orbit-zoom.png --window-size=1100,700 --force-device-scale-factor=2 http://localhost:4000/)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --hide-scrollbars --no-sandbox --screenshot=/tmp/fix-desktop.png --window-size=1280,1100 --force-device-scale-factor=1.5 http://localhost:4000/)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --hide-scrollbars --no-sandbox --screenshot=/tmp/fix-mobile.png --window-size=420,1500 http://localhost:4000/)",
+      "Read(//private/tmp/**)",
+      "Bash(cat)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --hide-scrollbars --no-sandbox --user-data-dir=/tmp/chrome-light --screenshot=/tmp/fix-light.png --window-size=1280,1100 --virtual-time-budget=2000 \"file:///tmp/light.html\")",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git*)",
+      "Bash(lsof*)",
+      "Bash(ps*)",
+      "Bash(/opt/homebrew/bin/python3*)"
+    ]
+  }
+}
