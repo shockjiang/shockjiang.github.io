@@ -1,3 +1,17 @@
+- title: 'Guide, Think, Act: Interactive Embodied Reasoning in Vision-Language-Action Models'
+  authors: Yiran Ling, Qing Lian, Jinghang Li, Qing Jiang, Tianming Zhang, <strong>Xiaoke Jiang</strong>, Chuanxiu Liu, Jie Liu, Lei Zhang
+  venue: arXiv 2026
+  year: 2026
+  url: https://signalispupupu.github.io/GTA-VLA_ProjPage/
+  arxiv: https://arxiv.org/abs/2605.13632
+  pdf: ''
+  image: assets/images/papers/gta-vla.jpg
+  code: ''
+  project: https://signalispupupu.github.io/GTA-VLA_ProjPage/
+  tags:
+  - VLA
+  - Robot
+  ccf: ''
 - title: 'SpatialPoint: Spatial-aware Point Prediction for Embodied Localization'
   authors: Qiming Zhu, Zhirui Fang, Tianming Zhang, Chuanxiu Liu, <strong>Xiaoke Jiang*</strong>, Lei Zhang
   venue: arXiv 2026
