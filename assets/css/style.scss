@@ -353,6 +353,17 @@ a {
   &:hover { color: var(--accent); transform: translateY(-1px); }
 }
 
+.inline-view-counter {
+  margin-top: 7px;
+  font-size: 0.72em;
+  color: var(--text-muted);
+  opacity: 0.65;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  letter-spacing: 0.02em;
+}
 
 /* Tag colors are assigned per-tag by JS via CSS variables (--tag-c, --tag-bg, --tag-border).
    The fallbacks here apply before JS runs and for non-orbit tags. */

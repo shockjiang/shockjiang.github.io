@@ -407,6 +407,10 @@ html = f'''<!DOCTYPE html>
           <div class="profile-links">
             {profile_links_html()}
           </div>
+          <div class="inline-view-counter" id="inline-view-counter" style="visibility:hidden">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <span id="inline-view-count">—</span> views since 2026.6.1
+          </div>
         </div>
       </div>
     </div>
@@ -465,6 +469,30 @@ html = f'''<!DOCTYPE html>
   </footer>
 
   <script>{js}</script>
+  <script>
+    (function () {{
+      var wrap = document.getElementById('inline-view-counter');
+      var out  = document.getElementById('inline-view-count');
+      if (!wrap || !out) return;
+      var endpoints = [
+        'https://api.counterapi.dev/v1/shockjiang/homepage/up',
+        'https://api.counterapi.dev/v2/shockjiang/homepage/up'
+      ];
+      function tryNext(i) {{
+        if (i >= endpoints.length) return;
+        fetch(endpoints[i], {{ method: 'GET', cache: 'no-store' }})
+          .then(function (r) {{ return r.ok ? r.json() : Promise.reject(); }})
+          .then(function (d) {{
+            var n = d && (d.count !== undefined ? d.count : d.value);
+            if (typeof n !== 'number') throw new Error();
+            out.textContent = n.toLocaleString();
+            wrap.style.visibility = 'visible';
+          }})
+          .catch(function () {{ tryNext(i + 1); }});
+      }}
+      tryNext(0);
+    }})();
+  </script>
 </body>
 </html>'''
 

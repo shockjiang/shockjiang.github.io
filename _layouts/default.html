@@ -172,5 +172,29 @@
   </footer>
 
   <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  <script>
+    (function () {
+      var wrap = document.getElementById('inline-view-counter');
+      var out  = document.getElementById('inline-view-count');
+      if (!wrap || !out) return;
+      var endpoints = [
+        'https://api.counterapi.dev/v1/shockjiang/homepage/up',
+        'https://api.counterapi.dev/v2/shockjiang/homepage/up'
+      ];
+      function tryNext(i) {
+        if (i >= endpoints.length) return;
+        fetch(endpoints[i], { method: 'GET', cache: 'no-store' })
+          .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+          .then(function (d) {
+            var n = d && (d.count !== undefined ? d.count : d.value);
+            if (typeof n !== 'number') throw new Error();
+            out.textContent = n.toLocaleString();
+            wrap.style.visibility = 'visible';
+          })
+          .catch(function () { tryNext(i + 1); });
+      }
+      tryNext(0);
+    })();
+  </script>
 </body>
 </html>
