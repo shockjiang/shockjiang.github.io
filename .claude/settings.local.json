@@ -27,7 +27,10 @@
       "Bash(git*)",
       "Bash(lsof*)",
       "Bash(ps*)",
-      "Bash(/opt/homebrew/bin/python3*)"
+      "Bash(/opt/homebrew/bin/python3*)",
+      "WebFetch(domain:arxiv.org)",
+      "Bash(sips *)",
+      "Bash(ruby *)"
     ]
   }
 }
