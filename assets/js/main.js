@@ -15,18 +15,35 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  function panelFromHash() {
+    var h = (location.hash || '').replace(/^#/, '');
+    return (h && document.getElementById('panel-' + h)) ? h : null;
+  }
+
   document.querySelectorAll('.panel-nav a[data-panel]').forEach(function (link) {
     link.addEventListener('click', function (e) {
       e.preventDefault();
-      showPanel(link.dataset.panel);
+      var p = link.dataset.panel;
+      showPanel(p);
+      if (history.pushState) {
+        history.pushState(null, '', '#' + p);
+      } else {
+        location.hash = p;
+      }
     });
   });
 
-  // Restore last panel
-  var savedPanel = localStorage.getItem('activePanel');
-  if (savedPanel && document.getElementById('panel-' + savedPanel)) {
-    showPanel(savedPanel);
+  // Initial panel: URL hash wins over localStorage so shared links land on the right tab
+  var initialPanel = panelFromHash() || localStorage.getItem('activePanel');
+  if (initialPanel && document.getElementById('panel-' + initialPanel)) {
+    showPanel(initialPanel);
   }
+
+  // Back/forward navigation and externally-set hashes
+  window.addEventListener('hashchange', function () {
+    var p = panelFromHash();
+    if (p) showPanel(p);
+  });
 
   // Language toggling
   document.querySelectorAll('[data-lang-btn]').forEach(function (btn) {

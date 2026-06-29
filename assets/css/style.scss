@@ -867,6 +867,15 @@ a {
   margin-bottom: 6px;
 }
 
+/* Tools panel: shrink the gallery screenshots (portrait phone shots
+   would otherwise tower over the cards). Scoped to #panel-tools only. */
+#panel-tools .project-image img {
+  max-height: 240px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
 /* Tools panel: replace browser disc bullets with a tidy 2-col list.
    Uses existing --accent; no width / color changes outside this panel. */
 #panel-tools .project-card ul.project-desc {
