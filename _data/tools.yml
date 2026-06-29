@@ -1,0 +1,137 @@
+intro:
+  en: >-
+    These are small utilities I built to scratch my own itches in research and daily life — fast to use, single-purpose, and open source.
+    I keep them lean so they stay useful instead of accreting features, and I share them in case the same itch bites someone else.
+  zh: >-
+    下面是我为科研和日常使用顺手做的几个小工具——专一、轻量、开源。
+    我刻意保持它们简单，避免功能膨胀，也希望对有同样需求的人有用。
+
+ui:
+  why:
+    en: "Why:"
+    zh: "为什么做："
+  features:
+    en: "Main features"
+    zh: "主要功能"
+
+tools:
+  - title:
+      en: "TianYan (天眼)"
+      zh: "天眼 TianYan"
+    subtitle:
+      en: "Multi-format file & dataset previewer for the web"
+      zh: "多格式文件 / 数据集的网页预览器"
+    motivation:
+      en: >-
+        Real research projects run on cloud GPUs, and the artifacts I actually want to look at — training datasets, model outputs, depth/mask predictions, HDF5 trajectories — live on those remote machines.
+        SCP-ing files back is slow, Jupyter is heavyweight for "just let me see it", and OS file managers do not preview ML formats anyway.
+        TianYan runs as a small web server next to the data: point a browser at the cloud machine and inspect any project's datasets and outputs through one unified, pluggable viewer.
+      zh: >-
+        真正在跑的研究项目大多在云端 GPU 上，我想随时看一眼的训练数据、模型输出、深度 / 掩码预测、HDF5 轨迹都躺在远端机器上。
+        把文件 scp 回本地慢，开 Jupyter 只为"瞅一眼"太重，操作系统的文件管理器也不会预览这些 ML 格式。
+        天眼直接以一个小型 Web 服务的形式跑在数据旁边：浏览器打开云端机器，就能在统一可扩展的查看器里检视任意项目的数据集和输出。
+    tags: ["Web", "FastAPI", "React", "Dataset Previewer", "Multi-format"]
+    features:
+      en:
+        - "Tree-style sidebar that recursively browses any local root directory"
+        - "Auto-detects file type: RGB, depth (Uint16), mask, video, JSON, text, tabular (.jsonl/.parquet), pickle, .npy/.npz, .ply, USD, HDF5"
+        - "File-tuple visualization with synced panes (RGB+depth, RGB+mask, RGB+depth+mask, RGB+bbox/mask JSON)"
+        - "HTTP range-aware video streaming so multi-GB clips scrub instantly"
+        - "Pluggable viewer system — add a new format with one backend route plus one React component"
+        - "FastAPI + React/Vite stack; vite HMR for dev, single uvicorn process for prod"
+      zh:
+        - "树状侧边栏，递归浏览任意本地根目录"
+        - "自动识别文件类型：RGB、深度 (Uint16)、掩码、视频、JSON、文本、表格 (.jsonl/.parquet)、pickle、.npy/.npz、.ply、USD、HDF5"
+        - "文件元组联动可视化（RGB+深度、RGB+掩码、RGB+深度+掩码、RGB+bbox/掩码 JSON）"
+        - "支持 HTTP Range 的视频流，多 GB 视频也能秒级跳播"
+        - "可插拔的查看器架构——加一个后端路由 + 一个 React 组件即可支持新格式"
+        - "FastAPI + React/Vite 技术栈；开发用 Vite HMR，生产用单进程 uvicorn"
+    links:
+      - text: "GitHub"
+        url: "https://github.com/shockjiang/TianYan"
+
+  - title:
+      en: "MobileEye"
+      zh: "MobileEye 移动眼"
+    subtitle:
+      en: "Android-hosted file-browser web server"
+      zh: "运行在 Android 上的文件浏览 Web 服务器"
+    badges: ["no-ad", "no-login"]
+    motivation:
+      en: >-
+        Phones accumulate large datasets — photos, screen recordings, sensor logs — and every "easy" way to get them off the device has a catch: USB cabling is slow and needs a desktop client; mainstream file-transfer apps push you to a cloud upload, require an account login, or are smothered in ads.
+        MobileEye flips the relationship: the phone itself runs a tiny LAN web server, and any laptop on the same Wi-Fi browses, streams, and bulk-uploads through a normal browser — no account, no ads, no cloud round-trip.
+        It also speaks the same API as TianYan, so the same viewer UI works for both local disks and phones.
+      zh: >-
+        手机里堆着越来越多的数据——照片、屏幕录像、传感器日志。可所谓"方便"的导出方案各有坑：USB 线慢、还要装桌面客户端；主流文件传输 App 要么逼你上传云、要求账号登录，要么塞满广告。
+        MobileEye 换了个方向：让手机自己跑一个轻量级局域网 Web 服务器，同一 Wi-Fi 下任意笔记本都能用浏览器浏览、播放、批量上传——无需账号、无广告、不绕公网。
+        它和天眼用同一套 API，所以同一个查看器界面既能浏览本地磁盘，也能浏览手机存储。
+    tags: ["Android", "Web Server", "File Browser", "NanoHTTPD"]
+    features:
+      en:
+        - "Runs entirely on the phone — no companion desktop app needed"
+        - "TianYan-shaped API, so the same web frontend browses phone and laptop storage interchangeably"
+        - "Range-aware video streaming directly from the phone's storage"
+        - "Multi-GB chunked uploads that survive flaky Wi-Fi"
+        - "Bundled minimal frontend ready out-of-the-box; works in any browser"
+        - "LAN-only by default; optional password gate"
+      zh:
+        - "全部跑在手机上——桌面端无需任何客户端"
+        - "与天眼同一套 API，同一个网页前端既能浏览电脑磁盘也能浏览手机存储"
+        - "直接从手机存储进行带 Range 的视频流传输"
+        - "多 GB 的分片上传，能扛住不稳定 Wi-Fi"
+        - "自带轻量前端，开箱即用，任何浏览器都能访问"
+        - "默认只允许局域网访问；可选密码保护"
+    images:
+      - title:
+          en: "Mobile UI"
+          zh: "手机端界面"
+        url: "assets/mobileeye/mobile-ui.jpg"
+      - title:
+          en: "Web UI (browsing phone storage from a laptop)"
+          zh: "网页端界面（在笔记本上浏览手机存储）"
+        url: "assets/mobileeye/web-ui.jpg"
+    links:
+      - text: "GitHub"
+        url: "https://github.com/shockjiang/mobile-eye"
+
+  - title:
+      en: "FolderPlayer"
+      zh: "FolderPlayer 文件夹播放器"
+    subtitle:
+      en: "Folder-scoped Android music player"
+      zh: "以文件夹为单位的 Android 音乐播放器"
+    badges: ["no-ad", "no-login"]
+    motivation:
+      en: >-
+        Mainstream Android music players are either ad-walled or push you into an account plus a cloud library, and they all force every track into a tag-based "library" that fights against the way I actually organize music — as folders on disk, by album / mood / workout.
+        FolderPlayer treats a chosen folder (and its subfolders) as the playlist: pick a folder, hit play, done.
+        No ads, no login, no library, no scan.
+      zh: >-
+        主流 Android 音乐播放器要么被广告淹没，要么把你推向账号 + 云端音乐库，而且统统强制把每首歌导入它们的标签化"音乐库"——这和我组织音乐的方式背道而驰：我就是按文件夹来分（按专辑、按心情、按训练歌单）。
+        FolderPlayer 让一个文件夹（及其子文件夹）直接就是当前播放列表：选个文件夹，按播放，完事。
+        没广告、不登录、没"音乐库"、不扫盘。
+    tags: ["Android", "Music Player", "Media3", "ExoPlayer"]
+    features:
+      en:
+        - "Folder = playlist: navigate the disk tree and tap to play a subtree"
+        - "ID3 album-art rendering on the now-playing screen"
+        - "Sleep timer for falling asleep to music"
+        - "Shuffle within the current folder"
+        - "Background playback with lock-screen / notification controls"
+        - "Media3 / ExoPlayer engine: gapless playback and modern audio-focus handling"
+      zh:
+        - "文件夹即播放列表：在磁盘树里点击任意子目录开始播放"
+        - "播放界面读取 ID3 标签，显示专辑封面"
+        - "睡眠定时关闭，适合靠音乐入睡"
+        - "在当前文件夹范围内随机播放"
+        - "后台播放，支持锁屏 / 通知栏控制"
+        - "引擎使用 Media3 / ExoPlayer：无缝衔接，符合现代音频焦点规范"
+    images:
+      - title:
+          en: "Player UI"
+          zh: "播放器界面"
+        url: "assets/folderplayer/player.jpg"
+    links:
+      - text: "GitHub"
+        url: "https://github.com/shockjiang/folder-player"

@@ -1,3 +1,8 @@
+- date: "2026-06"
+  content:
+    en: "One paper accepted to ECCV 2026: <a href='https://signalispupupu.github.io/GTA-VLA_ProjPage/' target='_blank'>GTA-VLA</a> (Guide, Think, Act)!"
+    zh: "一篇论文被 ECCV 2026 录用：<a href='https://signalispupupu.github.io/GTA-VLA_ProjPage/' target='_blank'>GTA-VLA</a>（Guide, Think, Act）！"
+
 - date: "2026-04-27"
   content:
     en: "Keynote talk at Guangdong AI Application Matchmaking Conference: SpatialPoint (<a href='https://mp.weixin.qq.com/s/eUVw8tWJilItAeyRXSx9jQ' target='_blank'>coverage</a>)."

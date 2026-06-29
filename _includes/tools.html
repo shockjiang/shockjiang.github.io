@@ -1,0 +1,70 @@
+{% assign data = site.data.tools %}
+{% assign ui = data.ui %}
+
+{% if data.intro %}
+<p class="project-desc">
+  <span data-lang="en" style="display:none">{{ data.intro.en }}</span>
+  <span data-lang="zh">{{ data.intro.zh }}</span>
+</p>
+{% endif %}
+
+{% for project in data.tools %}
+<div class="project-card">
+  <div class="project-header">
+    <h3 class="project-title">
+      <span data-lang="en" style="display:none">{{ project.title.en }}</span>
+      <span data-lang="zh">{{ project.title.zh }}</span>
+    </h3>
+    <span class="project-subtitle">
+      <span data-lang="en" style="display:none">{{ project.subtitle.en }}</span>
+      <span data-lang="zh">{{ project.subtitle.zh }}</span>
+    </span>
+  </div>
+  <div class="project-tags">
+    {% for tag in project.tags %}<span class="pub-tag">{{ tag }}</span>{% endfor %}
+    {% for b in project.badges %}<span class="pub-tag">{{ b }}</span>{% endfor %}
+  </div>
+
+  <div data-lang="en" style="display:none">
+    {% if project.motivation %}<p class="project-desc"><strong>{{ ui.why.en }}</strong> {{ project.motivation.en }}</p>{% endif %}
+    {% if project.features %}
+    <p class="project-desc"><strong>{{ ui.features.en }}</strong></p>
+    <ul class="project-desc">
+      {% for f in project.features.en %}<li>{{ f }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <div data-lang="zh">
+    {% if project.motivation %}<p class="project-desc"><strong>{{ ui.why.zh }}</strong> {{ project.motivation.zh }}</p>{% endif %}
+    {% if project.features %}
+    <p class="project-desc"><strong>{{ ui.features.zh }}</strong></p>
+    <ul class="project-desc">
+      {% for f in project.features.zh %}<li>{{ f }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
+  {% if project.links %}
+  <div class="project-links">
+    {% for link in project.links %}
+    <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.text }}</a>{% unless forloop.last %} | {% endunless %}
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if project.images %}
+  <div class="project-gallery">
+    {% for img in project.images %}
+    <div class="project-image">
+      <a href="{{ img.url | relative_url }}" target="_blank" rel="noopener">
+        <img src="{{ img.url | relative_url }}" alt="{{ img.title.en }}" loading="lazy">
+      </a>
+      <span class="video-label">
+        <span data-lang="en" style="display:none">{{ img.title.en }}</span>
+        <span data-lang="zh">{{ img.title.zh }}</span>
+      </span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endfor %}

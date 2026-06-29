@@ -19,6 +19,7 @@ pubs = load('publications.yml')
 cv_en = load('cv_en.yml')
 cv_zh = load('cv_zh.yml')
 projects = load('projects.yml')
+tools_data = load('tools.yml')
 css_raw = read('assets/css/style.scss').split('---')[-1]  # strip frontmatter
 css = sass.compile(string=css_raw, output_style='compressed')
 js = read('assets/js/main.js')
@@ -198,9 +199,11 @@ def cv_section_html(cv, labels):
     parts.append(f'<p class="cv-hobbies">{" &bull; ".join(cv.get("hobbies", []))}</p>')
     return '\n'.join(parts)
 
-def projects_html():
+def projects_html(items=None):
+    if items is None:
+        items = projects
     parts = []
-    for proj in projects:
+    for proj in items:
         tag_spans = ''.join(f'<span class="pub-tag">{t}</span>' for t in proj.get('tags', []))
         links_html = ''
         if proj.get('links'):
@@ -227,18 +230,87 @@ def projects_html():
         <div class="video-wrap">{media}</div>
         <span class="video-label">{v['title']}</span>
       </div>''')
+        desc_html = f'<p class="project-desc">{proj["description"]}</p>' if proj.get('description') else ''
         parts.append(f'''<div class="project-card">
   <div class="project-header">
     <h3 class="project-title">{proj['title']}</h3>
     <span class="project-subtitle">{proj.get('subtitle','')}</span>
   </div>
   <div class="project-tags">{tag_spans}</div>
-  <p class="project-desc">{proj['description']}</p>
+  {desc_html}
   {links_html}
   {images_html}
   <div class="project-videos">
     {''.join(videos)}
   </div>
+</div>''')
+    return '\n'.join(parts)
+
+def bilingual_span(field):
+    """Emit data-lang spans for a {en, zh} dict (or plain string as fallback)."""
+    if isinstance(field, dict):
+        en = (field.get('en') or '').strip()
+        zh = (field.get('zh') or en).strip()
+        return f'<span data-lang="en" style="display:none">{en}</span><span data-lang="zh">{zh}</span>'
+    return str(field or '')
+
+def tools_html():
+    parts = []
+    intro = tools_data.get('intro')
+    if intro:
+        parts.append(f'<p class="project-desc">{bilingual_span(intro)}</p>')
+    ui = tools_data.get('ui', {})
+    for t in tools_data.get('tools', []):
+        tag_spans = ''.join(f'<span class="pub-tag">{x}</span>' for x in t.get('tags', []))
+        tag_spans += ''.join(f'<span class="pub-tag">{b}</span>' for b in t.get('badges', []))
+
+        def lang_block(lang):
+            blocks = []
+            mot = t.get('motivation')
+            if mot:
+                blocks.append(
+                    f'<p class="project-desc"><strong>{ui.get("why", {}).get(lang, "Why:")}</strong> '
+                    f'{mot.get(lang, "") if isinstance(mot, dict) else mot}</p>'
+                )
+            feats = t.get('features')
+            if feats:
+                fl = feats.get(lang, []) if isinstance(feats, dict) else feats
+                if fl:
+                    blocks.append(f'<p class="project-desc"><strong>{ui.get("features", {}).get(lang, "Main features")}</strong></p>')
+                    blocks.append('<ul class="project-desc">' + ''.join(f'<li>{f}</li>' for f in fl) + '</ul>')
+            return ''.join(blocks)
+
+        lang_html = (
+            f'<div data-lang="en" style="display:none">{lang_block("en")}</div>'
+            f'<div data-lang="zh">{lang_block("zh")}</div>'
+        )
+
+        links_html = ''
+        if t.get('links'):
+            link_items = ' | '.join(f'<a href="{l["url"]}" target="_blank" rel="noopener">{l["text"]}</a>' for l in t['links'])
+            links_html = f'<div class="project-links">{link_items}</div>'
+
+        images_html = ''
+        if t.get('images'):
+            img_items = []
+            for img in t['images']:
+                title = img.get('title', '')
+                alt = title.get('en', '') if isinstance(title, dict) else title
+                img_items.append(f'''<div class="project-image">
+      <a href="{img['url']}" target="_blank" rel="noopener"><img src="{img['url']}" alt="{alt}" loading="lazy"></a>
+      <span class="video-label">{bilingual_span(title)}</span>
+    </div>''')
+            images_html = f'<div class="project-gallery">{"".join(img_items)}</div>'
+
+        parts.append(f'''<div class="project-card">
+  <div class="project-header">
+    <h3 class="project-title">{bilingual_span(t.get('title', ''))}</h3>
+    <span class="project-subtitle">{bilingual_span(t.get('subtitle', ''))}</span>
+  </div>
+  <div class="project-tags">{tag_spans}</div>
+  {lang_html}
+  {links_html}
+  {images_html}
 </div>''')
     return '\n'.join(parts)
 
@@ -420,6 +492,7 @@ html = f'''<!DOCTYPE html>
         <a href="#" data-panel="news">News</a>
         <a href="#" data-panel="publications" class="active">Publications</a>
         <a href="#" data-panel="projects">Projects</a>
+        <a href="#" data-panel="tools">Tools</a>
         <a href="#" data-panel="cv">Resume</a>
       </div>
       <span class="nav-divider"></span>
@@ -450,6 +523,10 @@ html = f'''<!DOCTYPE html>
 
     <section id="panel-projects" class="panel">
       {projects_html()}
+    </section>
+
+    <section id="panel-tools" class="panel">
+      {tools_html()}
     </section>
 
     <section id="panel-cv" class="panel">
@@ -501,7 +578,7 @@ with open(os.path.join(SITE, 'index.html'), 'w') as f:
     f.write(html)
 
 # Copy assets
-for d in ['assets/images', 'files']:
+for d in ['assets/images', 'assets/mobileeye', 'assets/folderplayer', 'files']:
     src = os.path.join(ROOT, d)
     dst = os.path.join(SITE, d)
     if os.path.exists(src):
