@@ -34,17 +34,14 @@ education:
 work:
 - period: 2026.08 - now
   company: Manifold AI
-  url: ''
+  url: https://www.manifoldai.cn/
   role: Partner & R&D Director
   highlights:
-  - title: World Model
-    desc: World models for embodied manipulation - video hand-to-gripper transfer, value function learning, 3D vision-language
-  - title: Whole-Body Control & Loco-Manipulation
-    desc: Coordinated control of arms, torso and base; combined locomotion and manipulation
-  - title: Tactile & Compliant Control
-    desc: Force/tactile sensing and compliant control for contact-rich manipulation
+  - title: Innovative Technology Exploration & Deployment
+    desc: Exploring innovative technologies and bringing frontier techniques into real products
   - title: R&D Leadership
     desc: Building and leading the algorithm team, owning the technical roadmap and productization
+  logo: assets/images/logos/manifold.png
 - period: 2022.10 - 2026.08
   company: IDEA
   url: https://www.idea.edu.cn/research/cvr.html

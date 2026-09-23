@@ -34,17 +34,14 @@ education:
 work:
 - period: 2026.08 - 至今
   company: 流形空间（Manifold AI）
-  url: ''
+  url: https://www.manifoldai.cn/
   role: 技术合伙人、研发总监
   highlights:
-  - title: 世界模型
-    desc: 面向具身操作的世界模型：视频中手到夹爪的迁移、价值函数学习、3D 视觉语言
-  - title: 全身控制与运动操作
-    desc: 手臂、躯干与底盘的协同控制，移动操作（loco-manipulation）
-  - title: 触觉与柔顺控制
-    desc: 力/触觉感知与富接触场景下的柔顺操作
+  - title: 创新技术探索与落地
+    desc: 负责创新技术的探索以及前沿技术的具体落地
   - title: 研发管理
     desc: 组建并带领算法团队，负责技术路线与产品化落地
+  logo: assets/images/logos/manifold.png
 - period: 2022.10 - 2026.08
   company: IDEA 研究院
   url: https://www.idea.edu.cn/research/cvr.html
