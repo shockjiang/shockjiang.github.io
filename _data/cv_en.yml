@@ -32,7 +32,20 @@ education:
   supervisor: <a href='http://netarchlab.tsinghua.edu.cn/~junbi/'>Prof. Jun Bi</a> and <a href='https://www.thss.tsinghua.edu.cn/info/1057/1237.htm'>Prof. Fei He</a>
   logo: assets/images/logos/tsinghua.png
 work:
-- period: 2022 - now
+- period: 2026.08 - now
+  company: Manifold AI
+  url: ''
+  role: Partner & R&D Director
+  highlights:
+  - title: World Model
+    desc: World models for embodied manipulation - video hand-to-gripper transfer, value function learning, 3D vision-language
+  - title: Whole-Body Control & Loco-Manipulation
+    desc: Coordinated control of arms, torso and base; combined locomotion and manipulation
+  - title: Tactile & Compliant Control
+    desc: Force/tactile sensing and compliant control for contact-rich manipulation
+  - title: R&D Leadership
+    desc: Building and leading the algorithm team, owning the technical roadmap and productization
+- period: 2022.10 - 2026.08
   company: IDEA
   url: https://www.idea.edu.cn/research/cvr.html
   role: Senior CV Researcher
@@ -69,9 +82,11 @@ work:
   - title: Keypoint Detection
     desc: Keypoints detection in the wild
   - title: 3D Reconstruction & Novel View Synthesis
-    desc: LeanGaussian (CVPR'25), UniG (ICCV'25), Coca-Splat (arXiv'25)
+    desc: LeanGaussian (CVPR'25), UniGS (ICCV'25), Coca-Splat (arXiv'25)
   - title: Inertial Navigation
     desc: IMU + GPS + wheel odometry fusion
+  - title: Technology Incubation
+    desc: DINO-XGrasp, oVP and related technologies incubated into the startup Visincept
   logo: assets/images/logos/idea.png
 - period: 2018 - 2022
   company: SenseTime
@@ -99,6 +114,13 @@ work:
   - title: Outstanding Employee Award
     desc: Received the Outstanding Employee Award in 2017
   logo: assets/images/logos/kandao.svg
+services:
+- 'Reviewer: CVPR 2025 / CVPR 2026 / ICCV 2025 / ECCV 2026 / NeurIPS 2024'
+- 'PC Member: AAAI 2026'
+honors:
+- Shenzhen High-Level Talent Special Support Program, Level B (2025)
+- Shenzhen Pengcheng Excellent Talent Card (2026)
+- Outstanding Employee Award, SenseTime (2019) and Kandao (2017)
 skills:
 - category: Mathematics
   items:

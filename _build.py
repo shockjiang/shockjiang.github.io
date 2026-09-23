@@ -125,7 +125,7 @@ def pubs_html():
         if p.get('project'): action_links.append(f'<a href="{p["project"]}" target="_blank" rel="noopener">Project</a>')
         action_links.append('<a href="#" class="bibtex-toggle" onclick="event.preventDefault();this.parentElement.parentElement.parentElement.querySelector(\'.bibtex-box\').classList.toggle(\'show\')">BibTeX</a>')
 
-        authors_plain = re.sub(r'<[^>]+>', '', p['authors']).replace('*', '')
+        authors_plain = re.sub(r'<[^>]+>', '', p['authors']).replace('*', '').replace('&dagger;', '')
         bib_key = p['title'].split(':')[0].lower().replace(' ', '')
         bibtex_content = f'''@article{{{bib_key}{p['year']},
   title={{{p['title']}}},
@@ -146,7 +146,7 @@ def pubs_html():
       </div>
     </div>''')
 
-    return f'<div class="tag-bar">\n  {tag_btns}</div>\n<div class="pub-list">\n' + '\n'.join(items) + '\n<button class="show-older-btn" id="show-older">Show earlier papers (2011-2019) &#9656;</button>\n</div>'
+    return f'<div class="tag-bar">\n  {tag_btns}</div>\n<div class="pub-note"><span data-lang="en" style="display:none"><strong>Bold</strong> = me; * = corresponding author; &dagger; = corresponding author (others)</span><span data-lang="zh"><strong>加粗</strong>为本人；* 表示本人为通讯作者；&dagger; 表示其他通讯作者</span></div>\n<div class="pub-list">\n' + '\n'.join(items) + '\n<button class="show-older-btn" id="show-older">Show earlier papers (2011-2019) &#9656;</button>\n</div>'
 
 def cv_section_html(cv, labels):
     parts = []
@@ -186,10 +186,15 @@ def cv_section_html(cv, labels):
         parts.append(f'''<div class="cv-entry">
     <div class="cv-period">{job['period']}{logo}</div>
     <div class="cv-body">
-      <div class="cv-heading"><a href="{job.get('url','#')}" target="_blank" rel="noopener">{job['company']}</a> &mdash; {job['role']}</div>
+      <div class="cv-heading">{('<a href="' + job['url'] + '" target="_blank" rel="noopener">' + job['company'] + '</a>') if job.get('url') else job['company']} &mdash; {job['role']}</div>
       {''.join(highlights)}
     </div>
   </div>''')
+
+    for key in ('services', 'honors'):
+        if cv.get(key):
+            parts.append(f'<h2 class="cv-section-title">{labels[key]}</h2>')
+            parts.append('<ul class="cv-details cv-list">' + ''.join(f'<li>{i}</li>' for i in cv[key]) + '</ul>')
 
     parts.append(f'<h2 class="cv-section-title">{labels["skills"]}</h2>')
     for s in cv.get('skills', []):
@@ -314,8 +319,8 @@ def tools_html():
 </div>''')
     return '\n'.join(parts)
 
-en_labels = {'edu': 'Education', 'work': 'Work Experience', 'skills': 'Skills', 'hobbies': 'Hobbies', 'sup': 'Supervisor'}
-zh_labels = {'edu': '教育经历', 'work': '工作经历', 'skills': '技能', 'hobbies': '爱好', 'sup': '导师'}
+en_labels = {'edu': 'Education', 'work': 'Work Experience', 'skills': 'Skills', 'hobbies': 'Hobbies', 'sup': 'Supervisor', 'services': 'Academic Service', 'honors': 'Honors'}
+zh_labels = {'edu': '教育经历', 'work': '工作经历', 'skills': '技能', 'hobbies': '爱好', 'sup': '导师', 'services': '学术服务', 'honors': '荣誉'}
 
 # Visitor stats block (kept outside the f-string so JS braces don't need escaping).
 visitor_html = '''<div class="visitor-stats">

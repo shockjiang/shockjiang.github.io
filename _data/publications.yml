@@ -1,5 +1,5 @@
 - title: 'Guide, Think, Act: Interactive Embodied Reasoning in Vision-Language-Action Models'
-  authors: Yiran Ling, Qing Lian, Jinghang Li, Qing Jiang, Tianming Zhang, <strong>Xiaoke Jiang</strong>, Chuanxiu Liu, Jie Liu, Lei Zhang
+  authors: Yiran Ling, Qing Lian, Jinghang Li, Qing Jiang, Tianming Zhang, <strong>Xiaoke Jiang</strong>, Chuanxiu Liu, Jie Liu&dagger;, Lei Zhang&dagger;
   venue: European Conference on Computer Vision (ECCV) 2026
   year: 2026
   url: https://signalispupupu.github.io/GTA-VLA_ProjPage/
@@ -54,9 +54,9 @@
   - 3DGS
   - Object Reconstruction
   ccf: ''
-- title: 'UniG: Modelling Unitary 3D Gaussians for View-Consistent 3D Reconstruction'
-  authors: Jiamin Wu, Kenkun Liu, Yukai Shi, <strong>Xiaoke Jiang*</strong>, Yuan Yao, Lei Zhang
-  venue: International Conference on Computer Vision (ICCV) 2025
+- title: 'UniGS: Modeling Unitary 3D Gaussians for Novel View Synthesis from Sparse-view Images'
+  authors: Jiamin Wu, Kenkun Liu, <strong>Xiaoke Jiang*</strong>, Yuan Yao, Lei Zhang
+  venue: International Conference on Computer Vision (ICCV) 2025, pp. 26241-26251
   year: 2025
   url: https://kenkunliu.github.io/UniG/
   arxiv: https://arxiv.org/abs/2410.13195
@@ -98,7 +98,7 @@
   ccf: A
 - title: 'HumanMM: Global Human Motion Recovery from Multi-shot Videos'
   authors: Yuhong Zhang, Guanlin Wu, Ling-Hao Chen, Zhuokai Zhao, Jing Lin, <strong>Xiaoke Jiang</strong>, Jiamin Wu, Zhuoheng Li, Hao Frank Yang, Haoqian Wang, Lei Zhang
-  venue: Conference on Computer Vision and Pattern Recognition (CVPR) 2025
+  venue: Conference on Computer Vision and Pattern Recognition (CVPR) 2025, pp. 1973-1983
   year: 2025
   url: https://arxiv.org/abs/2503.07597
   arxiv: https://arxiv.org/abs/2503.07597
@@ -124,7 +124,7 @@
   - 6D Pose
   ccf: A
 - title: 'Geo6D: Geometric-Constraints-Guided Direct Object 6D Pose Estimation Network'
-  authors: Jianqiu Chen, Mingshan Sun, Ye Zheng, Tianpeng Bao, Zhenyu He, Donghai Li, Guoqiang Jin, Zhao Rui, Liwei Wu, <strong>Xiaoke Jiang</strong>
+  authors: Jianqiu Chen, Mingshan Sun, Ye Zheng, Tianpeng Bao, Zhenyu He&dagger;, Donghai Li, Guoqiang Jin, Zhao Rui, Liwei Wu, <strong>Xiaoke Jiang</strong>
   venue: IEEE Transactions on Multimedia (TMM) 2025
   year: 2025
   url: https://github.com/Jianqiuer/Geo6D

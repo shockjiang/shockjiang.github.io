@@ -32,7 +32,20 @@ education:
   supervisor: <a href='http://netarchlab.tsinghua.edu.cn/~junbi/'>毕军教授</a> 和 <a href='https://www.thss.tsinghua.edu.cn/faculty/hefei.htm'>贺飞教授</a>
   logo: assets/images/logos/tsinghua.png
 work:
-- period: 2022 - 至今
+- period: 2026.08 - 至今
+  company: 流形空间（Manifold AI）
+  url: ''
+  role: 技术合伙人、研发总监
+  highlights:
+  - title: 世界模型
+    desc: 面向具身操作的世界模型：视频中手到夹爪的迁移、价值函数学习、3D 视觉语言
+  - title: 全身控制与运动操作
+    desc: 手臂、躯干与底盘的协同控制，移动操作（loco-manipulation）
+  - title: 触觉与柔顺控制
+    desc: 力/触觉感知与富接触场景下的柔顺操作
+  - title: 研发管理
+    desc: 组建并带领算法团队，负责技术路线与产品化落地
+- period: 2022.10 - 2026.08
   company: IDEA 研究院
   url: https://www.idea.edu.cn/research/cvr.html
   role: 高级计算机视觉研究员
@@ -69,9 +82,11 @@ work:
   - title: 关键点检测
     desc: 野外场景下的关键点检测
   - title: 3D 重建与新视角合成
-    desc: LeanGaussian (CVPR'25)、UniG (ICCV'25)、Coca-Splat (arXiv'25)
+    desc: LeanGaussian (CVPR'25)、UniGS (ICCV'25)、Coca-Splat (arXiv'25)
   - title: 惯性导航
     desc: IMU + GPS + 轮式里程计融合
+  - title: 技术孵化
+    desc: DINO-XGrasp、oVP 等技术孵化创业公司视启未来（Visincept）
   logo: assets/images/logos/idea.png
 - period: 2018 - 2022
   company: 商汤科技
@@ -99,6 +114,13 @@ work:
   - title: 优秀员工奖
     desc: 2017年获得优秀员工奖
   logo: assets/images/logos/kandao.svg
+services:
+- 审稿人：CVPR 2025 / CVPR 2026 / ICCV 2025 / ECCV 2026 / NeurIPS 2024
+- 程序委员会委员（PC Member）：AAAI 2026
+honors:
+- 深圳市高层次人才特支项目 B 级（2025）
+- 深圳市鹏程优才卡（2026）
+- 商汤科技优秀员工奖（2019）、看到科技优秀员工奖（2017）
 skills:
 - category: 数学
   items:

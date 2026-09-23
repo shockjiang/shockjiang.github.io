@@ -1,3 +1,8 @@
+- date: "2026-08"
+  content:
+    en: "Joined <b>Manifold AI</b> as Partner & R&D Director, working on world models and embodied manipulation."
+    zh: "加入<b>流形空间（Manifold AI）</b>，任技术合伙人、研发总监，聚焦世界模型与具身操作。"
+
 - date: "2026-06"
   content:
     en: "One paper accepted to ECCV 2026: <a href='https://signalispupupu.github.io/GTA-VLA_ProjPage/' target='_blank'>GTA-VLA</a> (Guide, Think, Act)!"
@@ -5,13 +10,13 @@
 
 - date: "2026-04-27"
   content:
-    en: "Keynote talk at Guangdong AI Application Matchmaking Conference: SpatialPoint (<a href='https://mp.weixin.qq.com/s/eUVw8tWJilItAeyRXSx9jQ' target='_blank'>coverage</a>)."
-    zh: "广东省人工智能应用对接大会主题演讲：SpatialPoint（<a href='https://mp.weixin.qq.com/s/eUVw8tWJilItAeyRXSx9jQ' target='_blank'>报道</a>）。"
+    en: "Keynote talk on SpatialPoint at the Guangdong Provincial AI Application Matchmaking Conference (<a href='https://mp.weixin.qq.com/s/eUVw8tWJilItAeyRXSx9jQ' target='_blank'>coverage</a>)."
+    zh: "在广东省人工智能应用对接大会作 SpatialPoint 主题演讲（<a href='https://mp.weixin.qq.com/s/eUVw8tWJilItAeyRXSx9jQ' target='_blank'>报道</a>）。"
 
 - date: "2026-04"
   content:
-    en: "🔥 <b>Hiring interns!</b> Research topics: World Model (video hand-to-gripper transfer, value function in RL, 3D Vision-Language, etc.). Contact: <a href='mailto:shock.jiang@outlook.com'>shock.jiang@outlook.com</a>"
-    zh: "🔥 <b>招收实习生！</b>研究方向：世界模型（视频中手到夹爪的迁移、强化学习中的价值函数、3D 视觉语言等）。联系：<a href='mailto:shock.jiang@outlook.com'>shock.jiang@outlook.com</a>"
+    en: "🔥 <b>Hiring interns!</b> Research topics: World Model (EgoDex, video hand-to-gripper transfer, value function in RL, 3D Vision-Language), whole-body control and loco-manipulation. Contact: <a href='mailto:shock@manifoldai.cn'>shock@manifoldai.cn</a> / <a href='mailto:shock.jiang@outlook.com'>shock.jiang@outlook.com</a>"
+    zh: "🔥 <b>招收实习生！</b>研究方向：世界模型（EgoDex、视频中手到夹爪的迁移、强化学习中的价值函数、3D 视觉语言）、全身控制与运动操作。联系：<a href='mailto:shock@manifoldai.cn'>shock@manifoldai.cn</a> / <a href='mailto:shock.jiang@outlook.com'>shock.jiang@outlook.com</a>"
 
 - date: "2026-03"
   content:
@@ -25,8 +30,8 @@
 
 - date: "2025-07"
   content:
-    en: "One paper accepted to ICCV 2025: UniG!"
-    zh: "一篇论文被ICCV 2025录用：UniG！"
+    en: "One paper accepted to ICCV 2025: UniGS (UniGS: Modeling Unitary 3D Gaussians for Novel View Synthesis from Sparse-view Images)!"
+    zh: "一篇论文被 ICCV 2025 录用：UniGS（UniGS: Modeling Unitary 3D Gaussians for Novel View Synthesis from Sparse-view Images）！"
 
 - date: "2025-06"
   content:

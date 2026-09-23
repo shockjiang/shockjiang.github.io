@@ -22,7 +22,7 @@
   <div class="cv-entry">
     <div class="cv-period">{{ job.period }}{% if job.logo %}<div class="cv-logos"><img src="{{ job.logo | relative_url }}" class="cv-logo" alt="{{ job.company }}"></div>{% endif %}</div>
     <div class="cv-body">
-      <div class="cv-heading"><a href="{{ job.url }}" target="_blank" rel="noopener">{{ job.company }}</a> &mdash; {{ job.role }}</div>
+      <div class="cv-heading">{% if job.url != "" and job.url %}<a href="{{ job.url }}" target="_blank" rel="noopener">{{ job.company }}</a>{% else %}{{ job.company }}{% endif %} &mdash; {{ job.role }}</div>
       {% for h in job.highlights %}
       <div class="cv-highlight">
         <strong>{{ h.title }}</strong>{% if h.desc != "" %}: {{ h.desc }}{% endif %}
@@ -38,6 +38,16 @@
     </div>
   </div>
   {% endfor %}
+
+  <h2 class="cv-section-title">Academic Service</h2>
+  <ul class="cv-details cv-list">
+    {% for item in cv.services %}<li>{{ item }}</li>{% endfor %}
+  </ul>
+
+  <h2 class="cv-section-title">Honors</h2>
+  <ul class="cv-details cv-list">
+    {% for item in cv.honors %}<li>{{ item }}</li>{% endfor %}
+  </ul>
 
   <h2 class="cv-section-title">Skills</h2>
   {% for skill in cv.skills %}
@@ -75,7 +85,7 @@
   <div class="cv-entry">
     <div class="cv-period">{{ job.period }}{% if job.logo %}<div class="cv-logos"><img src="{{ job.logo | relative_url }}" class="cv-logo" alt="{{ job.company }}"></div>{% endif %}</div>
     <div class="cv-body">
-      <div class="cv-heading"><a href="{{ job.url }}" target="_blank" rel="noopener">{{ job.company }}</a> &mdash; {{ job.role }}</div>
+      <div class="cv-heading">{% if job.url != "" and job.url %}<a href="{{ job.url }}" target="_blank" rel="noopener">{{ job.company }}</a>{% else %}{{ job.company }}{% endif %} &mdash; {{ job.role }}</div>
       {% for h in job.highlights %}
       <div class="cv-highlight">
         <strong>{{ h.title }}</strong>{% if h.desc != "" %}：{{ h.desc }}{% endif %}
@@ -91,6 +101,16 @@
     </div>
   </div>
   {% endfor %}
+
+  <h2 class="cv-section-title">学术服务</h2>
+  <ul class="cv-details cv-list">
+    {% for item in cv.services %}<li>{{ item }}</li>{% endfor %}
+  </ul>
+
+  <h2 class="cv-section-title">荣誉</h2>
+  <ul class="cv-details cv-list">
+    {% for item in cv.honors %}<li>{{ item }}</li>{% endfor %}
+  </ul>
 
   <h2 class="cv-section-title">技能</h2>
   {% for skill in cv.skills %}
