@@ -1,3 +1,8 @@
+- date: "2026-09"
+  content:
+    en: "🔥 <b>Hiring interns!</b> Research topics: whole-body control, tactile sensing + VLA. Contact: <a href='mailto:shock@manifoldai.cn'>shock@manifoldai.cn</a>"
+    zh: "🔥 <b>招收实习生！</b>研究方向：全身控制（whole-body control）、触觉 + VLA。联系：<a href='mailto:shock@manifoldai.cn'>shock@manifoldai.cn</a>"
+
 - date: "2026-08"
   content:
     en: "Joined <b>Manifold AI</b> as Partner & R&D Director, working on world models and embodied manipulation."
@@ -12,11 +17,6 @@
   content:
     en: "Keynote talk on SpatialPoint at the Guangdong Provincial AI Application Matchmaking Conference (<a href='https://mp.weixin.qq.com/s/eUVw8tWJilItAeyRXSx9jQ' target='_blank'>coverage</a>)."
     zh: "在广东省人工智能应用对接大会作 SpatialPoint 主题演讲（<a href='https://mp.weixin.qq.com/s/eUVw8tWJilItAeyRXSx9jQ' target='_blank'>报道</a>）。"
-
-- date: "2026-04"
-  content:
-    en: "🔥 <b>Hiring interns!</b> Research topics: World Model (EgoDex, video hand-to-gripper transfer, value function in RL, 3D Vision-Language), whole-body control and loco-manipulation. Contact: <a href='mailto:shock@manifoldai.cn'>shock@manifoldai.cn</a> / <a href='mailto:shock.jiang@outlook.com'>shock.jiang@outlook.com</a>"
-    zh: "🔥 <b>招收实习生！</b>研究方向：世界模型（EgoDex、视频中手到夹爪的迁移、强化学习中的价值函数、3D 视觉语言）、全身控制与运动操作。联系：<a href='mailto:shock@manifoldai.cn'>shock@manifoldai.cn</a> / <a href='mailto:shock.jiang@outlook.com'>shock.jiang@outlook.com</a>"
 
 - date: "2026-03"
   content:
