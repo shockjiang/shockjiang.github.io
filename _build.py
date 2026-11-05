@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build static HTML from Jekyll data files for local preview."""
 import datetime, yaml, os, re, shutil, sass
+from html import escape
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.join(ROOT, '_site')
@@ -20,9 +21,10 @@ cv_en = load('cv_en.yml')
 cv_zh = load('cv_zh.yml')
 projects = load('projects.yml')
 tools_data = load('tools.yml')
+vla_data = load('vla.yml')
 css_raw = read('assets/css/style.scss').split('---')[-1]  # strip frontmatter
 css = sass.compile(string=css_raw, output_style='compressed')
-js = read('assets/js/main.js')
+js = read('assets/js/main.js')  # Includes VLA panel and article-anchor navigation.
 
 # Icon SVGs
 icons = {
@@ -86,6 +88,43 @@ def news_html():
       <span data-lang="zh">{item['content']['zh']}</span>
     </span>
   </div>''')
+    return '\n'.join(parts)
+
+def vla_html():
+    """Render the same data and markup as _includes/vla.html.
+
+    Styles and panel interactions are read from the shared SCSS/JS assets above.
+    """
+    parts = [f'<p class="vla-intro">{bilingual_span(vla_data["intro"])}</p>']
+    for article in vla_data['articles']:
+        parts.append(f'<article class="vla-article" id="{escape(article["id"])}">')
+        for language in vla_data['intro']:
+            hidden = ' style="display:none"' if language == 'en' else ''
+            kicker = '实践笔记' if language == 'zh' else 'Field Notes'
+            contents = '文章目录' if language == 'zh' else 'Contents'
+            label = '文章目录' if language == 'zh' else 'Article contents'
+            parts.append(f'''<div data-lang="{language}" lang="{language}"{hidden}>
+              <header class="vla-header">
+                <span class="vla-kicker">VLA / {kicker}</span>
+                <h2>{escape(article['title'][language])}</h2>
+                <p>{escape(article['summary'][language])}</p>
+              </header>
+              <nav class="vla-toc" aria-label="{label}"><strong>{contents}</strong><ol>''')
+            for section in article['sections']:
+                anchor = f'{article["id"]}-{section["id"]}-{language}'
+                parts.append(f'<li><a href="#{anchor}">{escape(section["title"][language])}</a></li>')
+            parts.append('</ol></nav><div class="vla-body">')
+            for section in article['sections']:
+                anchor = f'{article["id"]}-{section["id"]}-{language}'
+                parts.append(f'<section id="{anchor}"><h3>{escape(section["title"][language])}</h3>')
+                parts.extend(f'<p>{escape(p[language])}</p>' for p in section['paragraphs'])
+                if section['items']:
+                    parts.append('<ul>')
+                    parts.extend(f'<li>{escape(item[language])}</li>' for item in section['items'])
+                    parts.append('</ul>')
+                parts.append('</section>')
+            parts.append('</div></div>')
+        parts.append('</article>')
     return '\n'.join(parts)
 
 def pubs_html():
@@ -498,6 +537,7 @@ html = f'''<!DOCTYPE html>
     <nav class="panel-nav">
       <div class="panel-links">
         <a href="#" data-panel="news">News</a>
+        <a href="#vla" data-panel="vla"><span data-lang="zh">VLA专题</span><span data-lang="en" style="display:none">VLA</span></a>
         <a href="#" data-panel="publications" class="active">Publications</a>
         <a href="#" data-panel="projects">Projects</a>
         <a href="#" data-panel="tools">Tools</a>
@@ -523,6 +563,10 @@ html = f'''<!DOCTYPE html>
       <div class="news-list">
         {news_html()}
       </div>
+    </section>
+
+    <section id="panel-vla" class="panel">
+      {vla_html()}
     </section>
 
     <section id="panel-publications" class="panel active">

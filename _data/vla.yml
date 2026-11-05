@@ -1,0 +1,188 @@
+intro:
+  zh: 从真实场景出发，记录 VLA 从数据、模型到现场交付的实践。
+  en: Practical notes on taking VLA from data and models to real-world operation.
+articles:
+- id: vla-delivery
+  title:
+    zh: 如何完成VLA交付
+    en: How to Deliver a VLA System
+  summary:
+    zh: 从交付目标、SOP 与硬件选型开始，建立数据、模型、控制和真机反馈的完整闭环。
+    en: Start with delivery goals, SOP design and hardware, then close the loop across data, policy, control and
+      real-robot feedback.
+  sections:
+  - id: goals
+    title:
+      zh: 01 / 先确认交付目标
+      en: 01 / Define delivery goals
+    paragraphs:
+    - zh: VLA（Vision-Language-Action，视觉—语言—动作）交付通常面对固定、单一的业务场景，可以利用目标物、目标位置和工位布局等先验，通过后训练与强化学习缩短迭代周期。它与追求广泛泛化的预训练、中期训练有不同的侧重点。
+      en: VLA (Vision-Language-Action) delivery usually targets a specific operational setting. Object, destination
+        and workstation priors can support faster iteration through post-training and reinforcement learning, with
+        different priorities from pre-training and mid-training.
+    - zh: 交付要求系统在现场持续工作，成功率、节拍、精度和异常恢复都要达到约定要求。因此，第一步是确认交付目标；第二步是设计 SOP（标准操作流程）并选择合适的硬件。数据采集应在这些决策之后启动。
+      en: Delivery requires sustained operation on site, with agreed success rate, cycle time, accuracy and recovery
+        behavior. Confirm these goals first, then design the standard operating procedure (SOP) and select hardware.
+        Data collection follows those decisions.
+    items:
+    - zh: 明确任务边界：处理什么物体、覆盖哪些位置、允许哪些环境变化，以及哪些情况需要人工协作。
+      en: 'Define task boundaries: objects, reachable locations, allowed environmental changes and cases requiring
+        human assistance.'
+    - zh: 把成功率与节拍一起评估，提前约定测试条件和失败的判定方式。研发、采集与交付场地不一致时，要逐项对齐差异。
+      en: Evaluate success rate together with cycle time, and agree on test conditions and failure criteria. Reconcile
+        differences across development, collection and delivery sites.
+  - id: hardware
+    title:
+      zh: 02 / 硬件先跑通整个工作空间
+      en: 02 / Validate hardware across the workspace
+    paragraphs: []
+    items:
+    - zh: 臂展与夹爪：覆盖所有操作位置，检查开口宽度、闭合速度，以及异形物体能否夹稳。夹爪根部读数不一定等于指尖的实际间距。
+      en: 'Reach and gripper: cover all operating locations; check opening width, closing speed and grasp stability
+        on irregular objects. A reading at the gripper base may differ from the actual fingertip gap.'
+    - zh: 边缘与角落：验证抓取箱边、箱角物体时，夹爪和腕上相机是否与料框干涉。
+      en: 'Edges and corners: check whether the gripper or wrist camera collides with the bin while reaching boundary
+        objects.'
+    - zh: 视觉与触觉：主相机要覆盖完整场景，末端结构不能遮挡关键信息；检查触觉信号能否区分对齐与未对齐状态。
+      en: 'Vision and touch: the main camera must cover the scene without critical occlusion by the end effector.
+        Check whether tactile signals distinguish aligned and misaligned contact.'
+    - zh: 先检查机械和传感问题：夹爪松动、电机掉电、图像模糊、视频帧率不足与重复帧，都可能表现为模型效果差。
+      en: 'Check mechanics and sensing early: loose grippers, motor power loss, motion blur, low camera frame rate
+        and duplicate frames can all appear as policy failures.'
+  - id: sop
+    title:
+      zh: 03 / SOP 是最关键、也最难的一步
+      en: 03 / SOP design is the critical step
+    paragraphs:
+    - zh: 先用物理结构简化任务。例如，用斜坡辅助翻面，把双手操作改成单手操作。流程越简单、状态越可区分，模型学习与后续排障就越容易。
+      en: 'Simplify the task physically first: a ramp may assist flipping, or a two-handed operation may become
+        a one-handed one. Simpler procedures with distinguishable states are easier to learn and debug.'
+    items:
+    - zh: 固定机器人、工作台和料框的相对布局，并使场景能够在仿真器里复现；采集时让料框在允许的小范围内变化，覆盖真实部署偏差。料框底部可增加柔性垫层。
+      en: Keep the robot, table and bin layout reproducible in simulation. Vary bin position within an allowed range
+        during collection to cover deployment tolerances. A compliant layer at the bin bottom can reduce impact.
+    - zh: 分别定义最佳流程、常规流程和失败恢复流程。用遥操作模拟典型错误，再采集顺势恢复的动作，覆盖抓空、滑落等状态。
+      en: Define ideal, routine and recovery procedures separately. Reproduce typical errors through teleoperation
+        and collect recovery actions for states such as missed grasps and slips.
+    - zh: 减少误触、临时换目标、犹豫停顿和不必要的姿态调整。细小动作也会进入数据，进而影响模型行为。
+      en: Reduce accidental contact, target switching, hesitation and unnecessary object adjustments. Small demonstration
+        habits can become policy behavior.
+    - zh: 检查动作歧义：复位与接近、抓取成功后的提升与抓空后的提升，可能在单帧中很相似。可用图像、夹爪宽度和关节角训练动作分类器，通过混淆矩阵定位难以区分的阶段。
+      en: 'Check ambiguous stages: returning and approaching, or lifting after successful and failed grasps, may
+        look alike in a single frame. An action classifier using images, gripper width and joint angles can expose
+        confusion between stages.'
+    - zh: 训练算法的人应亲自采集至少 10 条数据，关键相关人也建议参与，建立对流程难点和遥操作体感的共同理解。
+      en: The person training the policy should collect at least ten demonstrations; key collaborators should also
+        participate to develop a shared understanding of the procedure.
+  - id: guardrails
+    title:
+      zh: 04 / 把安全护栏放进执行链路
+      en: 04 / Put guardrails in the execution loop
+    paragraphs: []
+    items:
+    - zh: 防触底应按夹爪末端的真实几何计算，例如指尖角点或边缘，不能只看机械臂末端参考点的高度。
+      en: Detect bottom contact using the physical fingertip geometry, such as corners or edges, rather than only
+        the end-effector reference position.
+    - zh: 到达深度边界或出现“持续下压指令、实际位置不动”时，停止继续下压，保留允许的开合爪和上抬动作。回退上抬距离需结合工装、物体和可用空间确定，例如在空间允许时上抬 5 cm。
+      en: At a depth limit, or when downward commands persist without corresponding motion, inhibit further descent
+        while preserving permitted gripper and retreat actions. A 5 cm upward retreat is one example where clearance
+        permits; actual thresholds depend on tooling, objects and clearance.
+    - zh: 六维力传感器需要去重力、去加速度，并考虑负载影响。力信号只有经过校准与配套处理，才能可靠参与控制。
+      en: Six-axis force sensing requires calibration and compensation for gravity, acceleration and payload before
+        it can reliably inform control.
+  - id: data
+    title:
+      zh: 05 / 数据质量：正确动作与恢复动作都要有
+      en: 05 / Collect clean demonstrations and recovery data
+    paragraphs: []
+    items:
+    - zh: 每次遥操从约定初始位置开始，剔除接手前的抖动与观察阶段。动作果断，操作对象始终处于有效视野内。
+      en: Start each demonstration from the agreed initial state. Remove takeover jitter and observation periods;
+        execute decisively and keep relevant objects visible.
+    - zh: 标注区分 task、sub-task 与 action/skill，并为特殊动作补充环境描述。小停顿可能是关键技能边界，不能一概作为无效数据删除。
+      en: Distinguish task, sub-task and action/skill labels, with environmental context for special actions. Brief
+        pauses can mark important skill boundaries and should not be removed indiscriminately.
+    - zh: 清理无效静止帧和异常尖峰，按需平滑动作。模仿学习数据保留正确行为与恢复行为，但要剔除导致失败的错误动作片段。
+      en: Remove irrelevant stationary frames and anomalous spikes, with action smoothing where appropriate. For
+        imitation learning, retain correct behavior and recovery while excluding the preceding erroneous actions.
+  - id: training
+    title:
+      zh: 06 / 训练和离线评测盯住关键阶段
+      en: 06 / Focus training and offline evaluation on critical stages
+    paragraphs: []
+    items:
+    - zh: 针对真机抖动带来的图像变化做数据增强，避免只适应平稳遥操画面。
+      en: Augment for image changes caused by robot motion so the policy does not rely solely on smooth teleoperation
+        footage.
+    - zh: 用反事实样本检查指令跟随；对特殊 SOP 分支补充场景与动作文本，结合动作和进度预测，检查模型是否区分不同阶段。
+      en: Use counterfactual samples to assess instruction following. Annotate special SOP branches with scene and
+        action descriptions, and consider action and progress prediction to distinguish stages.
+    - zh: 在训练与评测中提高关键帧、关键 skill 的权重；按需加入末端执行器（EEF）相关辅助预测头与损失。整体平均误差之外，也要关注抓取、接触和恢复阶段。
+      en: Weight critical frames and skills more heavily in training and evaluation, and consider end-effector auxiliary
+        heads and losses. Inspect grasping, contact and recovery in addition to aggregate error.
+  - id: deployment
+    title:
+      zh: 07 / 从模型动作到平滑的底层控制
+      en: 07 / Turn policy actions into smooth robot control
+    paragraphs:
+    - zh: 先单步执行，分别看目标是否抓得准、物体是否夹得稳、失败后是否能恢复。随后检查推理延迟、轨迹插值和底层控制，避免把执行链路问题全部归因于模型。
+      en: Start with stepwise execution to assess targeting accuracy, grasp stability and recovery separately. Then
+        inspect inference latency, trajectory interpolation and low-level control before attributing every failure
+        to the policy.
+    items:
+    - zh: 以 30 Hz 的 action chunk 对接 500 Hz 底层控制为例：两者之间需要插值，五次多项式可用于构造位置、速度和加速度连续的轨迹。这些频率是实例，实际以机器人接口为准。
+      en: Consider a 30 Hz action chunk feeding a 500 Hz controller. Interpolation bridges the rates; quintic polynomials
+        can provide continuous position, velocity and acceleration. These rates are examples and must match the
+        robot interface.
+    - zh: 控制器过于强调位置到达时，可能放大抖动。应结合本体能力调试 PID，并在硬件支持时评估力位混合控制。
+      en: An overly stiff position controller can amplify jitter. Tune PID for the platform and evaluate hybrid
+        force/position control when supported.
+  - id: rules
+    title:
+      zh: 08 / 模型与规则协作，重点是平滑接管
+      en: 08 / Combine the policy with smooth rule-based handoffs
+    paragraphs: []
+    items:
+    - zh: 抓取并提升到合适高度后，可由规则接管搬运、放置和返回等确定性动作，把模型能力集中在复杂交互阶段。
+      en: After a successful grasp and lift, rules can handle deterministic carrying, placement and return motions,
+        leaving the policy to manage complex interactions.
+    - zh: 接管点、避障必经点和放置点之间要考虑速度与加速度连续；规则与模型切换也要避免突然停顿或跳变。放置位置可在允许范围内加入变化。
+      en: Maintain smooth velocity and acceleration across handoff, obstacle-avoidance and placement points. Avoid
+        abrupt stops or jumps when switching between rules and the policy. Placement can vary within the allowed
+        region.
+    - zh: 夹持稳定性需要单独验证。可在夹住后补充闭合动作以减少途中掉落，执行力度与次数需按物体和夹爪能力调整。
+      en: Validate grasp retention separately. Additional closing actions after grasping may reduce slips; force
+        and repetition must suit the object and gripper.
+  - id: evaluation
+    title:
+      zh: 09 / 用真机反馈建立迭代闭环
+      en: 09 / Close the loop with real-robot feedback
+    paragraphs: []
+    items:
+    - zh: 把空料框、没有目标、腕上相机看不到目标等分布外状态纳入测试，并明确停止、恢复或人工接管的处理方式。
+      en: Test out-of-distribution states such as empty bins, absent targets and missing wrist-camera views, with
+        defined stop, recovery or assistance behavior.
+    - zh: 每次真机测试保留人工反馈，区分定位不准、夹持不稳、恢复失败、控制抖动和硬件异常，再决定改数据、模型、SOP 还是控制链路。
+      en: Keep human feedback for each real-robot evaluation. Distinguish targeting errors, unstable grasps, failed
+        recovery, control jitter and hardware faults before choosing what to change.
+    - zh: 回流真机数据，特别是抖动、模糊和失败恢复片段。真实部署图像与遥操图像存在差异，需要在下一轮采集和训练中覆盖。
+      en: Feed real-robot data back into iteration, especially jitter, blur and recovery cases. Deployment imagery
+        differs from demonstrations and needs coverage in subsequent collection and training.
+  - id: handover
+    title:
+      zh: 10 / 交付前的核对清单
+      en: 10 / Before handover
+    paragraphs: []
+    items:
+    - zh: 目标已确认：任务范围、成功率、节拍、测试条件和人机协作边界有共同定义。
+      en: 'Goals agreed: task scope, success rate, cycle time, test conditions and human-assistance boundaries are
+        defined.'
+    - zh: 流程已跑通：硬件可达、视野充分，常规 SOP 与恢复 SOP 都有对应数据和真机验证。
+      en: 'Procedure validated: hardware reaches required locations, cameras provide sufficient coverage, and routine
+        and recovery procedures have data and real-robot validation.'
+    - zh: 执行可持续：安全护栏生效、规则接管平滑、空料框等异常状态有明确处理，已知硬件故障有排查方法。
+      en: 'Operation supported: guardrails work, handoffs are smooth, exceptional states have defined handling and
+        known hardware faults can be diagnosed.'
+    - zh: 反馈能闭环：现场问题能归因，数据与人工反馈能进入下一轮迭代。必要时结合检测、跟踪与分割模块补足感知，并检查遮挡下不同模块输出的含义。
+      en: 'Feedback actionable: site issues can be diagnosed, and data plus human feedback feed the next iteration.
+        Detection, tracking and segmentation may supplement perception; check how their outputs differ under occlusion.'

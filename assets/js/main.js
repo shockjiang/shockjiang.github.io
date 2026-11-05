@@ -17,7 +17,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function panelFromHash() {
     var h = (location.hash || '').replace(/^#/, '');
-    return (h && document.getElementById('panel-' + h)) ? h : null;
+    if (h && document.getElementById('panel-' + h)) return h;
+    // Article contents links must also open their panel on a fresh visit.
+    var target = h && document.getElementById(h);
+    var parentPanel = target && target.closest('.panel');
+    return parentPanel ? parentPanel.id.replace(/^panel-/, '') : null;
   }
 
   document.querySelectorAll('.panel-nav a[data-panel]').forEach(function (link) {

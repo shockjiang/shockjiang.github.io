@@ -22,6 +22,7 @@
     <nav class="panel-nav">
       <div class="panel-links">
         <a href="#" data-panel="news">News</a>
+        <a href="#vla" data-panel="vla"><span data-lang="zh">VLA专题</span><span data-lang="en" style="display:none">VLA</span></a>
         <a href="#" data-panel="publications" class="active">Publications</a>
         <a href="#" data-panel="projects">Projects</a>
         <a href="#" data-panel="tools">Tools</a>
@@ -45,6 +46,10 @@
 
     <section id="panel-news" class="panel">
       {% include news.html %}
+    </section>
+
+    <section id="panel-vla" class="panel">
+      {% include vla.html %}
     </section>
 
     <section id="panel-publications" class="panel active">
