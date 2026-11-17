@@ -90,12 +90,49 @@ def news_html():
   </div>''')
     return '\n'.join(parts)
 
+def vla_both(zh, en):
+    return f'<span data-lang="zh">{zh}</span><span data-lang="en" style="display:none">{en}</span>'
+
+def vla_card(index, article):
+    title, summary = article['title'], article['summary']
+    return f'''<a class="vla-card" href="#{escape(article['id'])}">
+      <span class="vla-kicker">{vla_both(f'VLA / 实践笔记 · {index}', f'VLA / Field Notes · {index}')}</span>
+      <h2>{vla_both(escape(title['zh']), escape(title['en']))}</h2>
+      <p>{vla_both(escape(summary['zh']), escape(summary['en']))}</p>
+      <span class="vla-more">{vla_both('阅读全文 →', 'Read the article →')}</span>
+    </a>'''
+
+def vla_section(article, section, language):
+    anchor = f'{article["id"]}-{section["id"]}-{language}'
+    parts = [f'<section id="{anchor}"><h3>{escape(section["title"][language])}</h3>']
+    parts.extend(f'<p>{escape(p[language])}</p>' for p in section.get('paragraphs') or [])
+    if section.get('items'):
+        parts.append('<ul>')
+        parts.extend(f'<li>{escape(item[language])}</li>' for item in section['items'])
+        parts.append('</ul>')
+    if section.get('table'):
+        table = section['table'][language]
+        head = ''.join(f'<th>{escape(str(c))}</th>' for c in table['head'])
+        rows = ''.join('<tr>' + ''.join(f'<td>{escape(str(c))}</td>' for c in row) + '</tr>' for row in table['rows'])
+        parts.append(f'<div class="vla-table"><table><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>')
+    if section.get('figure'):
+        fig = section['figure']
+        parts.append(f'''<figure class="vla-figure"><img src="{fig['src'][language]}" alt="{escape(fig['alt'][language])}" loading="lazy">
+          <figcaption>{escape(fig['caption'][language])}</figcaption></figure>''')
+    if section.get('example'):
+        label = '小件拣选实例' if language == 'zh' else 'Small-parts picking example'
+        parts.append(f'<aside class="vla-example"><strong>{label}</strong><p>{escape(section["example"][language])}</p></aside>')
+    parts.append('</section>')
+    return ''.join(parts)
+
 def vla_html():
     """Render the same data and markup as _includes/vla.html.
 
+    The panel shows a list of article cards; main.js opens one article by its hash.
     Styles and panel interactions are read from the shared SCSS/JS assets above.
     """
-    parts = [f'<p class="vla-intro">{bilingual_span(vla_data["intro"])}</p>']
+    cards = '\n'.join(vla_card(i, a) for i, a in enumerate(vla_data['articles'], 1))
+    parts = [f'<div class="vla-list"><p class="vla-intro">{bilingual_span(vla_data["intro"])}</p>{cards}</div>']
     for article in vla_data['articles']:
         parts.append(f'<article class="vla-article" id="{escape(article["id"])}">')
         for language in vla_data['intro']:
@@ -103,7 +140,9 @@ def vla_html():
             kicker = '实践笔记' if language == 'zh' else 'Field Notes'
             contents = '文章目录' if language == 'zh' else 'Contents'
             label = '文章目录' if language == 'zh' else 'Article contents'
+            back = '<a class="vla-back" href="#vla">' + ('← 返回文章列表' if language == 'zh' else '← All articles') + '</a>'
             parts.append(f'''<div data-lang="{language}" lang="{language}"{hidden}>
+              {back}
               <header class="vla-header">
                 <span class="vla-kicker">VLA / {kicker}</span>
                 <h2>{escape(article['title'][language])}</h2>
@@ -114,16 +153,8 @@ def vla_html():
                 anchor = f'{article["id"]}-{section["id"]}-{language}'
                 parts.append(f'<li><a href="#{anchor}">{escape(section["title"][language])}</a></li>')
             parts.append('</ol></nav><div class="vla-body">')
-            for section in article['sections']:
-                anchor = f'{article["id"]}-{section["id"]}-{language}'
-                parts.append(f'<section id="{anchor}"><h3>{escape(section["title"][language])}</h3>')
-                parts.extend(f'<p>{escape(p[language])}</p>' for p in section['paragraphs'])
-                if section['items']:
-                    parts.append('<ul>')
-                    parts.extend(f'<li>{escape(item[language])}</li>' for item in section['items'])
-                    parts.append('</ul>')
-                parts.append('</section>')
-            parts.append('</div></div>')
+            parts.extend(vla_section(article, section, language) for section in article['sections'])
+            parts.append(f'</div>{back}</div>')
         parts.append('</article>')
     return '\n'.join(parts)
 

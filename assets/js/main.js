@@ -24,11 +24,26 @@ document.addEventListener('DOMContentLoaded', function () {
     return parentPanel ? parentPanel.id.replace(/^panel-/, '') : null;
   }
 
+  // VLA panel: a hash naming an article (or an anchor inside one) opens that article;
+  // any other hash shows the article list.
+  function showVlaView(hash) {
+    var panel = document.getElementById('panel-vla');
+    if (!panel) return;
+    var target = hash && document.getElementById(hash);
+    var article = target && target.closest('.vla-article');
+    panel.classList.toggle('vla-reading', !!article);
+    panel.querySelectorAll('.vla-article').forEach(function (a) {
+      a.classList.toggle('is-open', a === article);
+    });
+    if (article) target.scrollIntoView();
+  }
+
   document.querySelectorAll('.panel-nav a[data-panel]').forEach(function (link) {
     link.addEventListener('click', function (e) {
       e.preventDefault();
       var p = link.dataset.panel;
       showPanel(p);
+      if (p === 'vla') showVlaView(null);
       if (history.pushState) {
         history.pushState(null, '', '#' + p);
       } else {
@@ -42,11 +57,17 @@ document.addEventListener('DOMContentLoaded', function () {
   if (initialPanel && document.getElementById('panel-' + initialPanel)) {
     showPanel(initialPanel);
   }
+  showVlaView((location.hash || '').replace(/^#/, ''));
+  // Images above the target shift the layout while loading; jump again once they are in.
+  window.addEventListener('load', function () {
+    showVlaView((location.hash || '').replace(/^#/, ''));
+  });
 
   // Back/forward navigation and externally-set hashes
   window.addEventListener('hashchange', function () {
     var p = panelFromHash();
     if (p) showPanel(p);
+    showVlaView((location.hash || '').replace(/^#/, ''));
   });
 
   // Language toggling

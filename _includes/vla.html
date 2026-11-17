@@ -1,12 +1,23 @@
-<p class="vla-intro">
-  <span data-lang="zh">{{ site.data.vla.intro.zh | escape }}</span>
-  <span data-lang="en" style="display:none">{{ site.data.vla.intro.en | escape }}</span>
-</p>
+<div class="vla-list">
+  <p class="vla-intro">
+    <span data-lang="zh">{{ site.data.vla.intro.zh | escape }}</span>
+    <span data-lang="en" style="display:none">{{ site.data.vla.intro.en | escape }}</span>
+  </p>
+  {% for article in site.data.vla.articles %}
+  <a class="vla-card" href="#{{ article.id }}">
+    <span class="vla-kicker"><span data-lang="zh">VLA / 实践笔记 · {{ forloop.index }}</span><span data-lang="en" style="display:none">VLA / Field Notes · {{ forloop.index }}</span></span>
+    <h2><span data-lang="zh">{{ article.title.zh | escape }}</span><span data-lang="en" style="display:none">{{ article.title.en | escape }}</span></h2>
+    <p><span data-lang="zh">{{ article.summary.zh | escape }}</span><span data-lang="en" style="display:none">{{ article.summary.en | escape }}</span></p>
+    <span class="vla-more"><span data-lang="zh">阅读全文 →</span><span data-lang="en" style="display:none">Read the article →</span></span>
+  </a>
+  {% endfor %}
+</div>
 {% for article in site.data.vla.articles %}
 <article class="vla-article" id="{{ article.id }}">
   {% for lang in site.data.vla.intro %}
   {% assign language = lang[0] %}
   <div data-lang="{{ language }}" lang="{{ language }}"{% if language == 'en' %} style="display:none"{% endif %}>
+    <a class="vla-back" href="#vla">{% if language == 'zh' %}← 返回文章列表{% else %}← All articles{% endif %}</a>
     <header class="vla-header">
       <span class="vla-kicker">VLA / {% if language == 'zh' %}实践笔记{% else %}Field Notes{% endif %}</span>
       <h2>{{ article.title[language] | escape }}</h2>
@@ -27,16 +38,40 @@
         {% for paragraph in section.paragraphs %}
         <p>{{ paragraph[language] | escape }}</p>
         {% endfor %}
-        {% if section.items.size > 0 %}
+        {% if section.items and section.items.size > 0 %}
         <ul>
           {% for item in section.items %}
           <li>{{ item[language] | escape }}</li>
           {% endfor %}
         </ul>
         {% endif %}
+        {% if section.table %}
+        {% assign table = section.table[language] %}
+        <div class="vla-table"><table>
+          <thead><tr>{% for cell in table.head %}<th>{{ cell | escape }}</th>{% endfor %}</tr></thead>
+          <tbody>
+            {% for row in table.rows %}
+            <tr>{% for cell in row %}<td>{{ cell | escape }}</td>{% endfor %}</tr>
+            {% endfor %}
+          </tbody>
+        </table></div>
+        {% endif %}
+        {% if section.figure %}
+        <figure class="vla-figure">
+          <img src="{{ section.figure.src[language] | relative_url }}" alt="{{ section.figure.alt[language] | escape }}" loading="lazy">
+          <figcaption>{{ section.figure.caption[language] | escape }}</figcaption>
+        </figure>
+        {% endif %}
+        {% if section.example %}
+        <aside class="vla-example">
+          <strong>{% if language == 'zh' %}小件拣选实例{% else %}Small-parts picking example{% endif %}</strong>
+          <p>{{ section.example[language] | escape }}</p>
+        </aside>
+        {% endif %}
       </section>
       {% endfor %}
     </div>
+    <a class="vla-back" href="#vla">{% if language == 'zh' %}← 返回文章列表{% else %}← All articles{% endif %}</a>
   </div>
   {% endfor %}
 </article>

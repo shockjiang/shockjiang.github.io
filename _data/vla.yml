@@ -4,13 +4,62 @@ intro:
 articles:
 - id: vla-delivery
   title:
-    zh: 如何完成VLA交付
-    en: How to Deliver a VLA System
+    zh: 如何完成VLA交付：以小件拣选为例
+    en: 'How to Deliver a VLA System: A Small-Parts Picking Case'
   summary:
-    zh: 从交付目标、SOP 与硬件选型开始，建立数据、模型、控制和真机反馈的完整闭环。
+    zh: 从交付目标、SOP 与硬件选型开始，建立数据、模型、控制和真机反馈的完整闭环。全文以一个单臂从杂乱料框拣选小件、放上传送带的现场项目为例，每一步都给出实际做法和数据。
     en: Start with delivery goals, SOP design and hardware, then close the loop across data, policy, control and
-      real-robot feedback.
+      real-robot feedback. Every step is illustrated with a field project in which a single arm picks small parts
+      from a cluttered bin onto a conveyor.
   sections:
+  - id: case
+    title:
+      zh: 00 / 实例：单臂小件拣选
+      en: '00 / The case: single-arm small-parts picking'
+    paragraphs:
+    - zh: 任务是让一只机械臂从杂乱的料框里逐个夹起小盒，放到传送带上。策略是 π0.5 类的视觉—语言—动作模型，先用另一站点的遥操 SOP 数据起步，再加入目标现场的数据，部署在现场的边缘 GPU 上。从第一次现场测试到客户认可的演示，用了
+        26 天。下面各节的“小件拣选实例”都来自这个项目。
+      en: A single arm picks small boxes one by one from a cluttered bin and places them on a conveyor. The policy
+        is a π0.5-class vision-language-action model, bootstrapped from teleoperated SOP data collected at another
+        site, then extended with data from the target site and deployed on an on-site edge GPU. It took 26 days
+        from the first field test to a demonstration the customer accepted. Every "small-parts picking example"
+        below comes from this project.
+    items: []
+    table:
+      zh:
+        head:
+        - 指标
+        - 结果
+        rows:
+        - - 现场峰值节拍
+          - 680 件/小时
+        - - 稳定运行节拍
+          - 420 件/小时
+        - - 杂乱料框单次夹取成功率
+          - 41% → 75–94%
+        - - 服务端单次推理
+          - 165 → 42 ms（机器人侧 48.5 ms）
+        - - 研发自测评星
+          - 1 → 4.3 星
+        - - 训练 / 现场评测
+          - 25 天 104 个模型；8 天 30 次现场评测
+      en:
+        head:
+        - Metric
+        - Result
+        rows:
+        - - Peak throughput on site
+          - 680 pieces/hour
+        - - Sustained throughput
+          - 420 pieces/hour
+        - - Single-grasp success in a cluttered bin
+          - 41% → 75–94%
+        - - Server-side inference per request
+          - 165 → 42 ms (48.5 ms measured on the robot)
+        - - Internal star rating
+          - 1 → 4.3 stars
+        - - Training / field evaluation
+          - 104 models in 25 days; 30 field evaluations in 8 days
   - id: goals
     title:
       zh: 01 / 先确认交付目标
@@ -31,6 +80,12 @@ articles:
     - zh: 把成功率与节拍一起评估，提前约定测试条件和失败的判定方式。研发、采集与交付场地不一致时，要逐项对齐差异。
       en: Evaluate success rate together with cycle time, and agree on test conditions and failure criteria. Reconcile
         differences across development, collection and delivery sites.
+    example:
+      zh: 验收目标定为“件/小时”加单次夹取成功率，两者一起看。复盘中最大的教训是目标中途变了：项目开始只做单臂取放，后来又加入双臂和混合堆叠场景，人力和机器被分散，进度反而变慢。评价标准也要在立项时定好并带版本号：离线主指标前后改过四次口径，不同口径的数字无法直接比较。
+      en: Acceptance combined pieces per hour with single-grasp success rate. The biggest lesson was that the goal
+        moved mid-project. It started as single-arm picking, then dual-arm and mixed stacking scenes were added,
+        which split people and robots and slowed everything down. Fix the evaluation metric at kickoff and version
+        it; our main offline metric changed definition four times, and numbers across definitions could not be compared.
   - id: hardware
     title:
       zh: 02 / 硬件先跑通整个工作空间
@@ -49,6 +104,13 @@ articles:
     - zh: 先检查机械和传感问题：夹爪松动、电机掉电、图像模糊、视频帧率不足与重复帧，都可能表现为模型效果差。
       en: 'Check mechanics and sensing early: loose grippers, motor power loss, motion blur, low camera frame rate
         and duplicate frames can all appear as policy failures.'
+    example:
+      zh: 现场头部相机实际只有 12.5 fps，而数据按 30 Hz 记录，这类问题只有逐项实测才会发现。策略控制时，相机画面的像素抖动是遥操时的 2.1–2.5 倍，说明执行层抖动是真实存在的硬件问题，而不只是模型问题。指尖在腕部相机里是否可见也要提前确认：带指套和裸指的指尖外观不同，指尖检测和标注要分别处理。
+      en: The head camera on site actually ran at 12.5 fps while data was logged at 30 Hz; only item-by-item measurement
+        reveals such issues. Under policy control, image jitter was 2.1–2.5× that seen during teleoperation, so
+        execution jitter was a real hardware problem, not only a policy problem. Check fingertip visibility in the
+        wrist camera early as well; padded and bare fingertips look different, so fingertip detection and labels
+        must handle both.
   - id: sop
     title:
       zh: 03 / SOP 是最关键、也最难的一步
@@ -74,6 +136,15 @@ articles:
     - zh: 训练算法的人应亲自采集至少 10 条数据，关键相关人也建议参与，建立对流程难点和遥操作体感的共同理解。
       en: The person training the policy should collect at least ten demonstrations; key collaborators should also
         participate to develop a shared understanding of the procedure.
+    example:
+      zh: 采集从“每回合录一件”改为“每回合清空一整框”后，启停和复位一框只做一次，每件实际耗时从约 51 秒降到 24 秒，同样的工时采到的件数约为 2.2 倍。另外两个 SOP 层面的决定：回位（return）交给规则，不进训练，因为它和起始接近在画面与姿态上很像，混在一起训练会让模型混淆；等待阶段交给状态机、不查询策略——此前
+        21% 的训练帧是等待帧，导致模型起步犹豫。
+      en: Switching collection from one piece per episode to clearing a whole bin per episode meant start, stop
+        and reset happened once per bin. Effective time per piece fell from about 51 s to 24 s, roughly 2.2× more
+        pieces for the same hours. Two other SOP decisions followed. Returning home is executed by rules and excluded
+        from training, because it looks like the initial approach and confuses the policy. Waiting is handled by
+        a state machine without querying the policy; previously 21% of training frames were waiting frames, which
+        made the policy hesitate at the start.
   - id: guardrails
     title:
       zh: 04 / 把安全护栏放进执行链路
@@ -90,6 +161,14 @@ articles:
     - zh: 六维力传感器需要去重力、去加速度，并考虑负载影响。力信号只有经过校准与配套处理，才能可靠参与控制。
       en: Six-axis force sensing requires calibration and compensation for gravity, acceleration and payload before
         it can reliably inform control.
+    example:
+      zh: 单臂模型运行时，另一只手臂锁定在最后一次提交的位置；人工可以随时接管，每次接管都完整记录，之后成为再训练的数据。夹爪偶尔夹不紧，提升时物料滑落，所以闭合不完全交给模型：检测到闭合指令后，由规则按参考宽度（遥操闭合宽度的中位数，约
+        28 mm）夹到位并保持，直到松开。
+      en: While the single-arm policy runs, the other arm is locked at its last committed pose, and a human can
+        take over at any time. Every takeover is logged and later reused as training data. Because the gripper sometimes
+        failed to clamp firmly and parts slipped during lifting, closing was not left entirely to the policy. Once
+        a close command is detected, a rule closes to a reference width (the teleoperation median, about 28 mm)
+        and holds it until release.
   - id: data
     title:
       zh: 05 / 数据质量：正确动作与恢复动作都要有
@@ -105,6 +184,12 @@ articles:
     - zh: 清理无效静止帧和异常尖峰，按需平滑动作。模仿学习数据保留正确行为与恢复行为，但要剔除导致失败的错误动作片段。
       en: Remove irrelevant stationary frames and anomalous spikes, with action smoothing where appropriate. For
         imitation learning, retain correct behavior and recovery while excluding the preceding erroneous actions.
+    example:
+      zh: 小件拣选的数据预处理被整理成一条 L0–L7 的八层流水线：信号体检、周期与关键段切分、目标/辅助判定、抓取尝试与失败分类、技能标签、训练权重、停顿切除和速度归一，并用 3D 轨迹对比判断哪些来源的数据能用。详见本专题第二篇文章。
+      en: 'Data preprocessing for small-parts picking became an eight-layer pipeline, L0–L7: signal checks, cycle
+        and core-segment extraction, target/auxiliary admission, grasp attempts and failure classes, skill labels,
+        training weights, pause removal and speed normalization, with 3D trajectory comparison deciding which sources
+        are usable. See the second article in this series.'
   - id: training
     title:
       zh: 06 / 训练和离线评测盯住关键阶段
@@ -120,6 +205,16 @@ articles:
     - zh: 在训练与评测中提高关键帧、关键 skill 的权重；按需加入末端执行器（EEF）相关辅助预测头与损失。整体平均误差之外，也要关注抓取、接触和恢复阶段。
       en: Weight critical frames and skills more heavily in training and evaluation, and consider end-effector auxiliary
         heads and losses. Inspect grasping, contact and recovery in addition to aggregate error.
+    example:
+      zh: 纯 VLA 最常见的失败是定位不准：没对准目标盒，或戳到盒边。我们在腕部相机图像上叠加检测器给出的旋转框（OBB）和指尖位置，并用确定性规则选出要抓的那个盒子；训练和服务用同一套规则（审计前两边选框不一致率高达
+        53–58%）。叠加之后，杂乱料框的单次夹取成功率从 41% 升到 75–94%，每次成功耗时从 44 秒降到 11.5–19 秒。离线评测把接触前后关键窗口的权重提高到 5 倍，同时报告关节误差和末端位置误差（毫米）。
+      en: The most common failure of a plain VLA policy was poor targeting, missing the target box or poking its
+        edge. We drew detector outputs, oriented boxes (OBB) and fingertip positions, onto the wrist-camera image
+        and used a deterministic rule to choose the box to pick. Training and serving use the same rule; before
+        an audit they disagreed on the chosen box 53–58% of the time. With the overlay, single-grasp success in
+        a cluttered bin rose from 41% to 75–94%, and time per successful pick fell from 44 s to 11.5–19 s. Offline
+        evaluation weights the window around contact 5× and reports both joint error and end-effector position error
+        in millimetres.
   - id: deployment
     title:
       zh: 07 / 从模型动作到平滑的底层控制
@@ -137,6 +232,17 @@ articles:
     - zh: 控制器过于强调位置到达时，可能放大抖动。应结合本体能力调试 PID，并在硬件支持时评估力位混合控制。
       en: An overly stiff position controller can amplify jitter. Tune PID for the platform and evaluate hybrid
         force/position control when supported.
+    example:
+      zh: 服务端单次请求从约 165 ms 降到 42 ms，机器人侧（上传 + 推理）实测 48.5 ms；精度不让步，始终保持 10 步去噪和 bf16。最大的一步是把推理换成单个 CUDA graph 引擎（140
+        → 56 ms）。动作块按 30 Hz 执行，推理期间机器人继续执行已提交的 6 步旧动作（200 ms，实时分块），正好覆盖延迟。延迟不只在 GPU 上：机器人端改用 C++ 并上传 JPEG 后，上传从
+        29 ms 降到 4.3 ms。还要注意时间基准：π0.5 的 50 步动作块在 50 Hz 下是 1 秒，在 30 Hz 下变成 1.67 秒。
+      en: Server-side latency per request fell from about 165 ms to 42 ms, and the robot measured 48.5 ms end to
+        end (upload plus inference), with no loss of accuracy; we kept 10 denoising steps and bf16 throughout. The
+        biggest single gain came from a single-CUDA-graph inference engine (140 → 56 ms). Action chunks run at 30
+        Hz, and during inference the robot keeps executing six committed steps of the previous chunk (200 ms, real-time
+        chunking), which covers the latency. Latency is not only on the GPU; rewriting the robot client in C++ and
+        uploading JPEG cut upload time from 29 ms to 4.3 ms. Watch the time base too; π0.5's 50-step chunk is 1
+        s at 50 Hz but 1.67 s at 30 Hz.
   - id: rules
     title:
       zh: 08 / 模型与规则协作，重点是平滑接管
@@ -153,6 +259,14 @@ articles:
     - zh: 夹持稳定性需要单独验证。可在夹住后补充闭合动作以减少途中掉落，执行力度与次数需按物体和夹爪能力调整。
       en: Validate grasp retention separately. Additional closing actions after grasping may reduce slips; force
         and repetition must suit the object and gripper.
+    example:
+      zh: 规则只做三件 VLA 不擅长或不该冒险的事：选目标、判阶段、守边界。目标选择规则（选离指尖中点最近的盒子）让评星从 1 星升到 3 星；检测器判断当前阶段（下落 fall / 抓取 grasp / 抬起
+        raise）并写进提示词；回位和等待由规则和状态机执行。所有规则都在服务端可复现，训练与推理用同一套，模型看到的输入始终在分布内。
+      en: 'Rules do only three things a VLA policy is bad at or should not risk: choosing the target, determining
+        the stage and enforcing limits. A target rule (the box nearest the fingertip midpoint) lifted the rating
+        from 1 to 3 stars. A detector determines the current stage (fall, grasp or raise) and writes it into the
+        prompt. Returning and waiting are executed by rules and a state machine. All rules are reproducible on the
+        server and shared by training and inference, so the policy always sees in-distribution inputs.'
   - id: evaluation
     title:
       zh: 09 / 用真机反馈建立迭代闭环
@@ -168,6 +282,15 @@ articles:
     - zh: 回流真机数据，特别是抖动、模糊和失败恢复片段。真实部署图像与遥操图像存在差异，需要在下一轮采集和训练中覆盖。
       en: Feed real-robot data back into iteration, especially jitter, blur and recovery cases. Deployment imagery
         differs from demonstrations and needs coverage in subsequent collection and training.
+    example:
+      zh: 目标节奏是：每天训几个模型，早上测前一晚的模型，晚上测白天调整后的版本，测试录像每小时回流。25 天训练了 104 个模型，8 天里做了 30 次现场评测；旗舰模型按现场结果决定，而不是按离线排名。人工接管和现场回放被整理成带优势标签的
+        RECAP 数据，RECAP 模型在托盘场景 187 次夹取中成功 185 次（98.9%）。现场失败集中的场景（如拥挤料框）单独补采为难例数据。
+      en: The target rhythm was several models trained per day, the overnight model tested each morning and the
+        adjusted version each evening, with test recordings synced back hourly. We trained 104 models in 25 days
+        and ran 30 field evaluations in 8 days, and the flagship model was chosen by field results rather than offline
+        ranking. Human takeovers and field replays became advantage-labelled RECAP data, and the RECAP model succeeded
+        on 185 of 187 grasps (98.9%) in a tray scene. Scenes where field failures clustered, such as crowded bins,
+        were collected again as hard cases.
   - id: handover
     title:
       zh: 10 / 交付前的核对清单
@@ -186,3 +309,1323 @@ articles:
     - zh: 反馈能闭环：现场问题能归因，数据与人工反馈能进入下一轮迭代。必要时结合检测、跟踪与分割模块补足感知，并检查遮挡下不同模块输出的含义。
       en: 'Feedback actionable: site issues can be diagnosed, and data plus human feedback feed the next iteration.
         Detection, tracking and segmentation may supplement perception; check how their outputs differ under occlusion.'
+    example:
+      zh: 交付时仍要写进交接清单的未解决问题：执行层抖动；动作频率与动作块时长的匹配；没见过的物品状态和摆放；回位与起始接近这类相似阶段的混淆；以及戳边、碰框这类精细操作误差（30 条评测记录中有 12 条提到）。
+      en: 'Open issues that still belong on the handover list: execution jitter; matching the action rate to the
+        chunk duration; unseen object states and arrangements; confusion between similar stages such as returning
+        and approaching; and fine-manipulation errors such as poking box edges or hitting the bin, mentioned in
+        12 of 30 evaluation records.'
+- id: vla-data-pipeline
+  title:
+    zh: VLA 数据预处理：以小件拣选为例的八层流水线（L0–L7）
+    en: 'VLA Data Preprocessing: An Eight-Layer Pipeline (L0–L7) for Small-Parts Picking'
+  summary:
+    zh: 一条连续清框录像怎样变成训练样本：信号体检、切周期与关键段、按姿态判定目标数据、用 3D 轨迹对比筛选数据源、失败分类、技能标签、训练权重、停顿切除和速度归一。每一层都给出规则、阈值和在约两千万帧数据上的实测结果。
+    en: 'How a continuous bin-clearing recording becomes training samples: signal checks, cycle and core-segment
+      extraction, pose-based target admission, 3D trajectory comparison of data sources, failure classes, skill
+      labels, training weights, pause removal and speed normalization. Each layer comes with its rules, thresholds
+      and measured results on about twenty million frames.'
+  sections:
+  - id: why
+    title:
+      zh: 01 / 为什么数据处理决定上限
+      en: 01 / Why data processing sets the ceiling
+    paragraphs:
+    - zh: 模型学到的上限由数据决定。在小件拣选项目里，多次出问题，根子都在数据：头部相机实际只有 12.5 fps；一批清框数据的左右腕部相机在录制端接反；失败恢复数据用法不同，离线误差能相差 −61% 到 +30%；回位和起始接近混在一起训练，模型会把两者搞混。所以每条录像进入训练之前，都要过同一条处理流水线。
+      en: The data sets the ceiling on what a policy can learn. In the small-parts picking project, problem after
+        problem traced back to data. The head camera actually ran at 12.5 fps; in one bin-clearing collection the
+        left and right wrist cameras were swapped at the recorder; different uses of failure-recovery data moved
+        offline error anywhere from −61% to +30%; and training on returning and initial approaching together confused
+        the policy. Every recording therefore passes through the same processing pipeline before it reaches training.
+    - zh: 下面三条是交付篇中“数据质量”一节的原则，八层流水线把它们变成了可执行、可统计的规则：
+      en: 'The three principles below come from the data-quality section of the delivery article; the eight layers
+        turn them into executable, measurable rules:'
+    items:
+    - zh: 每次遥操从约定初始位置开始，剔除接手前的抖动与观察阶段。动作果断，操作对象始终处于有效视野内。
+      en: Start each demonstration from the agreed initial state. Remove takeover jitter and observation periods;
+        execute decisively and keep relevant objects visible.
+    - zh: 标注区分 task、sub-task 与 action/skill，并为特殊动作补充环境描述。小停顿可能是关键技能边界，不能一概作为无效数据删除。
+      en: Distinguish task, sub-task and action/skill labels, with environmental context for special actions. Brief
+        pauses can mark important skill boundaries and should not be removed indiscriminately.
+    - zh: 清理无效静止帧和异常尖峰，按需平滑动作。模仿学习数据保留正确行为与恢复行为，但要剔除导致失败的错误动作片段。
+      en: Remove irrelevant stationary frames and anomalous spikes, with action smoothing where appropriate. For
+        imitation learning, retain correct behavior and recovery while excluding the preceding erroneous actions.
+  - id: overview
+    title:
+      zh: 02 / 八层总览：从一条录像到训练样本
+      en: '02 / Overview: from one recording to training samples'
+    paragraphs:
+    - zh: 采集方式是“连续清框”：一条录像里连续抓取多个物品，中间有成功、空抓、碰触、恢复和停顿。流水线先做 L0 信号体检，再用 L1–L7 七层把录像切开、分类、加权和对齐。左右臂各自独立处理；所有层只生成标签，不改原始数据，因此任何一层的规则都可以单独修改、重算。
+      en: Data is collected by continuous bin clearing, with many picks per recording, mixing successes, empty grasps,
+        touches, recoveries and pauses. The pipeline first runs the L0 signal check, then seven layers, L1–L7, cut,
+        classify, weight and align the recording. Left and right arms are processed independently. Every layer only
+        writes labels and never edits raw data, so any layer's rules can be changed and recomputed on their own.
+    items: []
+    table:
+      zh:
+        head:
+        - 层
+        - 单位
+        - 做什么
+        - 解决什么
+        rows:
+        - - L0 信号体检
+          - 每条录像每只手臂
+          - 关节跳变、FK 一致性、夹爪读数与指令、时间戳、相机同步
+          - 初筛：问题段训练权重置 0
+        - - L1.1 完整周期
+          - 周期
+          - HOME → 抓取 → 抬起 → 放下 → 回 HOME
+          - 非关键阶段只从目标场景取
+        - - L1.2 关键段（核心）
+          - 周期
+          - 物体上方 10 cm → 抓取 → 抬到物体上方 5 cm
+          - 只借最难、最值得学的一段
+        - - L1.3 目标 / 辅助
+          - 关键段
+          - 三个时刻的关节姿态与目标场景比较
+          - 多源数据的准入标准
+        - - L2 尝试
+          - 抓取尝试
+          - 每次下探到抓取高度算一次，无论是否闭合
+          - 找出空抓、碰触等失败尝试
+        - - L3 结果
+          - 尝试
+          - 成功或 F1–F14 失败类型
+          - 失败不学，恢复要学
+        - - L4 技能
+          - 每帧
+          - 三段（fall / grasp / raise）+ 12 技能
+          - 阶段提示与细粒度数据分析
+        - - L5 权重
+          - 每帧
+          - 是否训练 0/1；接触窗权重 ×2
+          - 汇总成训练权重
+        - - L6 停顿切除
+          - 帧序列
+          - 切掉停顿，接缝处注入过渡动作
+          - 采集员的停顿习惯
+        - - L7 速度归一
+          - 每段
+          - 自由段速度对齐到基准采集员，接触窗不变速
+          - 采集员的速度差异
+      en:
+        head:
+        - Layer
+        - Unit
+        - What it does
+        - What it solves
+        rows:
+        - - L0 signal check
+          - Each recording and arm
+          - Joint jumps, FK consistency, gripper reading vs command, timestamps, camera sync
+          - 'Screening: faulty segments get zero training weight'
+        - - L1.1 full cycle
+          - Cycle
+          - HOME → grasp → lift → place → HOME
+          - Non-critical phases come only from the target scene
+        - - L1.2 core segment
+          - Cycle
+          - 10 cm above the object → grasp → lift to 5 cm above it
+          - Borrow only the hardest, most valuable segment
+        - - L1.3 target / auxiliary
+          - Core segment
+          - Compare joint poses at three moments with the target scene
+          - Admission rule for multi-source data
+        - - L2 attempts
+          - Grasp attempt
+          - Every descent to grasp height counts, closed or not
+          - Find empty grasps, touches and other failed attempts
+        - - L3 outcomes
+          - Attempt
+          - Success or failure classes F1–F14
+          - Do not learn failures; do learn recoveries
+        - - L4 skills
+          - Frame
+          - Three stages (fall / grasp / raise) plus 12 skills
+          - Stage prompts and fine-grained data analysis
+        - - L5 weights
+          - Frame
+          - Train 0/1; contact window weighted ×2
+          - Combine everything into training weights
+        - - L6 pause removal
+          - Frame sequence
+          - Cut pauses, inject bridging actions at the seams
+          - Operators' pause habits
+        - - L7 speed normalization
+          - Segment
+          - Align free-motion speed to the benchmark operator; contact window unchanged
+          - Speed differences between operators
+  - id: l0
+    title:
+      zh: 03 / L0 信号体检：先把明显有毛病的去掉
+      en: '03 / L0 signal check: remove the obviously broken first'
+    paragraphs:
+    - zh: 参考 Qwen 机器人操作工作中的状态—动作过滤，每条录像的每只手臂先过 L0。不通过的整段或局部标记为 qa_fail，训练权重置 0。表中阈值是初值，跑完全量数据后按分布再定。
+      en: Following the state-action filtering in Qwen's robot-manipulation work, each arm of each recording first
+        passes L0. Failing segments, or whole recordings, are marked qa_fail and get zero training weight. The thresholds
+        are initial values, to be revised from the distribution after a full pass.
+    - zh: 在 9,328 个文件、16,688 条单臂录像上跑完 L0：2,556 条含问题段，主要是时间戳跳变（2,412 条）和夹爪读数与指令对不上（115 条）。
+      en: Across 9,328 files and 16,688 single-arm recordings, 2,556 contained faulty segments, mainly timestamp
+        gaps (2,412) and gripper readings that did not follow commands (115).
+    items: []
+    table:
+      zh:
+        head:
+        - 检查
+        - 怎么判
+        - 初始阈值
+        rows:
+        - - 关节跳变
+          - 相邻帧关节差或其二阶差突增
+          - 单帧 > 0.2 rad，或 > 该关节 p99.9 的 3 倍
+        - - 极值 / 越限
+          - 关节超出 URDF 限位或录像内 p0.1–p99.9 之外
+          - 超限即标
+        - - FK 一致
+          - 由记录的关节算 FK，与记录的末端位姿比较
+          - 位置 > 1–2 cm 或姿态 > 5°
+        - - 夹爪读数 vs 指令
+          - 指令闭合 ≥ 1 s 后实测宽度应下降
+          - 下降 < 6 mm 即标
+        - - 状态冻结
+          - 关节整段不变而指令在变
+          - '> 2 s'
+        - - 时间戳 / 掉帧
+          - 相邻时间戳差
+          - '> 200 ms'
+        - - 相机健康与身份
+          - 黑帧、冻结、重复帧、帧率；左右腕部相机是否接反
+          - 同步偏移 > 2 帧
+      en:
+        head:
+        - Check
+        - Rule
+        - Initial threshold
+        rows:
+        - - Joint jumps
+          - Sudden rise in frame-to-frame joint change or its second difference
+          - '> 0.2 rad in one frame, or > 3× the joint''s p99.9'
+        - - Extremes / limit violations
+          - Joints beyond URDF limits or outside the recording's p0.1–p99.9
+          - Flag on violation
+        - - FK consistency
+          - FK from recorded joints vs the recorded end-effector pose
+          - '> 1–2 cm or > 5°'
+        - - Gripper reading vs command
+          - Measured width must drop after ≥ 1 s of a close command
+          - Flag if drop < 6 mm
+        - - Frozen state
+          - Joints constant while commands change
+          - '> 2 s'
+        - - Timestamps / dropped frames
+          - Gap between consecutive timestamps
+          - '> 200 ms'
+        - - Camera health and identity
+          - Black, frozen or duplicate frames, frame rate; swapped left/right wrist cameras
+          - Sync offset > 2 frames
+    example:
+      zh: 一批清框数据的 108 条录像，左右腕部相机全部在录制端接反了。数据流本身是“活”的，帧率、画面都正常，靠人眼很难及时发现。身份检查利用一个简单事实：干活那只手臂的相机画面变化大、深度近，闲着那只几乎不动。原始数据改正后，这项检查在每次同步新数据时自动运行。
+      en: In one bin-clearing collection, all 108 recordings had the left and right wrist cameras swapped at the
+        recorder. The streams were alive, with normal frame rates and images, so people did not notice in time.
+        The identity check relies on a simple fact; the camera on the working arm changes a lot and sees things
+        close by, while the idle arm's camera barely moves. After the raw data was fixed, the check runs automatically
+        on every sync.
+  - id: l1
+    title:
+      zh: 04 / L1 切周期与关键段：最难的是抓取本身
+      en: '04 / L1 cycles and core segments: the grasp is the hard part'
+    paragraphs:
+    - zh: 完整周期是 HOME → 抓取 → 抬起 → 放下 → 回 HOME，只保留目标场景的数据。关键段（核心）是从物体上方 10 cm 下落 → 抓取 → 抬到物体上方 5 cm（高度以闭合时刻的末端高度为物体参考），这是整个动作里最难、最值得学的部分。借用其他
+        SOP 或其他场景的数据时，只借这一段；从 home 出发、搬运、放下、回位这些容易学的阶段，只从目标场景取。
+      en: A full cycle runs HOME → grasp → lift → place → HOME and is kept only for the target scene. The core segment
+        runs from 10 cm above the object down to the grasp and up to 5 cm above the object, with the end-effector
+        height at closing as the object reference. It is the hardest and most valuable part of the motion. When
+        borrowing data from other SOPs or scenes, borrow only this segment; the easy phases (leaving home, carrying,
+        placing, returning) come only from the target scene.
+    - zh: 统一定义之前，每条流水线各用一套规则，同样叫 focus / lift 的帧在不同数据集里完全不同：一套里 focus 从抓取点上方约 1.7 cm 开始、lift 抬到约 15 cm；另一套里 focus
+        从约 3.6 cm 开始、lift 只抬约 4.1 cm。按新定义，在 2,582 条录像、11,329 次有效闭合上，95% 能同时找到“上方 10 cm”和“抬到 5 cm”两个锚点；剩下的取“上一次张开以来的最高点”作起点。侧向取物时，起点改为“离抓取点
+        10 cm”。
+      en: Before the definitions were unified, each pipeline had its own rules, and frames called focus or lift
+        meant different things in different datasets. In one, focus began about 1.7 cm above the grasp point and
+        lift ended near 15 cm; in another, focus began near 3.6 cm and lift ended at about 4.1 cm. Under the new
+        definition, 95% of 11,329 valid closes in 2,582 recordings have both anchors, 10 cm above and lifted 5 cm.
+        The rest start from the highest point since the previous opening. For side picks, the start is 10 cm from
+        the grasp point instead.
+    items: []
+    table:
+      zh:
+        head:
+        - 来源
+        - 10 cm → 闭合
+        - 闭合 → 抬起 5 cm
+        - 关键段总长
+        rows:
+        - - 目标现场（基准采集员）
+          - 2.43 s
+          - 0.53 s
+          - 3.03 s
+        - - 另一站点 SOP
+          - 2.60 s
+          - 0.60 s
+          - 3.23 s
+        - - 堆叠场景
+          - 2.92 s
+          - 1.00 s
+          - 4.03 s
+        - - 难例（拥挤料框）
+          - 3.70 s
+          - 0.67 s
+          - 4.45 s
+        - - 失败恢复
+          - 4.33 s
+          - 1.03 s
+          - 5.43 s
+      en:
+        head:
+        - Source
+        - 10 cm → close
+        - Close → lifted 5 cm
+        - Core total
+        rows:
+        - - Target site (benchmark operator)
+          - 2.43 s
+          - 0.53 s
+          - 3.03 s
+        - - SOP from another site
+          - 2.60 s
+          - 0.60 s
+          - 3.23 s
+        - - Stacking scene
+          - 2.92 s
+          - 1.00 s
+          - 4.03 s
+        - - Hard cases (crowded bin)
+          - 3.70 s
+          - 0.67 s
+          - 4.45 s
+        - - Failure recovery
+          - 4.33 s
+          - 1.03 s
+          - 5.43 s
+    example:
+      zh: 新定义的 focus 会包含约 1 秒的快速下降：手臂在 10 cm 处还在快速下落，大约到 3–4 cm 才减速。关键段内部再标出接触窗——夹爪接触物体前 45 帧到后 5 帧，训练权重加倍，后面的停顿切除和速度归一都不碰这一段。
+      en: The new focus includes about one second of fast descent, because the arm is still dropping quickly at
+        10 cm and only slows at around 3–4 cm. Inside the core segment, the contact window runs from 45 frames before
+        to 5 frames after the fingers touch the object. It gets double training weight, and pause removal and speed
+        normalization never touch it.
+  - id: l13
+    title:
+      zh: 05 / L1.3 目标还是辅助：按姿态而不是按来源
+      en: '05 / L1.3 target or auxiliary: decide by pose, not by source'
+    paragraphs:
+    - zh: 在关键段上再分一层：这次抓取和目标场景是不是“同一个动作”。判据是 HOME、抓取、抬起 5 cm 三个时刻的 7 个关节角，到最近的目标场景关键段的距离都不超过目标场景自身留一最近邻距离的 p95（HOME
+        0.092 rad、抓取 0.243 rad、抬起 0.227 rad）。通过的按子类训练（正常抓取、失败后的恢复抓取、现场回收的 RECAP 数据等）；不通过的标为辅助，只作辅助训练。失败恢复从失败处开始，不比
+        HOME。
+      en: 'One more split on the core segment: is this grasp the same move as in the target scene? The rule compares
+        the seven joint angles at three moments, HOME, grasp and lifted 5 cm, with the nearest target-scene core.
+        Each distance must be within the p95 of the target scene''s own leave-one-out nearest-neighbour distance
+        (HOME 0.092 rad, grasp 0.243 rad, lift 0.227 rad). Passing cores train under their subtype (normal grasp,
+        recovery after failure, field RECAP data and so on); the rest are marked auxiliary. Recovery cores start
+        where the failure happened, so HOME is not compared for them.'
+    items:
+    - zh: 目标现场自己 88% 三者都在范围内，与“半径覆盖约 80–90% 样本”的设计一致。
+      en: The target site itself has 88% within range at all three moments, consistent with radii meant to cover
+        about 80–90% of samples.
+    - zh: 另一站点的 SOP 名义上是同一任务，实测只有 2% 合格：HOME 的关节角整体偏 0.1–0.23 rad 且非常集中（换了起始姿态），抓取时手腕翻滚差约 0.3 rad。按关节角，它不是同一个动作。
+      en: The SOP from another site is nominally the same task, yet only 2% qualify. Its HOME joints are offset
+        by 0.1–0.23 rad and tightly clustered (a different start pose), and wrist roll at the grasp differs by about
+        0.3 rad. By joint angles, it is not the same move.
+    - zh: 多品类小件来源和双臂数据接近 0%：它们仍然有用，但只能作辅助数据，不能当目标数据混训。
+      en: Multi-item small-parts data and dual-arm data are close to 0%. They are still useful, but only as auxiliary
+        data, not mixed in as target data.
+    table:
+      zh:
+        head:
+        - 来源
+        - 关键段
+        - HOME 在范围内
+        - 抓取在范围内
+        - 抬起在范围内
+        - 标为目标
+        rows:
+        - - 目标现场
+          - '735'
+          - 95%
+          - 95%
+          - 95%
+          - 646（88%）
+        - - 另一站点 SOP
+          - '802'
+          - 36%
+          - 16%
+          - 8%
+          - 16（2%）
+        - - 失败恢复
+          - 1,320
+          - 50%
+          - 22%
+          - 20%
+          - 169（13%，不比 HOME）
+        - - 难例（拥挤料框）
+          - '475'
+          - 43%
+          - 11%
+          - 7%
+          - 0（按来源归辅助）
+        - - 堆叠场景
+          - 1,368
+          - 78%
+          - 30%
+          - 30%
+          - 0（按来源归辅助）
+        - - 双臂录像
+          - 11,437
+          - 4%
+          - 1%
+          - 2%
+          - '0'
+        - - 多品类小件
+          - 9,243
+          - 0%
+          - 0%
+          - 0%
+          - '0'
+      en:
+        head:
+        - Source
+        - Core segments
+        - HOME in range
+        - Grasp in range
+        - Lift in range
+        - Labelled target
+        rows:
+        - - Target site
+          - '735'
+          - 95%
+          - 95%
+          - 95%
+          - 646 (88%)
+        - - SOP from another site
+          - '802'
+          - 36%
+          - 16%
+          - 8%
+          - 16 (2%)
+        - - Failure recovery
+          - 1,320
+          - 50%
+          - 22%
+          - 20%
+          - 169 (13%, HOME not compared)
+        - - Hard cases (crowded bin)
+          - '475'
+          - 43%
+          - 11%
+          - 7%
+          - 0 (auxiliary by source)
+        - - Stacking scene
+          - 1,368
+          - 78%
+          - 30%
+          - 30%
+          - 0 (auxiliary by source)
+        - - Dual-arm recordings
+          - 11,437
+          - 4%
+          - 1%
+          - 2%
+          - '0'
+        - - Multi-item small parts
+          - 9,243
+          - 0%
+          - 0%
+          - 0%
+          - '0'
+  - id: traj-pose
+    title:
+      zh: 06 / 3D 轨迹对比（一）：抓取瞬间的姿态离目标有多远
+      en: '06 / 3D trajectory comparison (1): how far grasp poses are from the target'
+    paragraphs:
+    - zh: 不同来源采的数据，有的训练效果好，有的不好，判断的核心是比较 3D 轨迹。第一步看抓取瞬间：在“夹爪开始闭合”这一帧，取每次抓取的 7 个关节角、躯干坐标系下的末端位姿和躯干状态，逐个来源与目标现场的抓取集合比较。“区域内”指到最近目标抓取的距离不超过目标自身留一最近邻的
+        p95（关节 0.25 rad，位置 18 mm）；姿态差是与位置最近的目标抓取之间的旋转角。
+      en: Some sources train well and some do not, and the core test is to compare 3D trajectories. Start with the
+        moment of grasping. At the frame where the gripper starts closing, take the seven joint angles, the end-effector
+        pose in the torso frame and the torso state, and compare each source with the target site's set of grasps.
+        In region means the distance to the nearest target grasp is within the target's own leave-one-out p95 (0.25
+        rad in joints, 18 mm in position). Orientation difference is the rotation to the positionally nearest target
+        grasp.
+    items: []
+    table:
+      zh:
+        head:
+        - 来源
+        - 抓取数
+        - 关节最近邻（中位，rad）
+        - 关节区域内
+        - 位置区域内
+        - 位置最近邻（mm）
+        - 姿态差
+        - 抓取高度 z（mm）
+        rows:
+        - - 目标现场（参照）
+          - '633'
+          - '0.16'
+          - 95%
+          - 95%
+          - '9'
+          - 13°
+          - −180
+        - - 另一站点 SOP
+          - '653'
+          - '0.31'
+          - 18%
+          - 18%
+          - '37'
+          - 20°
+          - −90
+        - - 失败恢复
+          - '993'
+          - '0.30'
+          - 27%
+          - 64%
+          - '14'
+          - 19°
+          - −133
+        - - 旋转放置（历史项目）
+          - '192'
+          - '0.32'
+          - 15%
+          - 61%
+          - '14'
+          - 22°
+          - −132
+        - - 难例（拥挤料框）
+          - '327'
+          - '0.35'
+          - 17%
+          - 44%
+          - '20'
+          - 22°
+          - −115
+        - - 双臂录像的左臂
+          - 4,929
+          - '0.47'
+          - 3%
+          - 8%
+          - '62'
+          - 37°
+          - −92
+        - - 另一场景的右臂数据
+          - '643'
+          - '0.76'
+          - 0%
+          - 0%
+          - '219'
+          - 43°
+          - −192
+        - - 多品类小件
+          - 2,077
+          - '0.87'
+          - 0%
+          - 0%
+          - '118'
+          - 57°
+          - −321
+        - - 新采集的小件清框
+          - '769'
+          - '0.32'
+          - 33%
+          - 47%
+          - '19'
+          - 30°
+          - −178
+      en:
+        head:
+        - Source
+        - Grasps
+        - Joint NN (median rad)
+        - Joints in region
+        - Position in region
+        - Position NN (mm)
+        - Orientation diff
+        - Grasp height z (mm)
+        rows:
+        - - Target site (reference)
+          - '633'
+          - '0.16'
+          - 95%
+          - 95%
+          - '9'
+          - 13°
+          - −180
+        - - SOP from another site
+          - '653'
+          - '0.31'
+          - 18%
+          - 18%
+          - '37'
+          - 20°
+          - −90
+        - - Failure recovery
+          - '993'
+          - '0.30'
+          - 27%
+          - 64%
+          - '14'
+          - 19°
+          - −133
+        - - Rotate-and-place (earlier project)
+          - '192'
+          - '0.32'
+          - 15%
+          - 61%
+          - '14'
+          - 22°
+          - −132
+        - - Hard cases (crowded bin)
+          - '327'
+          - '0.35'
+          - 17%
+          - 44%
+          - '20'
+          - 22°
+          - −115
+        - - Left arm of dual-arm recordings
+          - 4,929
+          - '0.47'
+          - 3%
+          - 8%
+          - '62'
+          - 37°
+          - −92
+        - - Right-arm data from another scene
+          - '643'
+          - '0.76'
+          - 0%
+          - 0%
+          - '219'
+          - 43°
+          - −192
+        - - Multi-item small parts
+          - 2,077
+          - '0.87'
+          - 0%
+          - 0%
+          - '118'
+          - 57°
+          - −321
+        - - Newly collected small-part clearing
+          - '769'
+          - '0.32'
+          - 33%
+          - 47%
+          - '19'
+          - 30°
+          - −178
+    example:
+      zh: 多品类小件来源 2,077 次抓取没有一次落在目标区域内。其中 33% 的抓取手腕翻转了约 180°（前臂偏航关节在 +2…+4 rad，目标现场是 −2…0）。平行夹爪在几何上等价，但在关节空间里是另一组姿态。追查下去，原因在采集设置而不是操作员：某几天录的每条录像从第一帧起前臂就转在另一侧，整条不回正，之后几天全部正常。同一来源的抓取点比目标低
+        14 cm，51% 的抓取时躯干在动，而状态里并没有躯干信息——这些都只有在 3D 对比里才看得出来。
+      en: Not one of the 2,077 grasps from the multi-item small-parts source falls inside the target region. In
+        33% of them the wrist is flipped by about 180° (the forearm yaw joint sits at +2…+4 rad versus −2…0 at the
+        target site). A parallel gripper is geometrically symmetric, but in joint space this is a different pose.
+        The cause was the collection setup, not the operators; on a few days every recording started with the forearm
+        rotated to the other side and never re-centred, and later days were normal. The same source grasps 14 cm
+        lower than the target, and the torso moves during 51% of its grasps although the state does not include
+        the torso. Only a 3D comparison makes these visible.
+  - id: traj-path
+    title:
+      zh: 07 / 3D 轨迹对比（二）：路径形状、采集员差异与筛选
+      en: '07 / 3D trajectory comparison (2): path shape, operator differences and selection'
+    paragraphs:
+    - zh: 第二步看整条关键段路径：以抓取点为原点，把每次抓取从物体上方 10 cm 画到抬起 5 cm，比较俯视、侧视、正视三视图和可旋转的 3D 图。即使是同一场景，不同人采的数据差别也很大：平滑的抓取只在抓取点附近有一个极值；有人下落时来回调整，轨迹前伸、折返，空中出现多个极值。
+      en: Next, compare whole core paths. With the grasp point as the origin, draw each grasp from 10 cm above the
+        object to the 5 cm lift and compare top, side and front views plus a rotatable 3D view. Even within one
+        scene, operators differ a lot. A smooth grasp has a single extremum near the grasp point; others adjust
+        back and forth on the way down, overshooting and backtracking, with several extrema in mid-air.
+    items:
+    - zh: 速度：以目标现场的基准采集员为准，其他采集员的自由段要提速约 1.1 到 3 倍才追平。
+      en: 'Speed: measured against the target site''s benchmark operator, other operators'' free-motion segments
+        need a 1.1× to 3× speed-up to match.'
+    - zh: 停顿：有人在空中明显停住，有人一气呵成。
+      en: 'Pauses: some operators stop visibly in mid-air, others move in one continuous stroke.'
+    - zh: 极值点：目标现场平均每次 1.2 个、38% 一个都没有；另一站点 SOP 1.6 个；多品类小件 3.0 个；双臂录像 4.6 个。
+      en: 'Extrema: 1.2 per grasp at the target site, with none in 38% of grasps; 1.6 for the other site''s SOP;
+        3.0 for multi-item small parts; 4.6 for dual-arm recordings.'
+    - zh: 筛选规则：先按 L1.3 的姿态区域决定目标还是辅助；再用速度（L7）和停顿（L6）对齐；轨迹多极值、前伸折返目前只做统计，是下一步要补的处理层。
+      en: 'Selection: L1.3 pose regions decide target versus auxiliary; speed (L7) and pauses (L6) are then aligned.
+        Multiple extrema and overshoot are only measured so far and are the next layer to add.'
+    - zh: 去抖：遥操数据在运动时带约 10 Hz 的抖动分量。基于 DCT 的自适应平滑在 200 条 SOP 录像上去掉了 7–13 Hz 的抖动、完整保留 0–3 Hz 的动作，加加速度（jerk）降低 95%，但尚未接入训练验证。
+      en: 'De-jittering: teleoperation data carries a roughly 10 Hz component during motion. Adaptive DCT smoothing
+        on 200 SOP recordings removed the 7–13 Hz jitter, kept 0–3 Hz motion intact and cut jerk by 95%; it has
+        not yet been validated in training.'
+    figure:
+      src:
+        zh: assets/images/vla/grasp-trajectories-zh.svg
+        en: assets/images/vla/grasp-trajectories-en.svg
+      alt:
+        zh: 四类来源的抓取轨迹侧视图
+        en: Side view of grasp trajectories from four sources
+      caption:
+        zh: 侧视图（向前 – 高度，单位 mm）。每个来源随机取最多 14 次抓取，从物体上方 10 cm 画到抬起 5 cm，红点为抓取点。A 目标现场基准采集员的路径最干净；C、D 的路径前伸、折返明显，空中极值多。
+        en: Side view (forward vs height, mm). Up to 14 random grasps per source, drawn from 10 cm above the object
+          to the 5 cm lift; the red dot is the grasp point. The target site's benchmark operator (A) has the cleanest
+          paths; C and D overshoot and backtrack, with many mid-air extrema.
+  - id: l23
+    title:
+      zh: 08 / L2–L3 抓取尝试与失败分类：F1–F14
+      en: '08 / L2–L3 grasp attempts and failure classes: F1–F14'
+    paragraphs:
+    - zh: 一个周期里每次下探到抓取高度都算一次尝试，无论是否闭合。每次尝试落到“成功”或 14 类失败之一。能可靠测量的现在就处理；测不出或归不了类的标记为“已见、暂不处理”，对应段训练权重为 0。F14 是兜底类，收容高度可疑但测不出的情况。
+      en: Every descent to grasp height within a cycle counts as an attempt, whether or not the gripper closes.
+        Each attempt ends as a success or one of 14 failure classes. Classes that can be measured reliably are handled
+        now; the rest are marked seen but unprocessed, with zero training weight. F14 is the catch-all for highly
+        suspicious cases that cannot be measured or classified.
+    - zh: 全部数据共 38,045 次尝试：成功 24,712；抬起前重夹（F9）5,255；手指触碰（F2）3,632；下探放弃（F1）2,412；其他可疑（F14）780；空抓（F5）473；抓到窄边（F7）342；抬起时脱落（F10）322。注意：没有力信号时，F1
+        / F2 里可能有一部分只是重新对准、并没有碰到物体；它们之后的回升按恢复训练。
+      en: 'All data together has 38,045 attempts: 24,712 successes, 5,255 regrasps before lift (F9), 3,632 finger
+        touches (F2), 2,412 aborted descents (F1), 780 other suspicious (F14), 473 empty closes (F5), 342 edge grasps
+        (F7) and 322 drops during lift (F10). Without force sensing, some F1/F2 cases may just be re-alignment without
+        contact; the rise that follows them is trained as recovery.'
+    items: []
+    table:
+      zh:
+        head:
+        - 类别
+        - 名称
+        - 判据
+        - 处理
+        rows:
+        - - F1
+          - 下探放弃
+          - 到抓取高度附近未闭合即抬起
+          - 暂不处理
+        - - F2
+          - 手指触碰
+          - 末端在抓取高度附近局部低点、回弹 ≥ 0.5 cm、未闭合
+          - 处理
+        - - F3
+          - 推挤 / 碰歪
+          - 未闭合时物体跟踪位移 > 0.35 个物长或 > 10°
+          - 处理（有物体跟踪的数据）
+        - - F4
+          - 选错目标
+          - 对准的物体 ≠ 最后抓起的物体
+          - 暂不处理
+        - - F5
+          - 空抓
+          - 闭合期间最窄宽度 ≤ 20 mm
+          - 处理
+        - - F6
+          - 没夹紧 / 夹偏
+          - 最窄宽度 42–48 mm
+          - 暂不处理 → F14
+        - - F7
+          - 抓到窄边
+          - 宽度 6–13 mm 且夹着移动 ≥ 20 cm
+          - 处理
+        - - F8
+          - 错位闭合
+          - 在非物体位置闭合（需物体跟踪）
+          - 暂不处理
+        - - F9
+          - 抬起前重夹
+          - 抬起前多于一次闭合，含夹住—拖动—重夹
+          - 处理：拖动段不训，最后一次夹取起训练
+        - - F10
+          - 抬起时脱落
+          - 抬起中宽度 < 5 mm
+          - 处理
+        - - F11
+          - 搬运中掉落
+          - 夹到过、放下指令前掉到 < 5 mm
+          - 处理
+        - - F12
+          - 空夹爪搬运
+          - 从未夹到却移动 ≥ 20 cm
+          - 处理
+        - - F13
+          - 碰撞
+          - 手臂或物体碰到料框 / 其他物体（需跟踪或力信号）
+          - 暂不处理
+        - - F14
+          - 其他可疑
+          - 高度怀疑有问题但测不出、归不了类
+          - 训练权重 0，待人工复核
+      en:
+        head:
+        - Class
+        - Name
+        - Rule
+        - Handling
+        rows:
+        - - F1
+          - Aborted descent
+          - Rises near grasp height without closing
+          - Not yet handled
+        - - F2
+          - Finger touch
+          - Local low point near grasp height, rebound ≥ 0.5 cm, no close
+          - Handled
+        - - F3
+          - Push / knock
+          - Tracked object moves > 0.35 object lengths or > 10° before closing
+          - Handled (with object tracking)
+        - - F4
+          - Wrong target
+          - Aligned object ≠ the object finally picked
+          - Not yet handled
+        - - F5
+          - Empty close
+          - Minimum width ≤ 20 mm while closing
+          - Handled
+        - - F6
+          - Partial close
+          - Minimum width 42–48 mm
+          - Not yet handled → F14
+        - - F7
+          - Edge grasp
+          - Width 6–13 mm while moving ≥ 20 cm
+          - Handled
+        - - F8
+          - Misplaced close
+          - Closing away from any object (needs tracking)
+          - Not yet handled
+        - - F9
+          - Regrasp before lift
+          - More than one close before lifting, including grip-drag-regrip
+          - 'Handled: drag not trained, train from the last grasp'
+        - - F10
+          - Drop during lift
+          - Width < 5 mm while lifting
+          - Handled
+        - - F11
+          - Drop while carrying
+          - Held once, falls below 5 mm before the release command
+          - Handled
+        - - F12
+          - Carrying with an empty gripper
+          - Never held but moves ≥ 20 cm
+          - Handled
+        - - F13
+          - Collision
+          - Arm or object hits the bin or other objects (needs tracking or force)
+          - Not yet handled
+        - - F14
+          - Other suspicious
+          - Highly suspicious but unmeasurable or unclassifiable
+          - Zero weight, pending human review
+  - id: l4
+    title:
+      zh: 09 / L4 技能标签：12 类技能与三段
+      en: '09 / L4 skill labels: 12 skills and 3 stages'
+    paragraphs:
+    - zh: 一个抓放周期里有很多种动作。每一帧按动作的作用标成 12 类技能，再归并成三段（fall / grasp / raise）作为模型的阶段提示。新定义下，focus 从抓取点上方约 10 cm 开始到闭合指令为止，lift
+        只到抬起约 5 cm，之后到放下前算 carry。有遥操作夹爪指令的数据用规则切，没有的用腕部检测器的技能头逐帧预测再平滑，两者在共有数据上对账。
+      en: A pick-and-place cycle contains many kinds of motion. Each frame gets one of 12 skills by what the motion
+        does, and the skills merge into three stages (fall, grasp, raise) used as stage prompts. Under the new definitions,
+        focus runs from about 10 cm above the grasp point to the close command, lift ends at about 5 cm, and the
+        rest until release is carry. Data with teleoperation gripper commands is segmented by rules; data without
+        them uses a wrist detector's skill head per frame plus smoothing, and the two are reconciled where both
+        exist.
+    items:
+    - zh: 停顿多少：目标现场和另一站点 SOP 有 24–25% 的帧在 wait，多品类小件只有 6%。
+      en: 'How much pausing: 24–25% of frames are wait at the target site and in the other site''s SOP, only 6%
+        for multi-item small parts.'
+    - zh: 对准花多久：focus 在目标现场占 17%，堆叠和双臂占 24–31%，后两者在物体上方调整的时间明显更长。
+      en: 'How long alignment takes: focus is 17% of frames at the target site versus 24–31% for stacking and dual-arm
+        data, which spend much longer adjusting above the object.'
+    - zh: 失败和恢复在哪里：失败恢复数据有 2.7% 的帧是 touch、1.4% 是 lift_recovery、12% 是 other；目标现场几乎为 0。
+      en: 'Where failures and recoveries are: in failure-recovery data 2.7% of frames are touch, 1.4% lift_recovery
+        and 12% other; at the target site these are almost zero.'
+    - zh: 关键动作有多少：真正闭合抓取（close_gripper）在所有数据里只占 3% 的帧，这正是关键段要加权、不能被其他阶段淹没的原因。
+      en: 'How rare the key action is: actual closing (close_gripper) is only 3% of all frames, which is why the
+        core segment is weighted rather than drowned out by other phases.'
+    table:
+      zh:
+        head:
+        - 三段
+        - 技能
+        - 含义
+        rows:
+        - - fall
+          - approach
+          - 从高处向物体下落接近
+        - - fall
+          - focus
+          - 在物体上方对准、微调（从约 10 cm 起）
+        - - grasp
+          - close_gripper
+          - 闭合夹爪抓取
+        - - raise
+          - lift
+          - 抓住后抬起（到约 5 cm）
+        - - raise
+          - lift_recovery
+          - 失败后抬起、重新开始
+        - - —
+          - touch
+          - 失败：手指碰到物体或料框，没抓住
+        - - —
+          - carry
+          - 搬运到放置点
+        - - —
+          - open_gripper
+          - 张开夹爪放下
+        - - —
+          - return
+          - 回到 home（保留标签，一般不训练）
+        - - —
+          - wait
+          - 停住等待
+        - - —
+          - global_observe
+          - 在 home 附近观察全局
+        - - —
+          - other
+          - 以上都不是，包括空抓等其他失败段
+      en:
+        head:
+        - Stage
+        - Skill
+        - Meaning
+        rows:
+        - - fall
+          - approach
+          - Descend toward the object from above
+        - - fall
+          - focus
+          - Align and fine-tune above the object (from about 10 cm)
+        - - grasp
+          - close_gripper
+          - Close the gripper
+        - - raise
+          - lift
+          - Lift after grasping (to about 5 cm)
+        - - raise
+          - lift_recovery
+          - Lift after a failure, then start again
+        - - —
+          - touch
+          - 'Failure: fingers touch the object or bin without grasping'
+        - - —
+          - carry
+          - Carry to the placement point
+        - - —
+          - open_gripper
+          - Open the gripper to release
+        - - —
+          - return
+          - Return home (label kept, normally not trained)
+        - - —
+          - wait
+          - Stop and wait
+        - - —
+          - global_observe
+          - Observe the scene near home
+        - - —
+          - other
+          - None of the above, including empty closes and other failures
+  - id: l5
+    title:
+      zh: 10 / L5 是否训练与权重
+      en: 10 / L5 what to train and how much
+    paragraphs:
+    - zh: 前面各层的结论在 L5 汇总成逐帧的训练开关和权重。权重按动作块里的每一步计算：块里落在失败帧上的步，权重为 0。公开工作里，GiB 同样把坏段的模仿损失置 0；π*0.6 的 RECAP 则不屏蔽，而是给坏动作打低优势标签——可以作为第二方案。
+      en: L5 combines the earlier layers into per-frame training switches and weights. Weights apply to each step
+        of an action chunk; steps that land on failure frames get zero weight. Among public work, GiB likewise zeroes
+        the imitation loss on bad segments, while π*0.6's RECAP keeps them and assigns low advantage labels instead,
+        which is a possible second approach.
+    items: []
+    table:
+      zh:
+        head:
+        - 段落
+        - 是否训练
+        - 权重
+        rows:
+        - - 成功尝试的关键段
+          - '1'
+          - '1'
+        - - 接触窗（接触前 45 帧到后 5 帧）
+          - '1'
+          - '2'
+        - - 失败后的恢复段（截断周期里也训）
+          - '1'
+          - '1'
+        - - F1–F14 失败段（含暂不处理的）
+          - '0'
+          - '0'
+        - - L0 问题段
+          - '0'
+          - '0'
+        - - 完整周期中关键段以外的部分（不含 return）
+          - 目标场景 1，其他场景 0
+          - '1'
+        - - return
+          - '0'
+          - 0（保留标签）
+        - - 录像尾部未完成的周期
+          - '0'
+          - '0'
+      en:
+        head:
+        - Segment
+        - Train
+        - Weight
+        rows:
+        - - Core segment of a successful attempt
+          - '1'
+          - '1'
+        - - Contact window (45 frames before to 5 after contact)
+          - '1'
+          - '2'
+        - - Recovery after a failure (also in truncated cycles)
+          - '1'
+          - '1'
+        - - Failure segments F1–F14 (including unhandled classes)
+          - '0'
+          - '0'
+        - - L0 faulty segments
+          - '0'
+          - '0'
+        - - Rest of the full cycle outside the core (excluding return)
+          - 1 in the target scene, 0 elsewhere
+          - '1'
+        - - return
+          - '0'
+          - 0 (label kept)
+        - - Unfinished cycle at the end of a recording
+          - '0'
+          - '0'
+  - id: l6
+    title:
+      zh: 11 / L6 切除停顿并注入过渡动作
+      en: 11 / L6 cut pauses and inject bridging actions
+    paragraphs:
+    - zh: 在 2,876 条录像上实测，关键段内停顿长度中位 8 帧（30 Hz，p90 为 22 帧），相邻停顿间隔中位 32 帧；间隔 ≤ 10 帧的占 14%，“两三个挨得很近”的停顿确实存在。切掉停顿后，接缝处按前后平均速度注入过渡动作，用三次
+        Hermite 插值；注入帧只作动作目标，不作样本起点（它们没有图像）。
+      en: Measured on 2,876 recordings, pauses inside core segments last a median 8 frames (30 Hz; p90 22 frames),
+        and the median gap between neighbouring pauses is 32 frames, with 14% of gaps at 10 frames or less, so clusters
+        of close pauses are real. After a pause is cut, a bridging action at the seam uses the mean velocity before
+        and after, with cubic Hermite interpolation. Injected frames serve only as action targets, never as sample
+        starts, because they have no images.
+    - zh: 公开做法不同：openpi 处理 DROID 数据时不拼接、不插值，只禁止在静止段及其前约半个动作块内取样本起点，动作块仍读原始的未来。它更简单、零风险，但动作块里仍会出现停顿，适合作为 L6 的对照实验。
+      en: Public practice differs. openpi, on DROID, neither splices nor interpolates; it only forbids sample starts
+        inside idle segments and about half a chunk before them, and chunks still read the raw future. That is simpler
+        and risk-free, but pauses remain inside chunks, so it is a good control experiment for L6.
+    items: []
+    table:
+      zh:
+        head:
+        - 参数
+        - 取值
+        - 依据
+        rows:
+        - - 最短切除停顿
+          - ≥ 6 帧（0.2 s）
+          - 更短的是手抖级别，切了反而破坏连续性
+        - - 估速窗口 k
+          - 5 帧
+          - 与静止判据的 ±5 帧一致；间隔中位 32 帧，两侧都够用
+        - - 合并规则
+          - 间隔 < 10 帧的相邻切段合成一段，只注入一次
+          - 否则估速窗口会跨进另一个停顿
+        - - 注入速度
+          - 前后平均速度，三次 Hermite 插值
+          - 保证接缝处速度连续
+        - - 接触窗
+          - 不切，也不跨接触窗合并
+          - 接触前后的细小停顿可能就是技能边界
+      en:
+        head:
+        - Parameter
+        - Value
+        - Reason
+        rows:
+        - - Shortest pause to cut
+          - ≥ 6 frames (0.2 s)
+          - Shorter pauses are hand tremor; cutting them breaks continuity
+        - - Velocity window k
+          - 5 frames
+          - Matches the ±5-frame idle rule; with a 32-frame median gap, both sides fit
+        - - Merging
+          - Cuts less than 10 frames apart merge, with one injection
+          - Otherwise the velocity window reaches into another pause
+        - - Injected velocity
+          - Mean of before and after, cubic Hermite interpolation
+          - Keeps velocity continuous at the seam
+        - - Contact window
+          - Never cut, never merged across
+          - Small pauses around contact can be skill boundaries
+  - id: l7
+    title:
+      zh: 12 / L7 速度归一到基准采集员
+      en: 12 / L7 normalize speed to the benchmark operator
+    paragraphs:
+    - zh: 按关键段（10 cm → 抓取 → 5 cm）统计每位采集员的中位时长。目标现场的基准采集员最快，但这位采集员在另一站点的 SOP 里慢了 45%，所以目标速度取其在目标现场的关键段，而不是按人名一刀切。场景难度也有影响：同一位采集员在
+        SOP 里 3.23 s，在难例里 4.45 s。因此比例只在同场景内比，跨场景只对齐自由段。
+      en: For each operator, take the median duration of core segments (10 cm → grasp → 5 cm). The target site's
+        benchmark operator is the fastest, yet the same person is 45% slower in another site's SOP, so the target
+        speed is the operator's target-site core segments rather than anything tied to a name. Scene difficulty
+        matters too; one operator takes 3.23 s in the SOP but 4.45 s on hard cases. Ratios are therefore compared
+        within a scene, and only free-motion segments are aligned across scenes.
+    - zh: 公开工作的结论一致：DemoSpeedup 只加速自由段，均匀 2 倍反而掉成功率；ESPADA 只加速非接触段；SAIL 在实机上提速明显，但接触多的任务例外；TempoVLA 则把速度作为条件输入。
+      en: Public work agrees. DemoSpeedup accelerates only free motion, and uniform 2× hurts success; ESPADA accelerates
+        only casual segments; SAIL gains a lot on real robots except in contact-rich tasks; TempoVLA conditions
+        on speed as an input.
+    items:
+    - zh: 分段：关键段分成自由段（10 cm → 接触窗开始、接触窗结束 → 5 cm）和接触窗。
+      en: 'Split: the core segment divides into free-motion segments (10 cm → start of contact window, end of contact
+        window → 5 cm) and the contact window.'
+    - zh: 算比例：每段 r = 该段时长 / 基准采集员同段中位时长。
+      en: 'Ratio: r = segment duration / the benchmark operator''s median for the same segment.'
+    - zh: 只加速不减速：r > 1 的自由段按 r 抽帧，图像和动作同步抽，不需要合成图像；r ≤ 1 不动；接触窗保持 1 倍。
+      en: 'Speed up only: free segments with r > 1 are subsampled by r, images and actions together, so no images
+        need to be synthesized; r ≤ 1 is left alone; the contact window stays at 1×.'
+    - zh: 顺序：先 L6 切停顿，再 L7；否则停顿会把 r 拉大。
+      en: 'Order: L6 pause removal before L7, otherwise pauses inflate r.'
+    table:
+      zh:
+        head:
+        - 采集员
+        - 场景
+        - 次数
+        - 关键段总长
+        - 相对基准
+        rows:
+        - - A（基准）
+          - 目标现场
+          - '766'
+          - 3.03 s
+          - 1.00×
+        - - A
+          - 另一站点 SOP
+          - '109'
+          - 4.40 s
+          - 1.45×
+        - - B
+          - 另一站点 SOP
+          - '745'
+          - 3.23 s
+          - 1.07×
+        - - B
+          - 堆叠场景
+          - 1,230
+          - 4.03 s
+          - 1.33×
+        - - B
+          - 难例
+          - '528'
+          - 4.45 s
+          - 1.47×
+        - - B
+          - 失败恢复
+          - '549'
+          - 5.43 s
+          - 1.79×
+        - - C
+          - 双臂录像
+          - 3,465
+          - 3.73 s
+          - 1.23×
+        - - D
+          - 双臂录像
+          - 2,911
+          - 4.37 s
+          - 1.44×
+        - - E
+          - 双臂录像
+          - '296'
+          - 5.90 s
+          - 1.95×
+      en:
+        head:
+        - Operator
+        - Scene
+        - Grasps
+        - Core total
+        - Relative to benchmark
+        rows:
+        - - A (benchmark)
+          - Target site
+          - '766'
+          - 3.03 s
+          - 1.00×
+        - - A
+          - SOP from another site
+          - '109'
+          - 4.40 s
+          - 1.45×
+        - - B
+          - SOP from another site
+          - '745'
+          - 3.23 s
+          - 1.07×
+        - - B
+          - Stacking scene
+          - 1,230
+          - 4.03 s
+          - 1.33×
+        - - B
+          - Hard cases
+          - '528'
+          - 4.45 s
+          - 1.47×
+        - - B
+          - Failure recovery
+          - '549'
+          - 5.43 s
+          - 1.79×
+        - - C
+          - Dual-arm recordings
+          - 3,465
+          - 3.73 s
+          - 1.23×
+        - - D
+          - Dual-arm recordings
+          - 2,911
+          - 4.37 s
+          - 1.44×
+        - - E
+          - Dual-arm recordings
+          - '296'
+          - 5.90 s
+          - 1.95×
+  - id: results
+    title:
+      zh: 13 / 全流程跑在全部数据上的结果
+      en: 13 / Results of the full pipeline on all data
+    paragraphs:
+    - zh: L0–L7 在全部取放数据上跑完：9,328 条录像、16,688 只活动手臂、约 2,049 万帧，单进程约 2 分钟。只生成标签，不改训练文件。失败后的恢复段一律训练（4,410 段，之前有 46%
+        被失败段误置 0）；L6 不切接触窗，124.8 万接触帧一帧未动。关键段帧数经 L6、L7 后共减少约 31%，目标现场只减少 10%（它本来就快）。
+      en: L0–L7 ran on all pick-and-place data, 9,328 recordings, 16,688 active arms and about 20.49 million frames,
+        in roughly two minutes on a single process. It only writes labels and leaves training files untouched. Recovery
+        after failure is always trained (4,410 segments; previously 46% had been zeroed by neighbouring failure
+        segments). L6 never cuts the contact window, so all 1.248 million contact frames are untouched. Core frames
+        shrink by about 31% after L6 and L7, but only 10% at the target site, which was already fast.
+    items: []
+    table:
+      zh:
+        head:
+        - 来源
+        - 关键段帧
+        - L6 后
+        - L7 后
+        - 关键段共减少
+        rows:
+        - - 全部
+          - 3,136,348
+          - 2,823,916
+          - 2,171,569
+          - 31%
+        - - 新场景小件（多来源）
+          - 1,054,743
+          - 918,437
+          - 726,408
+          - 31%
+        - - 目标现场
+          - 68,306
+          - 67,274
+          - 61,189
+          - 10%
+        - - 另一站点 SOP
+          - 85,981
+          - 82,662
+          - 69,173
+          - 20%
+        - - 难例
+          - 68,364
+          - 61,036
+          - 42,997
+          - 37%
+        - - 堆叠场景
+          - 186,971
+          - 174,541
+          - 120,294
+          - 36%
+        - - 双臂录像
+          - 1,498,568
+          - 1,361,049
+          - 1,039,143
+          - 31%
+        - - 失败恢复
+          - 173,415
+          - 158,917
+          - 112,365
+          - 35%
+      en:
+        head:
+        - Source
+        - Core frames
+        - After L6
+        - After L7
+        - Total core reduction
+        rows:
+        - - All
+          - 3,136,348
+          - 2,823,916
+          - 2,171,569
+          - 31%
+        - - Small parts in a new scene (multi-source)
+          - 1,054,743
+          - 918,437
+          - 726,408
+          - 31%
+        - - Target site
+          - 68,306
+          - 67,274
+          - 61,189
+          - 10%
+        - - SOP from another site
+          - 85,981
+          - 82,662
+          - 69,173
+          - 20%
+        - - Hard cases
+          - 68,364
+          - 61,036
+          - 42,997
+          - 37%
+        - - Stacking scene
+          - 186,971
+          - 174,541
+          - 120,294
+          - 36%
+        - - Dual-arm recordings
+          - 1,498,568
+          - 1,361,049
+          - 1,039,143
+          - 31%
+        - - Failure recovery
+          - 173,415
+          - 158,917
+          - 112,365
+          - 35%
+  - id: takeaways
+    title:
+      zh: 14 / 小结与仍缺的部分
+      en: 14 / Takeaways and what is still missing
+    paragraphs: []
+    items:
+    - zh: 先筛后用：信号、夹爪、相机的明显问题在 L0 一次查完，并作为自动检查跑在每次新数据同步上；“流是活的、但身份错了”这类问题，靠人眼发现太晚。
+      en: 'Screen before use: signal, gripper and camera problems are caught once in L0 and checked automatically
+        on every sync. Problems where the stream is alive but its identity is wrong are found too late by eye.'
+    - zh: 多源数据要有准入标准：按姿态和目标场景比较（L1.3），而不是按来源整体接收或丢弃；名义上的同一任务，实测可能只有 2% 合格。
+      en: 'Multi-source data needs an admission rule: compare poses with the target scene (L1.3) instead of accepting
+        or rejecting whole sources; a nominally identical task may qualify only 2% of the time.'
+    - zh: 只借关键段：其他来源只贡献 10 cm → 抓取 → 5 cm 的关键段，接触窗加权、不切、不加速。
+      en: 'Borrow only the core: other sources contribute only the 10 cm → grasp → 5 cm segment, with the contact
+        window weighted, never cut and never sped up.'
+    - zh: 3D 轨迹对比是判断数据好坏的核心工具：抓取瞬间的关节与位姿说明“是不是同一个动作”，整条路径的极值和折返说明“采得干不干净”，还能追查到采集设置这样的根因。
+      en: 3D trajectory comparison is the core tool for judging data. Joints and pose at the grasp tell whether
+        it is the same move, extrema and backtracking along the path tell how clean the demonstration is, and the
+        comparison can expose root causes such as collection setup.
+    - zh: 归一化是混训的前提：数值上，归一化统计量按每次的数据组合重算；时间上，L6 切停顿、L7 统一速度；空间轨迹的平滑和对齐先从关键段做起，以抓取点和上下两个高度为锚点。
+      en: 'Normalization comes before mixing: recompute normalization statistics for every data mix; in time, L6
+        removes pauses and L7 aligns speed; in space, smoothing and alignment start with the core segment, anchored
+        at the grasp point and the two heights.'
+    - zh: 仍缺的部分：周期级质量分与去重；按采集员或场次划分训练集和验证集（随机按录像抽会让相似周期两边都有）；按采集员或站点平衡采样；以及针对轨迹多极值、前伸折返的处理层。
+      en: 'Still missing: cycle-level quality scores and deduplication; train/validation splits by operator or session
+        (random splits by recording put similar cycles on both sides); balanced sampling by operator or site; and
+        a layer that handles multiple extrema and overshoot in trajectories.'
